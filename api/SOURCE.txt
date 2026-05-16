@@ -1,0 +1,3 @@
+source-url: https://api.fiken.no/api/v2/docs/swagger.yaml
+fetched-at: 2026-05-15T12:15:23Z
+sha256:     08816f50e4365a80a850c71069c621f2b649b74c57f15c94299d0388cc23be88
