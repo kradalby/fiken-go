@@ -20,6 +20,10 @@ type Capability struct {
 
 type capCtxKey struct{}
 
+func withCap(ctx context.Context, c Capability) context.Context {
+	return context.WithValue(ctx, capCtxKey{}, c)
+}
+
 func capFrom(ctx context.Context) (Capability, bool) {
 	v, ok := ctx.Value(capCtxKey{}).(Capability)
 	return v, ok

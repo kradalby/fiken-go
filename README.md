@@ -44,6 +44,11 @@ fiken mcp
 # Read-write + HTTP for a remote agent
 fiken mcp --mode=read-write --transport=http --listen=:8765
 
+# Tailscale tsnet (joins a tailnet; read is implicit for any peer,
+# writes require a kradalby.no/cap/fiken-mcp grant with {"write": true}).
+export FIKEN_TSNET_AUTHKEY=tskey-auth-...
+fiken mcp --tsnet --tsnet-hostname fiken-mcp
+
 # Claude Desktop / Code:
 claude mcp add fiken -- fiken mcp
 ```

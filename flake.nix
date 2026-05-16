@@ -24,7 +24,7 @@
           version = "0.0.0-dev";
           src = ./.;
           inherit go;
-          vendorHash = "sha256-sVh7G41xdcoX9YlAHUxqxw52auA2pRKHSuf99ACqoLY=";
+          vendorHash = "sha256-mtnfJM9FxiEEQvLxoTty+1QZjJy7tf3R7R1DcCnGLq8=";
           subPackages = [ "./..." ];
         };
       in
