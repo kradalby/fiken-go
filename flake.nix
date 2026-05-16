@@ -1,0 +1,49 @@
+{
+  description = "fiken-go — Go library, CLI, and MCP server for the Fiken API";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+
+        # Prefer Go 1.26 if available, else 1.25.
+        go = pkgs.go_1_26 or pkgs.go_1_25;
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          packages = [
+            go
+            pkgs.gopls
+            pkgs.gofumpt
+            pkgs.gotools # provides goimports
+            pkgs.golangci-lint
+            pkgs.gotestsum
+            pkgs.gotests
+            pkgs.difftastic
+            pkgs.prek
+            pkgs.ogen
+            pkgs.prettier
+            pkgs.nixfmt-rfc-style
+            pkgs.git
+          ];
+
+          shellHook = ''
+            echo "fiken-go devShell — Go $(${go}/bin/go version | cut -d' ' -f3)"
+          '';
+        };
+
+        formatter = pkgs.nixfmt-rfc-style;
+      }
+    );
+}

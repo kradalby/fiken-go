@@ -1,0 +1,26 @@
+# Build outputs
+/result
+/result-*
+
+# Direnv cache
+/.direnv/
+
+# Editor swap
+*.swp
+*~
+
+# Go test cache (rare to land in repo, but be safe)
+*.test
+*.out
+coverage.out
+
+# Local secrets (defensive — we never commit creds anyway)
+.env
+.env.local
+.envrc.local
+.mcp.json
+*.pem
+*.key
+
+# OS junk
+.DS_Store
