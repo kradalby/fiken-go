@@ -1446,7 +1446,7 @@ company      = "Slug of the company. Required."
 time_user_id = "Numeric id of the time user. Required."
 
 [auth.login]
-prompt_url       = "Create a personal API token at: https://fiken.no/foretak/<co>/api-tokens"
+prompt_url       = "Create a personal API token in Fiken: Settings → Security → Personal API keys."
 prompt_paste     = "Paste token (input hidden):"
 verifying        = "Verifying token..."
 saved_keyring    = "Saved to OS keyring (service=fiken-go, profile={{profile}})"

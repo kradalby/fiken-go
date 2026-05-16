@@ -1441,7 +1441,7 @@ company      = "Slug for selskapet. Påkrevd."
 time_user_id = "Numerisk id for time-brukeren. Påkrevd."
 
 [auth.login]
-prompt_url       = "Lag et personlig API-token: https://fiken.no/foretak/<co>/api-tokens"
+prompt_url       = "Lag et personlig API-token i Fiken: Rediger konto → Sikkerhet → Personlige API-nøkler."
 prompt_paste     = "Lim inn token (skjult inntasting):"
 verifying        = "Verifiserer token..."
 saved_keyring    = "Lagret i OS-nøkkelring (service=fiken-go, profil={{profile}})"
