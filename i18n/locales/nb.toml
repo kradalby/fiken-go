@@ -1,0 +1,1751 @@
+# fiken-go runtime bokmål catalog.
+
+[ops.companies_list]
+summary     = "List alle selskap brukeren har tilgang til."
+when_to_use = "Brukes for å finne tilgjengelige selskap-slugger før du kjører selskap-spesifikke operasjoner (fakturaer, kontakter osv.)."
+returns     = "Objekt med `items` (hver: slug, navn, organisasjonsnummer) og paginerings-metadata."
+example     = "fiken companies list"
+
+[ops.companies_get]
+summary     = "Hent ett selskap via slug."
+when_to_use = "Brukes når du har en slug og trenger selskap-felter (organisasjonsnummer, adresse, språk)."
+returns     = "Selskap-objekt med navn, slug, organisasjonsnummer, adresse, standardspråk."
+example     = "fiken companies get --company my-co"
+
+[ops.companies_get.flags]
+company = "Slug for selskapet som skal hentes. Påkrevd. Eksempel: --company=acme-as"
+
+[ops.contacts_list]
+summary     = "List kontakter for et selskap."
+when_to_use = "Brukes for å finne en contact_id før du fakturerer, knytter vedlegg eller henter kontaktpersoner."
+returns     = "Objekt med `items` (hver: contact_id, navn, e-post, organisasjonsnummer, valuta, språk, kunde, leverandør, inaktiv) og paginerings-metadata."
+example     = "fiken contacts list --company acme"
+
+[ops.contacts_list.flags]
+company   = "Slug for selskapet det skal søkes i. Påkrevd. Eksempel: --company=acme-as"
+page      = "Sidetall (0-indeksert). Eksempel: --page=2"
+page_size = "Sidestørrelse (maks 100). Eksempel: --page-size=50"
+
+[ops.contacts_get]
+summary     = "Hent én kontakt via id."
+when_to_use = "Brukes når du allerede har en contact_id og trenger hele kontakt-posten."
+returns     = "Kontakt-objekt med contact_id, navn, e-post, telefonnummer, organisasjonsnummer, valuta, språk, kunde, leverandør, inaktiv."
+example     = "fiken contacts get --company acme --contact-id 42"
+
+[ops.contacts_get.flags]
+company    = "Slug for selskapet som eier kontakten. Påkrevd. Eksempel: --company=acme-as"
+contact_id = "Numerisk id for kontakten som skal hentes. Påkrevd. Eksempel: --contact-id=42"
+
+[ops.contacts_create]
+summary     = "Lag en ny kontakt. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Opprettet Kontakt (når implementert)."
+example     = "fiken contacts create --company acme  # ikke koblet enda"
+
+[ops.contacts_create.flags]
+company = "Slug for selskapet som eier kontakten. Påkrevd."
+
+[ops.contacts_update]
+summary     = "Oppdater en eksisterende kontakt. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Oppdatert Kontakt (når implementert)."
+example     = "fiken contacts update --company acme --contact-id 42  # ikke koblet enda"
+
+[ops.contacts_update.flags]
+company    = "Slug for selskapet som eier kontakten. Påkrevd."
+contact_id = "Numerisk id for kontakten som skal oppdateres. Påkrevd."
+
+[ops.contacts_delete]
+summary     = "Slett eller deaktiver en kontakt. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Tom suksess-envelope (når implementert). Hvis kontakten har tilknyttede poster, settes den som inaktiv i stedet for å slettes."
+example     = "fiken contacts delete --company acme --contact-id 42  # ikke koblet enda"
+
+[ops.contacts_delete.flags]
+company    = "Slug for selskapet som eier kontakten. Påkrevd."
+contact_id = "Numerisk id for kontakten som skal slettes. Påkrevd."
+
+[ops.contacts_persons_list]
+summary     = "List kontaktpersonene knyttet til en kontakt."
+when_to_use = "Brukes for å finne en contact_person_id før du adresserer fakturaer/tilbud til en navngitt person."
+returns     = "Objekt med `items` (hver: contact_person_id, navn, e-post, telefonnummer) og minimal meta."
+example     = "fiken contacts persons list --company acme --contact-id 42"
+
+[ops.contacts_persons_list.flags]
+company    = "Slug for selskapet. Påkrevd. Eksempel: --company=acme-as"
+contact_id = "Numerisk id for foreldrekontakten. Påkrevd. Eksempel: --contact-id=42"
+
+[ops.contacts_persons_get]
+summary     = "Hent én kontaktperson."
+when_to_use = "Brukes når du har en contact_person_id og trenger hele posten."
+returns     = "ContactPerson-objekt med contact_person_id, navn, e-post, telefonnummer."
+example     = "fiken contacts persons get --company acme --contact-id 42 --contact-person-id 7"
+
+[ops.contacts_persons_get.flags]
+company           = "Slug for selskapet. Påkrevd."
+contact_id        = "Numerisk id for foreldrekontakten. Påkrevd."
+contact_person_id = "Numerisk id for kontaktpersonen. Påkrevd."
+
+[ops.contacts_persons_create]
+summary     = "Legg til en kontaktperson på en kontakt. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Opprettet ContactPerson (når implementert)."
+example     = "fiken contacts persons create --company acme --contact-id 42  # ikke koblet enda"
+
+[ops.contacts_persons_create.flags]
+company    = "Slug for selskapet. Påkrevd."
+contact_id = "Numerisk id for foreldrekontakten. Påkrevd."
+
+[ops.contacts_persons_update]
+summary     = "Oppdater en kontaktperson. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Oppdatert ContactPerson (når implementert)."
+example     = "fiken contacts persons update --company acme --contact-id 42 --contact-person-id 7  # ikke koblet enda"
+
+[ops.contacts_persons_update.flags]
+company           = "Slug for selskapet. Påkrevd."
+contact_id        = "Numerisk id for foreldrekontakten. Påkrevd."
+contact_person_id = "Numerisk id for kontaktpersonen. Påkrevd."
+
+[ops.contacts_persons_delete]
+summary     = "Slett en kontaktperson. (Stub: ikke implementert i Plan C oppgave 1.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Tom suksess-envelope (når implementert)."
+example     = "fiken contacts persons delete --company acme --contact-id 42 --contact-person-id 7  # ikke koblet enda"
+
+[ops.contacts_persons_delete.flags]
+company           = "Slug for selskapet. Påkrevd."
+contact_id        = "Numerisk id for foreldrekontakten. Påkrevd."
+contact_person_id = "Numerisk id for kontaktpersonen. Påkrevd."
+
+[ops.accounts_list]
+summary     = "List bokføringskontoer for et selskap."
+when_to_use = "Brukes for å finne kontonumre (f.eks. 3020, 1500:10001) før du bokfører transaksjoner eller filtrerer hovedboken."
+returns     = "Objekt med `items` (hver: code, name) og paginerings-metadata."
+example     = "fiken accounts list --company acme --range 3000-3999"
+
+[ops.accounts_list.flags]
+company      = "Slug for selskapet det skal søkes i. Påkrevd. Eksempel: --company=acme-as"
+page         = "Sidetall (0-indeksert). Eksempel: --page=2"
+page_size    = "Sidestørrelse (maks 100). Eksempel: --page-size=50"
+from_account = "Nedre grense for kontonummer (uten reskontro). Eksempel: --from-account=3000"
+to_account   = "Øvre grense for kontonummer (uten reskontro). Eksempel: --to-account=3999"
+range        = "Kommaseparerte koder eller intervaller. Eksempel: --range=\"1000-1500,3020,7000-7004\""
+
+[ops.accounts_get]
+summary     = "Hent én bokføringskonto via kode."
+when_to_use = "Brukes når du allerede har en kontokode og trenger det kanoniske navnet."
+returns     = "Konto-objekt med code og name."
+example     = "fiken accounts get --company acme --account-code 3020"
+
+[ops.accounts_get.flags]
+company      = "Slug for selskapet som eier kontoen. Påkrevd. Eksempel: --company=acme-as"
+account_code = "Kontokode (fire siffer, eventuelt med `:<reskontro>`-suffiks). Påkrevd. Eksempel: --account-code=1500:10001"
+
+[ops.bank_accounts_list]
+summary     = "List bankkontoer for et selskap."
+when_to_use = "Brukes for å finne bank_account_id, IBAN eller saldo før avstemming eller bokføring av betalinger."
+returns     = "Objekt med `items` (hver: bank_account_id, navn, account_code, bank_account_number, iban, bic, foreign_service, type, reconciled_balance i øre, reconciled_date, inaktiv) og paginerings-metadata."
+example     = "fiken bank-accounts list --company acme"
+
+[ops.bank_accounts_list.flags]
+company   = "Slug for selskapet det skal søkes i. Påkrevd. Eksempel: --company=acme-as"
+page      = "Sidetall (0-indeksert). Eksempel: --page=2"
+page_size = "Sidestørrelse (maks 100). Eksempel: --page-size=50"
+inactive  = "Returner inaktive bankkontoer i stedet for aktive. Eksempel: --inactive"
+
+[ops.bank_accounts_get]
+summary     = "Hent én bankkonto via id."
+when_to_use = "Brukes når du allerede har en bank_account_id og trenger hele konto-posten (nummer, saldo, type)."
+returns     = "BankAccount-objekt med bank_account_id, navn, account_code, bank_account_number, iban, bic, foreign_service, type, reconciled_balance (øre), reconciled_date, inaktiv."
+example     = "fiken bank-accounts get --company acme --bank-account-id 2747365"
+
+[ops.bank_accounts_get.flags]
+company         = "Slug for selskapet som eier bankkontoen. Påkrevd. Eksempel: --company=acme-as"
+bank_account_id = "Numerisk id for bankkontoen. Påkrevd. Eksempel: --bank-account-id=2747365"
+
+[ops.bank_accounts_create]
+summary     = "Lag en ny bankkonto. (Stub: ikke implementert i Plan C.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Opprettet BankAccount (når implementert)."
+example     = "fiken bank-accounts create --company acme  # ikke koblet enda"
+
+[ops.bank_accounts_create.flags]
+company = "Slug for selskapet som eier bankkontoen. Påkrevd."
+
+[ops.journal_entries_list]
+summary     = "List bilag (journalposter) for et selskap."
+when_to_use = "Brukes for å inspisere selskapets hovedbok-posteringer, eventuelt filtrert på dato eller sist-endret."
+returns     = "Objekt med `items` (hver: journal_entry_id, journal_entry_number, beskrivelse, transaksjonsdato, transaksjons-id, linjer[]) og paginerings-metadata. Linjebeløp er int64 øre."
+example     = "fiken journal-entries list --company acme --date-ge 2024-01-01 --date-le 2024-01-31"
+
+[ops.journal_entries_list.flags]
+company          = "Slug for selskapet det skal søkes i. Påkrevd. Eksempel: --company=acme-as"
+page             = "Sidetall (0-indeksert). Eksempel: --page=2"
+page_size        = "Sidestørrelse (maks 100). Eksempel: --page-size=50"
+date             = "Filtrer på eksakt posteringsdato (YYYY-MM-DD). Eksempel: --date=2024-03-01"
+date_le          = "Filtrer posteringsdato <= verdi."
+date_lt          = "Filtrer posteringsdato < verdi."
+date_ge          = "Filtrer posteringsdato >= verdi."
+date_gt          = "Filtrer posteringsdato > verdi."
+last_modified    = "Filtrer på eksakt sist-endret-dato."
+last_modified_le = "Filtrer sist-endret <= verdi."
+last_modified_lt = "Filtrer sist-endret < verdi."
+last_modified_ge = "Filtrer sist-endret >= verdi."
+last_modified_gt = "Filtrer sist-endret > verdi."
+created_date     = "Filtrer på eksakt opprettet-dato."
+created_date_le  = "Filtrer opprettet-dato <= verdi."
+created_date_lt  = "Filtrer opprettet-dato < verdi."
+created_date_ge  = "Filtrer opprettet-dato >= verdi."
+created_date_gt  = "Filtrer opprettet-dato > verdi."
+
+[ops.journal_entries_get]
+summary     = "Hent én journalpost via id."
+when_to_use = "Brukes når du allerede har en journal_entry_id og trenger hele posten med linjer og vedlegg-metadata."
+returns     = "JournalEntry-objekt med journal_entry_id, journal_entry_number, beskrivelse, transaksjonsdato, transaksjons-id, offset_transaction_id, lines[] (amount øre, account, vat_code) og attachments[]."
+example     = "fiken journal-entries get --company acme --journal-entry-id 1234"
+
+[ops.journal_entries_get.flags]
+company          = "Slug for selskapet som eier journalposten. Påkrevd."
+journal_entry_id = "Numerisk id for journalposten. Påkrevd. Eksempel: --journal-entry-id=1234"
+
+[ops.journal_entries_create]
+summary     = "Lag en fri postering (general journal entry). (Stub: ikke implementert i Plan C oppgave 4.)"
+when_to_use = "Reservert for senere Plan C-oppgave; gir for øyeblikket internal/not-implemented."
+returns     = "Opprettet JournalEntry (når implementert)."
+example     = "fiken journal-entries create --company acme  # ikke koblet enda"
+
+[ops.journal_entries_create.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.journal_entries_attachments_list]
+summary     = "List vedlegg for en journalpost."
+when_to_use = "Brukes for å finne identifier, nedlastings-URL eller type på filer knyttet til en gitt journalpost."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken journal-entries attachments --company acme --journal-entry-id 1234"
+
+[ops.journal_entries_attachments_list.flags]
+company          = "Slug for selskapet. Påkrevd."
+journal_entry_id = "Numerisk id for journalposten. Påkrevd."
+
+[ops.journal_entries_attachments_attach]
+summary     = "Legg ved en fil på en journalpost. (Stub: multipart-opplasting kobles i Plan D.)"
+when_to_use = "Reservert for Plan D; gir for øyeblikket internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for det opprettede vedlegget (når implementert)."
+example     = "fiken journal-entries attach --company acme --journal-entry-id 1234 --file ./faktura.pdf  # ikke koblet enda"
+
+[ops.journal_entries_attachments_attach.flags]
+company          = "Slug for selskapet. Påkrevd."
+journal_entry_id = "Numerisk id for journalposten. Påkrevd."
+filename         = "Overstyr filnavn (standard: basename av --file)."
+file             = "Lokal filsti som skal lastes opp. Påkrevd."
+
+[ops.transactions_list]
+summary     = "List transaksjoner for et selskap."
+when_to_use = "Brukes for å gå gjennom bokførte transaksjoner (salg, kjøp, journalposter), eventuelt filtrert på opprettet- eller sist-endret-dato."
+returns     = "Objekt med `items` (hver: transaction_id, type, beskrivelse, opprettet-dato, sist-endret-dato, deleted, entries[]) og paginerings-metadata. Hver entry speiler en JournalEntry med int64 øre linjebeløp."
+example     = "fiken transactions list --company acme --created-date-ge 2024-01-01"
+
+[ops.transactions_list.flags]
+company          = "Slug for selskapet det skal søkes i. Påkrevd. Eksempel: --company=acme-as"
+page             = "Sidetall (0-indeksert). Eksempel: --page=2"
+page_size        = "Sidestørrelse (maks 100). Eksempel: --page-size=50"
+last_modified    = "Filtrer på eksakt sist-endret-dato (YYYY-MM-DD)."
+last_modified_le = "Filtrer sist-endret <= verdi."
+last_modified_lt = "Filtrer sist-endret < verdi."
+last_modified_ge = "Filtrer sist-endret >= verdi."
+last_modified_gt = "Filtrer sist-endret > verdi."
+created_date     = "Filtrer på eksakt opprettet-dato."
+created_date_le  = "Filtrer opprettet-dato <= verdi."
+created_date_lt  = "Filtrer opprettet-dato < verdi."
+created_date_ge  = "Filtrer opprettet-dato >= verdi."
+created_date_gt  = "Filtrer opprettet-dato > verdi."
+
+[ops.transactions_get]
+summary     = "Hent én transaksjon via id."
+when_to_use = "Brukes når du allerede har en transaction_id (returnert fra salg, kjøp eller journalpost-svar) og trenger hele ledger-hendelsen med tilhørende journalposter."
+returns     = "Transaction-objekt med transaction_id, type, beskrivelse, opprettet-dato, sist-endret-dato, deleted, og entries[] (hver en JournalEntry-form med int64 øre linjebeløp)."
+example     = "fiken transactions get --company acme --transaction-id 9988"
+
+[ops.transactions_get.flags]
+company        = "Slug for selskapet som eier transaksjonen. Påkrevd."
+transaction_id = "Numerisk id for transaksjonen. Påkrevd. Eksempel: --transaction-id=9988"
+
+[ops.invoices_list]
+summary     = "List fakturaer for et selskap."
+when_to_use = "Brukes for å vise utstedte fakturaer, eventuelt filtrert på faktura-, forfalls- eller endringsdato, kunde, betalingsstatus eller ordrereferanse."
+returns     = "Objekt med `items` (hver: invoice_id, invoice_number, issue_date, due_date, gross/net/vat i int64 øre, customer_id/name, lines[], attachments[]) og pagineringsmeta."
+example     = "fiken invoices list --company acme --issue-date-ge 2024-01-01 --settled=false"
+
+[ops.invoices_list.flags]
+company            = "Slug for selskapet som skal forespørres. Påkrevd. Eksempel: --company=acme-as"
+page               = "Sidetall (0-indeksert)."
+page_size          = "Sidestørrelse (maks 100)."
+issue_date         = "Filtrer på eksakt fakturadato (YYYY-MM-DD)."
+issue_date_le      = "Filtrer fakturadato <= verdi."
+issue_date_lt      = "Filtrer fakturadato < verdi."
+issue_date_ge      = "Filtrer fakturadato >= verdi."
+issue_date_gt      = "Filtrer fakturadato > verdi."
+last_modified      = "Filtrer på eksakt sist-endret-dato."
+last_modified_le   = "Filtrer sist-endret <= verdi."
+last_modified_lt   = "Filtrer sist-endret < verdi."
+last_modified_ge   = "Filtrer sist-endret >= verdi."
+last_modified_gt   = "Filtrer sist-endret > verdi."
+due_date           = "Filtrer på eksakt forfallsdato."
+due_date_le        = "Filtrer forfallsdato <= verdi."
+due_date_lt        = "Filtrer forfallsdato < verdi."
+due_date_ge        = "Filtrer forfallsdato >= verdi."
+due_date_gt        = "Filtrer forfallsdato > verdi."
+customer_id        = "Filtrer på kundens kontakt-id."
+settled            = "Filtrer til betalte fakturaer."
+order_reference    = "Filtrer på ordrereferanse."
+invoice_draft_uuid = "Filtrer på kildeutkast-UUID."
+invoice_number     = "Filtrer på eksakt fakturanummer-streng."
+
+[ops.invoices_get]
+summary     = "Hent én faktura via id."
+when_to_use = "Brukes når du har en invoice_id (returnert fra list, utkast eller salgs-flyt) og trenger hele dokumentet med linjer, vedlegg og kunde."
+returns     = "Faktura-objekt med invoice_id, invoice_number, faktura-/forfallsdato, gross/net/vat int64 øre, lines[], attachments[] og flatpakket customer_id/name."
+example     = "fiken invoices get --company acme --invoice-id 1234"
+
+[ops.invoices_get.flags]
+company    = "Slug for selskapet som eier fakturaen. Påkrevd."
+invoice_id = "Numerisk id for fakturaen (ikke fakturanummeret). Påkrevd."
+
+[ops.invoices_send]
+summary     = "Send en faktura til kunden. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Tomt suksess-omslag (når implementert)."
+example     = "fiken invoices send --company acme --invoice-id 1234  # ikke koblet ennå"
+
+[ops.invoices_send.flags]
+company    = "Slug for selskapet. Påkrevd."
+invoice_id = "Numerisk id for fakturaen som skal sendes. Påkrevd."
+
+[ops.invoices_counter_create]
+summary     = "Initialiser fakturatelleren for regnskapsåret. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Tellerverdi (når implementert)."
+example     = "fiken invoices counter create --company acme --value 1000  # ikke koblet ennå"
+
+[ops.invoices_counter_create.flags]
+company = "Slug for selskapet. Påkrevd."
+value   = "Starttellerverdi. Påkrevd."
+
+[ops.invoices_drafts_list]
+summary     = "List fakturautkast for et selskap."
+when_to_use = "Brukes for å vise utkast (ikke-poste fakturaer og kreditnotaer) før de promoteres, eventuelt filtrert på ordrereferanse eller UUID."
+returns     = "Objekt med `items` (hver: draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[], customer_ids[]) og pagineringsmeta."
+example     = "fiken invoices drafts list --company acme"
+
+[ops.invoices_drafts_list.flags]
+company         = "Slug for selskapet. Påkrevd."
+page            = "Sidetall (0-indeksert)."
+page_size       = "Sidestørrelse (maks 100)."
+order_reference = "Filtrer på ordrereferanse."
+uuid            = "Filtrer på utkast-UUID."
+
+[ops.invoices_drafts_get]
+summary     = "Hent ett fakturautkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payload-en før redigering eller promotering."
+returns     = "InvoiceDraft-objekt med draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[] og customer_ids[]."
+example     = "fiken invoices drafts get --company acme --draft-id 1"
+
+[ops.invoices_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.invoices_drafts_create]
+summary     = "Lag et nytt fakturautkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Opprettet InvoiceDraft (når implementert)."
+example     = "fiken invoices drafts create --company acme --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.invoices_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher invoiceishDraftRequest (ikke koblet ennå)."
+
+[ops.invoices_drafts_update]
+summary     = "Oppdater et eksisterende fakturautkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Oppdatert InvoiceDraft (når implementert)."
+example     = "fiken invoices drafts update --company acme --draft-id 1 --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.invoices_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body (ikke koblet ennå)."
+
+[ops.invoices_drafts_delete]
+summary     = "Slett et fakturautkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Sletteflagg (når implementert)."
+example     = "fiken invoices drafts delete --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.invoices_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.invoices_drafts_create_from]
+summary     = "Promoter et utkast til en postet faktura. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for den nye fakturaen (når implementert)."
+example     = "fiken invoices drafts create-from --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.invoices_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kildeutkastet. Påkrevd."
+
+[ops.invoices_attachments_list]
+summary     = "List vedlegg for en faktura."
+when_to_use = "Brukes for å finne identifikatorer, nedlastings-URL eller filtyper knyttet til en spesifikk faktura."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken invoices attachments list --company acme --invoice-id 1234"
+
+[ops.invoices_attachments_list.flags]
+company    = "Slug for selskapet. Påkrevd."
+invoice_id = "Numerisk id for fakturaen. Påkrevd."
+
+[ops.invoices_attachments_attach]
+summary     = "Knytt en fil til en faktura. (Stub: multipart-opplasting kommer i Plan D.)"
+when_to_use = "Reservert for Plan D; returnerer foreløpig internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for opprettet vedlegg (når implementert)."
+example     = "fiken invoices attachments attach --company acme --invoice-id 1234 --file ./kontrakt.pdf  # ikke koblet ennå"
+
+[ops.invoices_attachments_attach.flags]
+company    = "Slug for selskapet. Påkrevd."
+invoice_id = "Numerisk id for fakturaen. Påkrevd."
+filename   = "Overstyrt filnavn (standard: filnavn fra --file)."
+file       = "Lokal filsti for opplasting. Påkrevd."
+
+[ops.invoices_drafts_attachments_list]
+summary     = "List vedlegg for et fakturautkast."
+when_to_use = "Brukes for å finne identifikatorer, nedlastings-URL eller filtyper knyttet til et spesifikt fakturautkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken invoices drafts attachments list --company acme --draft-id 1"
+
+[ops.invoices_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.invoices_drafts_attachments_attach]
+summary     = "Knytt en fil til et fakturautkast. (Stub: multipart-opplasting kommer i Plan D.)"
+when_to_use = "Reservert for Plan D; returnerer foreløpig internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for opprettet vedlegg (når implementert)."
+example     = "fiken invoices drafts attachments attach --company acme --draft-id 1 --file ./kontrakt.pdf  # ikke koblet ennå"
+
+[ops.invoices_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+filename = "Overstyrt filnavn (standard: filnavn fra --file)."
+file     = "Lokal filsti for opplasting. Påkrevd."
+
+[ops.credit_notes_list]
+summary     = "List kreditnotaer for et selskap."
+when_to_use = "Brukes for å vise utstedte kreditnotaer, eventuelt filtrert på faktura- eller endringsdato, kunde, betalingsstatus eller kildeutkast-UUID."
+returns     = "Objekt med `items` (hver: credit_note_id, credit_note_number, issue_date, gross/net/vat i int64 øre, associated_invoice_id, customer_id/name, lines[]) og pagineringsmeta."
+example     = "fiken credit-notes list --company acme --issue-date-ge 2024-01-01"
+
+[ops.credit_notes_list.flags]
+company                = "Slug for selskapet som skal forespørres. Påkrevd."
+page                   = "Sidetall (0-indeksert)."
+page_size              = "Sidestørrelse (maks 100)."
+issue_date             = "Filtrer på eksakt fakturadato (YYYY-MM-DD)."
+issue_date_le          = "Filtrer fakturadato <= verdi."
+issue_date_lt          = "Filtrer fakturadato < verdi."
+issue_date_ge          = "Filtrer fakturadato >= verdi."
+issue_date_gt          = "Filtrer fakturadato > verdi."
+last_modified          = "Filtrer på eksakt sist-endret-dato."
+last_modified_le       = "Filtrer sist-endret <= verdi."
+last_modified_lt       = "Filtrer sist-endret < verdi."
+last_modified_ge       = "Filtrer sist-endret >= verdi."
+last_modified_gt       = "Filtrer sist-endret > verdi."
+customer_id            = "Filtrer på kundens kontakt-id."
+settled                = "Filtrer til betalte kreditnotaer."
+credit_note_draft_uuid = "Filtrer på kildeutkast-UUID (uavhengig kreditnota)."
+
+[ops.credit_notes_get]
+summary     = "Hent én kreditnota via id."
+when_to_use = "Brukes når du har en credit_note_id og trenger hele dokumentet med linjer, tilknyttet faktura og kunde."
+returns     = "Kreditnota-objekt med credit_note_id, credit_note_number, gross/net/vat int64 øre, lines[], associated_invoice_id og flatpakket customer_id/name."
+example     = "fiken credit-notes get --company acme --credit-note-id 7"
+
+[ops.credit_notes_get.flags]
+company        = "Slug for selskapet som eier kreditnotaen. Påkrevd."
+credit_note_id = "Id for kreditnotaen (sti-parameter som streng, ikke kreditnota-nummeret). Påkrevd."
+
+[ops.credit_notes_send]
+summary     = "Send en kreditnota til kunden. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Tomt suksess-omslag (når implementert)."
+example     = "fiken credit-notes send --company acme --credit-note-id 7  # ikke koblet ennå"
+
+[ops.credit_notes_send.flags]
+company        = "Slug for selskapet. Påkrevd."
+credit_note_id = "Numerisk id for kreditnotaen som skal sendes. Påkrevd."
+
+[ops.credit_notes_counter_create]
+summary     = "Initialiser kreditnota-telleren for regnskapsåret. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Tellerverdi (når implementert)."
+example     = "fiken credit-notes counter create --company acme --value 10000  # ikke koblet ennå"
+
+[ops.credit_notes_counter_create.flags]
+company = "Slug for selskapet. Påkrevd."
+value   = "Starttellerverdi. Påkrevd."
+
+[ops.credit_notes_full_create]
+summary     = "Lag en kreditnota som dekker hele beløpet på en faktura. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for ny kreditnota (når implementert)."
+example     = "fiken credit-notes full-create --company acme --from-file ./full.json  # ikke koblet ennå"
+
+[ops.credit_notes_full_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher fullCreditNoteRequest (ikke koblet ennå)."
+
+[ops.credit_notes_partial_create]
+summary     = "Lag en kreditnota for et delvis beløp av en faktura. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for ny kreditnota (når implementert)."
+example     = "fiken credit-notes partial-create --company acme --from-file ./partial.json  # ikke koblet ennå"
+
+[ops.credit_notes_partial_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher partialCreditNoteRequest (ikke koblet ennå)."
+
+[ops.credit_notes_drafts_list]
+summary     = "List kreditnota-utkast for et selskap."
+when_to_use = "Brukes for å vise kreditnota-utkast (uavhengige kreditnotaer) før de promoteres."
+returns     = "Objekt med `items` (hver: draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[], customer_ids[]) og pagineringsmeta."
+example     = "fiken credit-notes drafts list --company acme"
+
+[ops.credit_notes_drafts_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidetall (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.credit_notes_drafts_get]
+summary     = "Hent ett kreditnota-utkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payload-en før redigering eller promotering."
+returns     = "InvoiceDraft-objekt (type=credit_note) med draft_id, uuid, issue_date, due_days, net/gross int64 øre, lines[], attachments[] og customer_ids[]."
+example     = "fiken credit-notes drafts get --company acme --draft-id 1"
+
+[ops.credit_notes_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.credit_notes_drafts_create]
+summary     = "Lag et nytt kreditnota-utkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Opprettet InvoiceDraft (når implementert)."
+example     = "fiken credit-notes drafts create --company acme --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.credit_notes_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher invoiceishDraftRequest (ikke koblet ennå)."
+
+[ops.credit_notes_drafts_update]
+summary     = "Oppdater et eksisterende kreditnota-utkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Oppdatert InvoiceDraft (når implementert)."
+example     = "fiken credit-notes drafts update --company acme --draft-id 1 --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.credit_notes_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body (ikke koblet ennå)."
+
+[ops.credit_notes_drafts_delete]
+summary     = "Slett et kreditnota-utkast. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Sletteflagg (når implementert)."
+example     = "fiken credit-notes drafts delete --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.credit_notes_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.credit_notes_drafts_create_from]
+summary     = "Promoter et kreditnota-utkast til en postet kreditnota. (Stub: muterende wiring kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølgende oppgave; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for ny kreditnota (når implementert)."
+example     = "fiken credit-notes drafts create-from --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.credit_notes_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kildeutkastet. Påkrevd."
+
+[ops.credit_notes_drafts_attachments_list]
+summary     = "List vedlegg for et kreditnota-utkast."
+when_to_use = "Brukes for å finne identifikatorer, nedlastings-URL eller filtyper knyttet til et spesifikt kreditnota-utkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken credit-notes drafts attachments list --company acme --draft-id 1"
+
+[ops.credit_notes_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.credit_notes_drafts_attachments_attach]
+summary     = "Knytt en fil til et kreditnota-utkast. (Stub: multipart-opplasting kommer i Plan D.)"
+when_to_use = "Reservert for Plan D; returnerer foreløpig internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for opprettet vedlegg (når implementert)."
+example     = "fiken credit-notes drafts attachments attach --company acme --draft-id 1 --file ./kontrakt.pdf  # ikke koblet ennå"
+
+[ops.credit_notes_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+filename = "Overstyrt filnavn (standard: filnavn fra --file)."
+file     = "Lokal filsti for opplasting. Påkrevd."
+
+[ops.offers_list]
+summary     = "List tilbud for et selskap."
+when_to_use = "Brukes for å hente tilbud med totaler, datoer og om de er akseptert."
+returns     = "Objekt med `items` (hver: offer_id, offer_number, date, gross/net/vat int64 øre, contact_id, accepted, lines[]) og paginerings-meta."
+example     = "fiken offers list --company acme --page-size 50"
+
+[ops.offers_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.offers_get]
+summary     = "Hent ett tilbud via id."
+when_to_use = "Brukes når du har en offer_id og trenger hele dokumentet inkl. linjer og kundereferanse."
+returns     = "Offer-objekt med offer_id, offer_number, date, gross/net/vat int64 øre, lines[] og contact_id."
+example     = "fiken offers get --company acme --offer-id 11"
+
+[ops.offers_get.flags]
+company  = "Slug for selskapet som eier tilbudet. Påkrevd."
+offer_id = "Id for tilbudet (path-parameter er string, ikke tilbudsnummer). Påkrevd."
+
+[ops.offers_send]
+summary     = "Send et tilbud til kunden. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Tom suksess-envelope (når implementert)."
+example     = "fiken offers send --company acme --offer-id 11  # ikke koblet ennå"
+
+[ops.offers_send.flags]
+company  = "Slug for selskapet. Påkrevd."
+offer_id = "Numerisk id for tilbudet som skal sendes. Påkrevd."
+
+[ops.offers_counter_create]
+summary     = "Initialiser tilbudsteller for regnskapsåret. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Tellerverdi (når implementert)."
+example     = "fiken offers counter create --company acme --value 10000  # ikke koblet ennå"
+
+[ops.offers_counter_create.flags]
+company = "Slug for selskapet. Påkrevd."
+value   = "Startverdi for telleren. Påkrevd."
+
+[ops.offers_drafts_list]
+summary     = "List tilbudsutkast for et selskap."
+when_to_use = "Brukes for å hente tilbudsutkast før de gjøres om til faktiske tilbud."
+returns     = "Objekt med `items` (hver: draft_id, uuid, type=offer, issue_date, net/gross int64 øre, lines[], attachments[], customer_ids[]) og paginerings-meta."
+example     = "fiken offers drafts list --company acme"
+
+[ops.offers_drafts_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.offers_drafts_get]
+summary     = "Hent ett tilbudsutkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payloaden før redigering eller promotering."
+returns     = "InvoiceDraft-objekt (type=offer) med draft_id, uuid, issue_date, net/gross int64 øre, lines[], attachments[] og customer_ids[]."
+example     = "fiken offers drafts get --company acme --draft-id 1"
+
+[ops.offers_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.offers_drafts_create]
+summary     = "Opprett et nytt tilbudsutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Opprettet InvoiceDraft (når implementert)."
+example     = "fiken offers drafts create --company acme --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.offers_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher invoiceishDraftRequest (ikke koblet ennå)."
+
+[ops.offers_drafts_update]
+summary     = "Oppdater et eksisterende tilbudsutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Oppdatert InvoiceDraft (når implementert)."
+example     = "fiken offers drafts update --company acme --draft-id 1 --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.offers_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body (ikke koblet ennå)."
+
+[ops.offers_drafts_delete]
+summary     = "Slett et tilbudsutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Slettet-flagg (når implementert)."
+example     = "fiken offers drafts delete --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.offers_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.offers_drafts_create_from]
+summary     = "Promoter et tilbudsutkast til et sendt tilbud. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for det nye tilbudet (når implementert)."
+example     = "fiken offers drafts create-from --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.offers_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kilde-utkastet. Påkrevd."
+
+[ops.offers_drafts_attachments_list]
+summary     = "List vedlegg for et tilbudsutkast."
+when_to_use = "Brukes for å finne identifikatorer, nedlastings-URL-er eller typer for filer knyttet til et tilbudsutkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken offers drafts attachments list --company acme --draft-id 1"
+
+[ops.offers_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.offers_drafts_attachments_attach]
+summary     = "Knytt en fil til et tilbudsutkast. (Stub: multipart-opplasting kommer i Plan D.)"
+when_to_use = "Reservert for Plan D; returnerer foreløpig internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for opprettet vedlegg (når implementert)."
+example     = "fiken offers drafts attachments attach --company acme --draft-id 1 --file ./kontrakt.pdf  # ikke koblet ennå"
+
+[ops.offers_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+filename = "Overstyrt filnavn (standard: filnavn fra --file)."
+file     = "Lokal filsti for opplasting. Påkrevd."
+
+[ops.order_confirmations_list]
+summary     = "List ordrebekreftelser for et selskap."
+when_to_use = "Brukes for å hente ordrebekreftelser med totaler, datoer og eventuell tilknyttet faktura."
+returns     = "Objekt med `items` (hver: confirmation_id, confirmation_number, date, gross/net/vat int64 øre, contact_id, created_invoice, lines[]) og paginerings-meta."
+example     = "fiken order-confirmations list --company acme --page-size 50"
+
+[ops.order_confirmations_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.order_confirmations_get]
+summary     = "Hent én ordrebekreftelse via id."
+when_to_use = "Brukes når du har en confirmation_id og trenger hele dokumentet inkl. linjer, internkommentar og evt. tilknyttet faktura."
+returns     = "OrderConfirmation-objekt med confirmation_id, confirmation_number, date, gross/net/vat int64 øre, lines[], contact_id og created_invoice."
+example     = "fiken order-confirmations get --company acme --confirmation-id 11"
+
+[ops.order_confirmations_get.flags]
+company         = "Slug for selskapet som eier ordrebekreftelsen. Påkrevd."
+confirmation_id = "Id for ordrebekreftelsen (path-parameter er string). Påkrevd."
+
+[ops.order_confirmations_counter_create]
+summary     = "Initialiser teller for ordrebekreftelser for regnskapsåret. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Tellerverdi (når implementert)."
+example     = "fiken order-confirmations counter create --company acme --value 10000  # ikke koblet ennå"
+
+[ops.order_confirmations_counter_create.flags]
+company = "Slug for selskapet. Påkrevd."
+value   = "Startverdi for telleren. Påkrevd."
+
+[ops.order_confirmations_create_invoice_draft]
+summary     = "Opprett et fakturautkast fra en ordrebekreftelse. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for det nye fakturautkastet (når implementert)."
+example     = "fiken order-confirmations create-invoice-draft --company acme --confirmation-id 11  # ikke koblet ennå"
+
+[ops.order_confirmations_create_invoice_draft.flags]
+company         = "Slug for selskapet. Påkrevd."
+confirmation_id = "Kilde-id for ordrebekreftelsen. Påkrevd."
+
+[ops.order_confirmations_drafts_list]
+summary     = "List ordrebekreftelsesutkast for et selskap."
+when_to_use = "Brukes for å hente ordrebekreftelsesutkast før de gjøres om til faktiske ordrebekreftelser."
+returns     = "Objekt med `items` (hver: draft_id, uuid, type=order_confirmation, issue_date, net/gross int64 øre, lines[], attachments[], customer_ids[]) og paginerings-meta."
+example     = "fiken order-confirmations drafts list --company acme"
+
+[ops.order_confirmations_drafts_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.order_confirmations_drafts_get]
+summary     = "Hent ett ordrebekreftelsesutkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payloaden før redigering eller promotering."
+returns     = "InvoiceDraft-objekt (type=order_confirmation) med draft_id, uuid, issue_date, net/gross int64 øre, lines[], attachments[] og customer_ids[]."
+example     = "fiken order-confirmations drafts get --company acme --draft-id 1"
+
+[ops.order_confirmations_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.order_confirmations_drafts_create]
+summary     = "Opprett et nytt ordrebekreftelsesutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Opprettet InvoiceDraft (når implementert)."
+example     = "fiken order-confirmations drafts create --company acme --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.order_confirmations_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher invoiceishDraftRequest (ikke koblet ennå)."
+
+[ops.order_confirmations_drafts_update]
+summary     = "Oppdater et eksisterende ordrebekreftelsesutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Oppdatert InvoiceDraft (når implementert)."
+example     = "fiken order-confirmations drafts update --company acme --draft-id 1 --from-file ./draft.json  # ikke koblet ennå"
+
+[ops.order_confirmations_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body (ikke koblet ennå)."
+
+[ops.order_confirmations_drafts_delete]
+summary     = "Slett et ordrebekreftelsesutkast. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Slettet-flagg (når implementert)."
+example     = "fiken order-confirmations drafts delete --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.order_confirmations_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.order_confirmations_drafts_create_from]
+summary     = "Promoter et ordrebekreftelsesutkast til en sendt ordrebekreftelse. (Stub: muterende kobling kommer i en oppfølgende Plan C-oppgave.)"
+when_to_use = "Reservert for oppfølger; returnerer foreløpig internal/not-implemented."
+returns     = "Location-URL for den nye ordrebekreftelsen (når implementert)."
+example     = "fiken order-confirmations drafts create-from --company acme --draft-id 1  # ikke koblet ennå"
+
+[ops.order_confirmations_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kilde-utkastet. Påkrevd."
+
+[ops.order_confirmations_drafts_attachments_list]
+summary     = "List vedlegg for et ordrebekreftelsesutkast."
+when_to_use = "Brukes for å finne identifikatorer, nedlastings-URL-er eller typer for filer knyttet til et ordrebekreftelsesutkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken order-confirmations drafts attachments list --company acme --draft-id 1"
+
+[ops.order_confirmations_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.order_confirmations_drafts_attachments_attach]
+summary     = "Knytt en fil til et ordrebekreftelsesutkast. (Stub: multipart-opplasting kommer i Plan D.)"
+when_to_use = "Reservert for Plan D; returnerer foreløpig internal/not-implemented. MCP eksponerer dette verktøyet kun når EnableAttachments er satt."
+returns     = "Location-URL for opprettet vedlegg (når implementert)."
+example     = "fiken order-confirmations drafts attachments attach --company acme --draft-id 1 --file ./kontrakt.pdf  # ikke koblet ennå"
+
+[ops.order_confirmations_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+filename = "Overstyrt filnavn (standard: filnavn fra --file)."
+file     = "Lokal filsti for opplasting. Påkrevd."
+
+[ops.products_list]
+summary     = "List produkter i varekatalogen for et selskap."
+when_to_use = "Bruk for å bla i varekatalogen, finne product_id via navn/nummer, eller inspisere enhetspris, MVA-type og lagerbeholdning."
+returns     = "Objekt med `items` (hver: product_id, name, product_number, unit_price int64 øre, income_account, vat_type, active, stock, note) og paginering."
+example     = "fiken products list --company acme --page-size 50"
+
+[ops.products_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.products_get]
+summary     = "Hent ett enkelt produkt etter id."
+when_to_use = "Bruk når du har en product_id og trenger hele produktposten."
+returns     = "Product-objekt med product_id, name, product_number, unit_price int64 øre, income_account, vat_type, active, stock, note og createdDate/lastModifiedDate."
+example     = "fiken products get --company acme --product-id 7"
+
+[ops.products_get.flags]
+company    = "Slug for selskapet som eier produktet. Påkrevd."
+product_id = "Numerisk id for produktet. Påkrevd."
+
+[ops.products_create]
+summary     = "Opprett et nytt produkt. (Stub: muterende kobling kommer i en oppfølgings-Plan-C-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Opprettet Product (når implementert)."
+example     = "fiken products create --company acme --from-file ./product.json  # ikke koblet ennå"
+
+[ops.products_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher product-skjemaet (ikke koblet ennå)."
+
+[ops.products_update]
+summary     = "Oppdater et eksisterende produkt. (Stub: muterende kobling kommer i en oppfølgings-Plan-C-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Oppdatert Product (når implementert)."
+example     = "fiken products update --company acme --product-id 7 --from-file ./product.json  # ikke koblet ennå"
+
+[ops.products_update.flags]
+company    = "Slug for selskapet. Påkrevd."
+product_id = "Numerisk id for produktet som skal oppdateres. Påkrevd."
+from_file  = "Sti til JSON-body (ikke koblet ennå)."
+
+[ops.products_delete]
+summary     = "Slett et produkt. (Stub: muterende kobling kommer i en oppfølgings-Plan-C-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Tom suksess-envelope (når implementert)."
+example     = "fiken products delete --company acme --product-id 7  # ikke koblet ennå"
+
+[ops.products_delete.flags]
+company    = "Slug for selskapet. Påkrevd."
+product_id = "Numerisk id for produktet som skal slettes. Påkrevd."
+
+[ops.products_sales_report_create]
+summary     = "Generer en produktsalgsrapport for et datointervall."
+when_to_use = "Bruk for å aggregere salg per produkt (antall, brutto, netto, MVA) over et datointervall — både solgt og kreditert bevegelse, samt netto sum."
+returns     = "Objekt med `items` (hver rad: product, sold, credited, sum — hver aggregering har count, sales, net_amount, vat_amount, gross_amount i int64 øre) og minimal meta."
+example     = "fiken products sales-report create --company acme --from 2024-01-01 --to 2024-12-31"
+
+[ops.products_sales_report_create.flags]
+company = "Slug for selskapet. Påkrevd."
+from    = "Startdato inklusiv, YYYY-MM-DD. Påkrevd."
+to      = "Sluttdato inklusiv, YYYY-MM-DD. Påkrevd."
+
+[ops.sales_list]
+summary     = "Liste salg for et selskap."
+when_to_use = "Bruk for å bla i salg (kontantsalg, fakturasalg eller annet salg). Filtrer på dato, sist endret, salgsnummer, kunde eller oppgjort-flagg."
+returns     = "Objekt med `items` (hver: sale_id, sale_number, date, kind, net_amount int64 øre, vat_amount int64 øre, total_paid int64 øre, outstanding_balance int64 øre, customer, lines, payments, attachments) og paginering."
+example     = "fiken sales list --company acme --settled=false"
+
+[ops.sales_list.flags]
+company          = "Slug for selskapet. Påkrevd."
+page             = "Sidenummer (0-indeksert)."
+page_size        = "Sidestørrelse (maks 100)."
+date             = "Filtrer på eksakt salgsdato (YYYY-MM-DD)."
+date_le          = "Filtrer dato <= verdi."
+date_lt          = "Filtrer dato < verdi."
+date_ge          = "Filtrer dato >= verdi."
+date_gt          = "Filtrer dato > verdi."
+last_modified    = "Filtrer på eksakt sist-endret-dato."
+last_modified_le = "Filtrer sist-endret <= verdi."
+last_modified_lt = "Filtrer sist-endret < verdi."
+last_modified_ge = "Filtrer sist-endret >= verdi."
+last_modified_gt = "Filtrer sist-endret > verdi."
+sale_number      = "Filtrer på salgsnummer-streng."
+settled          = "Filtrer til oppgjorte salg (standard: inkluder ikke-oppgjorte)."
+contact_id       = "Filtrer på kunde-contact-id."
+
+[ops.sales_get]
+summary     = "Hent ett enkelt salg etter id."
+when_to_use = "Bruk når du har en sale_id og trenger hele salgsposten, inkludert betalinger og vedlegg."
+returns     = "Sale-objekt med sale_id, sale_number, date, kind, beløp i int64 øre, customer, lines, payments, attachments."
+example     = "fiken sales get --company acme --sale-id 42"
+
+[ops.sales_get.flags]
+company = "Slug for selskapet som eier salget. Påkrevd."
+sale_id = "Numerisk id for salget. Påkrevd."
+
+[ops.sales_create]
+summary     = "Opprett et nytt salg. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Location-header for det nye salget (når implementert)."
+example     = "fiken sales create --company acme --from-file ./sale.json  # ikke koblet ennå"
+
+[ops.sales_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher SaleRequest-skjemaet (ikke koblet ennå)."
+
+[ops.sales_delete]
+summary     = "Marker et salg som slettet. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented. Skaper en reverstransaksjon og setter deleted-flagget (selve salget bevares)."
+returns     = "Salget etter sletting (når implementert)."
+example     = "fiken sales delete --company acme --sale-id 42 --description 'duplikat'  # ikke koblet ennå"
+
+[ops.sales_delete.flags]
+company             = "Slug for selskapet. Påkrevd."
+sale_id             = "Numerisk id for salget som skal slettes. Påkrevd."
+delete_description  = "Påkrevd revisjonsbeskrivelse for slettingen."
+
+[ops.sales_settle]
+summary     = "Marker et salg som oppgjort uten betaling. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented. Tilsvarer 'sett til oppgjort uten betaling' i Fiken-GUI-et."
+returns     = "Oppdatert salg (når implementert)."
+example     = "fiken sales settle --company acme --sale-id 42 --settled-date 2024-06-01  # ikke koblet ennå"
+
+[ops.sales_settle.flags]
+company      = "Slug for selskapet. Påkrevd."
+sale_id      = "Numerisk id for salget. Påkrevd."
+settled_date = "Oppgjørsdato, YYYY-MM-DD. Påkrevd."
+
+[ops.sales_write_off]
+summary     = "Registrer tapsføring for et salg. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented. Salget kan ikke være kontantsalg, allerede tapsført, oppgjort eller slettet, og må ha utestående beløp."
+returns     = "Oppdatert salg (når implementert)."
+example     = "fiken sales write-off --company acme --sale-id 42 --from-file ./tapsforing.json  # ikke koblet ennå"
+
+[ops.sales_write_off.flags]
+company   = "Slug for selskapet. Påkrevd."
+sale_id   = "Numerisk id for salget. Påkrevd."
+from_file = "Sti til JSON-body som matcher WriteOffRequest-skjemaet (ikke koblet ennå)."
+
+[ops.sales_attachments_list]
+summary     = "List vedlegg for et salg."
+when_to_use = "Bruk for å bla i filene (fakturaer, kvitteringer) som er knyttet til et salg."
+returns     = "Objekt med `items` (hver: identifier, type, download_url, comment) og minimal meta."
+example     = "fiken sales attachments list --company acme --sale-id 42"
+
+[ops.sales_attachments_list.flags]
+company = "Slug for selskapet. Påkrevd."
+sale_id = "Numerisk id for salget. Påkrevd."
+
+[ops.sales_attachments_attach]
+summary     = "Last opp et vedlegg til et salg. (Plan D — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan D; multipart-opplasting kobles når EnableAttachments er trådet gjennom begge frontender."
+returns     = "Location-header for det nye vedlegget (når implementert)."
+example     = "fiken sales attachments attach --company acme --sale-id 42 --file ./kvittering.pdf  # Plan D"
+
+[ops.sales_attachments_attach.flags]
+company           = "Slug for selskapet. Påkrevd."
+sale_id           = "Numerisk id for salget. Påkrevd."
+filename          = "Overstyr filnavnet (standard: basename av --file)."
+file              = "Lokal filsti å laste opp. Påkrevd."
+attach_to_sale    = "True hvis vedlegget dokumenterer salget (faktura osv.)."
+attach_to_payment = "True hvis vedlegget dokumenterer betalingen (kvittering osv.)."
+
+[ops.sales_payments_list]
+summary     = "List betalinger for et salg."
+when_to_use = "Bruk for å bla i betalingene (hel eller delvis) som er registrert på et salg."
+returns     = "Objekt med `items` (hver: payment_id, date, account, amount int64 øre, currency, fee int64 øre) og minimal meta."
+example     = "fiken sales payments list --company acme --sale-id 42"
+
+[ops.sales_payments_list.flags]
+company = "Slug for selskapet. Påkrevd."
+sale_id = "Numerisk id for salget. Påkrevd."
+
+[ops.sales_payments_get]
+summary     = "Hent én enkelt salgsbetaling etter id."
+when_to_use = "Bruk når du har en payment_id og trenger hele betalingsposten."
+returns     = "Payment-objekt med payment_id, date, account, amount int64 øre, currency, fee."
+example     = "fiken sales payments get --company acme --sale-id 42 --payment-id 7"
+
+[ops.sales_payments_get.flags]
+company    = "Slug for selskapet. Påkrevd."
+sale_id    = "Numerisk id for salget. Påkrevd."
+payment_id = "Numerisk id for betalingen. Påkrevd."
+
+[ops.sales_payments_create]
+summary     = "Registrer en betaling for et salg. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Location-header for den nye betalingen (når implementert)."
+example     = "fiken sales payments create --company acme --sale-id 42 --from-file ./betaling.json  # ikke koblet ennå"
+
+[ops.sales_payments_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+sale_id   = "Numerisk id for salget. Påkrevd."
+from_file = "Sti til JSON-body som matcher Payment-skjemaet (ikke koblet ennå)."
+
+[ops.purchases_list]
+summary     = "List kjøp for et selskap."
+when_to_use = "Bruk for å bla i kjøp (kontantkjøp eller leverandørfaktura). Filtrer på dato, oppgjørsdato eller betalt-flagg."
+returns     = "Objekt med `items` (hver: purchase_id, identifier, date, kind, paid, supplier, lines, payments, attachments) og paginering."
+example     = "fiken purchases list --company acme --paid=false"
+
+[ops.purchases_list.flags]
+company         = "Slug for selskapet. Påkrevd."
+page            = "Sidenummer (0-indeksert)."
+page_size       = "Sidestørrelse (maks 100)."
+date            = "Filtrer på eksakt kjøpsdato (YYYY-MM-DD)."
+date_le         = "Filtrer dato <= verdi."
+date_lt         = "Filtrer dato < verdi."
+date_ge         = "Filtrer dato >= verdi."
+date_gt         = "Filtrer dato > verdi."
+settled_date    = "Filtrer på eksakt oppgjørsdato."
+settled_date_le = "Filtrer oppgjørsdato <= verdi."
+settled_date_lt = "Filtrer oppgjørsdato < verdi."
+settled_date_ge = "Filtrer oppgjørsdato >= verdi."
+settled_date_gt = "Filtrer oppgjørsdato > verdi."
+paid            = "Filtrer til betalte kjøp (standard: inkluder ubetalte)."
+
+[ops.purchases_get]
+summary     = "Hent ett enkelt kjøp etter id."
+when_to_use = "Bruk når du har en purchase_id og trenger hele kjøpsposten, inkludert betalinger og vedlegg."
+returns     = "Kjøp-objekt med purchase_id, identifier, date, kind, supplier, lines, payments, attachments."
+example     = "fiken purchases get --company acme --purchase-id 99"
+
+[ops.purchases_get.flags]
+company     = "Slug for selskapet som eier kjøpet. Påkrevd."
+purchase_id = "Numerisk id for kjøpet. Påkrevd."
+
+[ops.purchases_create]
+summary     = "Opprett et nytt kjøp. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Location-header for det nye kjøpet (når implementert)."
+example     = "fiken purchases create --company acme --from-file ./kjop.json  # ikke koblet ennå"
+
+[ops.purchases_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher PurchaseRequest-skjemaet (ikke koblet ennå)."
+
+[ops.purchases_delete]
+summary     = "Marker et kjøp som slettet. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented. Skaper en reverstransaksjon og setter deleted-flagget (selve kjøpet bevares)."
+returns     = "Kjøpet etter sletting (når implementert)."
+example     = "fiken purchases delete --company acme --purchase-id 99 --description 'duplikat'  # ikke koblet ennå"
+
+[ops.purchases_delete.flags]
+company             = "Slug for selskapet. Påkrevd."
+purchase_id         = "Numerisk id for kjøpet som skal slettes. Påkrevd."
+delete_description  = "Påkrevd revisjonsbeskrivelse for slettingen."
+
+[ops.purchases_attachments_list]
+summary     = "List vedlegg for et kjøp."
+when_to_use = "Bruk for å bla i filene (fakturaer, kvitteringer) som er knyttet til et kjøp."
+returns     = "Objekt med `items` (hver: identifier, type, download_url, comment) og minimal meta."
+example     = "fiken purchases attachments list --company acme --purchase-id 99"
+
+[ops.purchases_attachments_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+purchase_id = "Numerisk id for kjøpet. Påkrevd."
+
+[ops.purchases_attachments_attach]
+summary     = "Last opp et vedlegg til et kjøp. (Plan D — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan D; multipart-opplasting kobles når EnableAttachments er trådet gjennom begge frontender."
+returns     = "Location-header for det nye vedlegget (når implementert)."
+example     = "fiken purchases attachments attach --company acme --purchase-id 99 --file ./kvittering.pdf  # Plan D"
+
+[ops.purchases_attachments_attach.flags]
+company           = "Slug for selskapet. Påkrevd."
+purchase_id       = "Numerisk id for kjøpet. Påkrevd."
+filename          = "Overstyr filnavnet (standard: basename av --file)."
+file              = "Lokal filsti å laste opp. Påkrevd."
+attach_to_sale    = "True hvis vedlegget dokumenterer kjøpsfakturaen."
+attach_to_payment = "True hvis vedlegget dokumenterer betalingen (kvittering osv.)."
+
+[ops.purchases_payments_list]
+summary     = "List betalinger for et kjøp."
+when_to_use = "Bruk for å bla i betalingene (hel eller delvis) som er registrert på et kjøp."
+returns     = "Objekt med `items` (hver: payment_id, date, account, amount int64 øre, currency, fee int64 øre) og minimal meta."
+example     = "fiken purchases payments list --company acme --purchase-id 99"
+
+[ops.purchases_payments_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+purchase_id = "Numerisk id for kjøpet. Påkrevd."
+
+[ops.purchases_payments_get]
+summary     = "Hent én enkelt kjøpsbetaling etter id."
+when_to_use = "Bruk når du har en payment_id og trenger hele betalingsposten."
+returns     = "Payment-objekt med payment_id, date, account, amount int64 øre, currency, fee."
+example     = "fiken purchases payments get --company acme --purchase-id 99 --payment-id 11"
+
+[ops.purchases_payments_get.flags]
+company     = "Slug for selskapet. Påkrevd."
+purchase_id = "Numerisk id for kjøpet. Påkrevd."
+payment_id  = "Numerisk id for betalingen. Påkrevd."
+
+[ops.purchases_payments_create]
+summary     = "Registrer en betaling for et kjøp. (Stub: muterende kobling kommer i en oppfølgings-oppgave.)"
+when_to_use = "Reservert for oppfølging; returnerer foreløpig internal/not-implemented."
+returns     = "Location-header for den nye betalingen (når implementert)."
+example     = "fiken purchases payments create --company acme --purchase-id 99 --from-file ./betaling.json  # ikke koblet ennå"
+
+[ops.purchases_payments_create.flags]
+company     = "Slug for selskapet. Påkrevd."
+purchase_id = "Numerisk id for kjøpet. Påkrevd."
+from_file   = "Sti til JSON-body som matcher Payment-skjemaet (ikke koblet ennå)."
+
+[ops.inbox_list]
+summary     = "List dokumenter i selskapets innboks."
+when_to_use = "Bruk for å bla i innboks-dokumenter (lastet opp, ikke koblet til kjøp/salg ennå). Filtrer på status (brukt/ubrukt) eller delsøk på navn."
+returns     = "Objekt med `items` (hver: document_id, name, filename, status, created_at, document_url) og paginering."
+example     = "fiken inbox list --company acme --status unused"
+
+[ops.inbox_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+sort_by     = "Sortering: 'createdDate asc', 'createdDate desc', 'name asc', 'name desc'."
+status      = "Filtrer på status: all, unused, used."
+name        = "Case-insensitivt delsøk på dokumentnavn."
+
+[ops.inbox_get]
+summary     = "Hent ett enkelt innboks-dokument etter id."
+when_to_use = "Bruk når du har en document_id og trenger hele innboks-posten, inkludert dokument-URL."
+returns     = "Innboks-dokumentobjekt med document_id, name, filename, status, created_at, document_url."
+example     = "fiken inbox get --company acme --document-id 42"
+
+[ops.inbox_get.flags]
+company     = "Slug for selskapet. Påkrevd."
+document_id = "Numerisk id for innboks-dokumentet. Påkrevd."
+
+[ops.inbox_send]
+summary     = "Last opp et dokument til innboksen. (Plan D — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan D; multipart-opplasting kobles når EnableAttachments er trådet gjennom begge frontender."
+returns     = "Location-header for det nye innboks-dokumentet (når implementert)."
+example     = "fiken inbox send --company acme --file ./faktura.pdf  # Plan D"
+
+[ops.inbox_send.flags]
+company          = "Slug for selskapet. Påkrevd."
+name             = "Dokumentnavn (standard: filnavn)."
+filename         = "Overstyr filnavnet (standard: basename av --file)."
+doc_description  = "Tilleggsbeskrivelse for dokumentet (TOML-nøkkel unngår i18n-reservert 'description')."
+file             = "Lokal filsti å laste opp. Påkrevd."
+
+[ops.projects_list]
+summary     = "List prosjekter for et selskap."
+when_to_use = "Bruk for å bla i prosjekter, eventuelt filtrert på fullført, navn eller prosjektnummer."
+returns     = "Objekt med `items` (hver: project_id, number, name, description, start_date, end_date, contact_id, contact_name, completed) og paginering."
+example     = "fiken projects list --company acme --completed false"
+
+[ops.projects_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+completed   = "Filtrer på fullført: 'true', 'false', eller utelat for alle."
+proj_name   = "Filtrer på prosjektnavn (TOML-nøkkel unngår i18n-reservert 'name')."
+number      = "Filtrer på prosjektnummer."
+
+[ops.projects_get]
+summary     = "Hent ett enkelt prosjekt etter id."
+when_to_use = "Bruk når du har en project_id og trenger hele prosjektposten."
+returns     = "Prosjektobjekt med project_id, number, name, description, start_date, end_date, contact_id, contact_name, completed."
+example     = "fiken projects get --company acme --project-id 42"
+
+[ops.projects_get.flags]
+company    = "Slug for selskapet. Påkrevd."
+project_id = "Numerisk id for prosjektet. Påkrevd."
+
+[ops.projects_create]
+summary     = "Opprett et prosjekt. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for det nye prosjektet (når implementert)."
+example     = "fiken projects create --company acme  # ikke implementert"
+
+[ops.projects_create.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.projects_update]
+summary     = "Oppdater et prosjekt. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for det oppdaterte prosjektet (når implementert)."
+example     = "fiken projects update --company acme --project-id 42  # ikke implementert"
+
+[ops.projects_update.flags]
+company    = "Slug for selskapet. Påkrevd."
+project_id = "Numerisk id for prosjektet. Påkrevd."
+
+[ops.projects_delete]
+summary     = "Slett et prosjekt. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Tom suksess-envelope ved 204 No Content (når implementert)."
+example     = "fiken projects delete --company acme --project-id 42  # ikke implementert"
+
+[ops.projects_delete.flags]
+company    = "Slug for selskapet. Påkrevd."
+project_id = "Numerisk id for prosjektet. Påkrevd."
+
+[ops.user_get]
+summary     = "Vis innlogget brukers navn og e-post."
+when_to_use = "Bruk for å verifisere hvilken bruker token er knyttet til; eneste operasjonen som ikke krever en selskap-slug."
+returns     = "Brukerobjekt med navn og e-post."
+example     = "fiken user me"
+
+[ops.user_get.flags]
+
+[ops.account_balances_list]
+summary     = "List saldo for bokføringskontoer pr. en gitt dato."
+when_to_use = "Bruk for å rendre en saldobalanse pr. dato eller hente saldoer i bulk."
+returns     = "Objekt med `items` (hver: code, name, balance i øre) og paginering."
+example     = "fiken account-balances list --company acme --date 2024-12-31"
+
+[ops.account_balances_list.flags]
+company      = "Slug for selskapet. Påkrevd."
+date         = "Saldo-dato YYYY-MM-DD. Påkrevd."
+page         = "Sidenummer (0-indeksert)."
+page_size    = "Sidestørrelse (maks 100)."
+from_account = "Nedre kontonummer (inkludert)."
+to_account   = "Øvre kontonummer (inkludert)."
+
+[ops.account_balances_get]
+summary     = "Hent saldo for én bokføringskonto pr. en gitt dato."
+when_to_use = "Bruk når du har en kontokode og trenger saldoen pr. en gitt dato."
+returns     = "AccountBalance-objekt med code, name, balance i øre."
+example     = "fiken account-balances get --company acme --account-code 3020 --date 2024-12-31"
+
+[ops.account_balances_get.flags]
+company      = "Slug for selskapet. Påkrevd."
+account_code = "Kontokode (f.eks. 3020 eller 1500:10001). Påkrevd."
+date         = "Saldo-dato YYYY-MM-DD. Påkrevd."
+
+[ops.bank_balances_list]
+summary     = "List banksaldoer for et selskap."
+when_to_use = "Bruk for å sammenligne banksaldoer mot avstemt / bokført saldo for kontantavstemming."
+returns     = "Objekt med `items` (hver: source, bank_account_id, bank_account_code, date, amount i øre) og paginering."
+example     = "fiken bank-balances list --company acme --date 2024-12-31"
+
+[ops.bank_balances_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+date        = "Saldo-dato YYYY-MM-DD. Valgfri."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.groups_list]
+summary     = "List kundegrupper for et selskap."
+when_to_use = "Bruk for å se hvilke kundegrupper som er konfigurert. Gruppe-navn returneres som en flat liste."
+returns     = "Objekt med `items` (hver: name) og paginering."
+example     = "fiken groups list --company acme"
+
+[ops.groups_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+
+[ops.activities_list]
+summary     = "List aktiviteter (timeart) for timeføring."
+when_to_use = "Bruk for å se aktiviteter konfigurert på selskapet, eventuelt filtrert på navn eller arkiveringsstatus."
+returns     = "Objekt med `items` (hver: activity_id, name, hourly_rate i øre, description, billable, archived, product_id, project_id) og paginering."
+example     = "fiken activities list --company acme --archived false"
+
+[ops.activities_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+act_name    = "Filtrer på navn (delvis match)."
+archived    = "Filtrer på arkivert: 'true', 'false', eller utelat for alle."
+
+[ops.activities_get]
+summary     = "Hent én aktivitet etter id."
+when_to_use = "Bruk når du har en activity_id og trenger hele posten."
+returns     = "Activity-objekt med activity_id, name, hourly_rate i øre, description, billable, archived, product_id, project_id."
+example     = "fiken activities get --company acme --activity-id 11"
+
+[ops.activities_get.flags]
+company     = "Slug for selskapet. Påkrevd."
+activity_id = "Numerisk id for aktiviteten. Påkrevd."
+
+[ops.activities_create]
+summary     = "Opprett en aktivitet. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for den nye aktiviteten (når implementert)."
+example     = "fiken activities create --company acme  # ikke implementert"
+
+[ops.activities_create.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.activities_update]
+summary     = "Oppdater en aktivitet. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for den oppdaterte aktiviteten (når implementert)."
+example     = "fiken activities update --company acme --activity-id 11  # ikke implementert"
+
+[ops.activities_update.flags]
+company     = "Slug for selskapet. Påkrevd."
+activity_id = "Numerisk id for aktiviteten. Påkrevd."
+
+[ops.activities_delete]
+summary     = "Slett (eller arkiver) en aktivitet. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging. Hvis aktiviteten har timer eller er standard på et prosjekt, vil Fiken arkivere i stedet for å slette."
+returns     = "Tom suksess-envelope ved 204 No Content (når implementert)."
+example     = "fiken activities delete --company acme --activity-id 11  # ikke implementert"
+
+[ops.activities_delete.flags]
+company     = "Slug for selskapet. Påkrevd."
+activity_id = "Numerisk id for aktiviteten. Påkrevd."
+
+[ops.time_entries_list]
+summary     = "List timeoppføringer for et selskap."
+when_to_use = "Bruk for å hente timer, eventuelt filtrert på dato, prosjekt, aktivitet, time-bruker eller fakturert status."
+returns     = "Objekt med `items` (hver: time_entry_id, date, hours, start_time, end_time, description, internal_note, activity_id, project_id, time_user_id, invoiced, invoice_id, locked) og paginering."
+example     = "fiken time-entries list --company acme --date-ge 2024-01-01 --invoiced false"
+
+[ops.time_entries_list.flags]
+company      = "Slug for selskapet. Påkrevd."
+page         = "Sidenummer (0-indeksert)."
+page_size    = "Sidestørrelse (maks 100)."
+date         = "Eksakt dato YYYY-MM-DD."
+date_ge      = "Dato >= YYYY-MM-DD."
+date_le      = "Dato <= YYYY-MM-DD."
+project_id   = "Filtrer på prosjekt-id."
+activity_id  = "Filtrer på aktivitets-id."
+time_user_id = "Filtrer på time-bruker-id."
+invoiced     = "Filtrer på fakturert: 'true', 'false', eller utelat for alle."
+
+[ops.time_entries_get]
+summary     = "Hent én timeoppføring etter id."
+when_to_use = "Bruk når du har en time_entry_id og trenger hele posten."
+returns     = "TimeEntry-objekt med time_entry_id, date, hours, start_time, end_time, description, internal_note, activity_id, project_id, time_user_id, invoiced, invoice_id, locked."
+example     = "fiken time-entries get --company acme --time-entry-id 100"
+
+[ops.time_entries_get.flags]
+company       = "Slug for selskapet. Påkrevd."
+time_entry_id = "Numerisk id for timeoppføringen. Påkrevd."
+
+[ops.time_entries_create]
+summary     = "Opprett en timeoppføring. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for den nye timeoppføringen (når implementert)."
+example     = "fiken time-entries create --company acme  # ikke implementert"
+
+[ops.time_entries_create.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.time_entries_update]
+summary     = "Oppdater en timeoppføring. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging; muterende kobling kommer når lesepath-overflaten er stabil."
+returns     = "Location-header for den oppdaterte timeoppføringen (når implementert)."
+example     = "fiken time-entries update --company acme --time-entry-id 100  # ikke implementert"
+
+[ops.time_entries_update.flags]
+company       = "Slug for selskapet. Påkrevd."
+time_entry_id = "Numerisk id for timeoppføringen. Påkrevd."
+
+[ops.time_entries_delete]
+summary     = "Slett en timeoppføring. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging. Fiken avviser sletting av fakturerte timer eller timer i lukket regnskapsperiode."
+returns     = "Tom suksess-envelope ved 204 No Content (når implementert)."
+example     = "fiken time-entries delete --company acme --time-entry-id 100  # ikke implementert"
+
+[ops.time_entries_delete.flags]
+company       = "Slug for selskapet. Påkrevd."
+time_entry_id = "Numerisk id for timeoppføringen. Påkrevd."
+
+[ops.time_entries_invoice_draft_create]
+summary     = "Lag fakturakladd fra timer. (Plan C oppfølging — ikke koblet ennå.)"
+when_to_use = "Reservert for Plan C-oppfølging. Fiken samler valgte timer til en ny fakturakladd med konfigurerbar gruppering (aktivitet / aktivitet+person / ingen)."
+returns     = "Id på fakturakladden (når implementert)."
+example     = "fiken time-entries invoice-draft --company acme  # ikke implementert"
+
+[ops.time_entries_invoice_draft_create.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.time_users_list]
+summary     = "List personer som kan registrere timer."
+when_to_use = "Bruk for å se time-brukere konfigurert på selskapet, eventuelt filtrert på navn eller e-post."
+returns     = "Objekt med `items` (hver: time_user_id, name, email) og paginering."
+example     = "fiken time-users list --company acme"
+
+[ops.time_users_list.flags]
+company     = "Slug for selskapet. Påkrevd."
+page        = "Sidenummer (0-indeksert)."
+page_size   = "Sidestørrelse (maks 100)."
+tu_name     = "Filtrer på navn (delvis match)."
+email       = "Filtrer på e-post."
+
+[ops.time_users_get]
+summary     = "Hent én time-bruker etter id."
+when_to_use = "Bruk når du har en time_user_id og trenger hele posten."
+returns     = "TimeUser-objekt med time_user_id, name, email."
+example     = "fiken time-users get --company acme --time-user-id 5"
+
+[ops.time_users_get.flags]
+company      = "Slug for selskapet. Påkrevd."
+time_user_id = "Numerisk id for time-brukeren. Påkrevd."
+
+[auth.login]
+prompt_url       = "Lag et personlig API-token: https://fiken.no/foretak/<co>/api-tokens"
+prompt_paste     = "Lim inn token (skjult inntasting):"
+verifying        = "Verifiserer token..."
+saved_keyring    = "Lagret i OS-nøkkelring (service=fiken-go, profil={{profile}})"
+saved_file       = "Lagret til fil {{path}} (mode 0600)"
+overwrite_prompt = "Profil {{profile}} har allerede en credential. Overskrive? [y/N]:"
+
+[auth.status]
+header   = "Profil: {{profile}}"
+user     = "Bruker: {{name}}"
+co_count = "Selskap: {{count}}"
+source   = "Kilde: {{source}}"
+
+[auth.logout]
+removed = "Fjernet credential for profil {{profile}}."
+
+[auth.list]
+header = "Profiler i {{path}}:"
+
+# === Plan D / 21-op-hale (maskinoversatt fra en.toml) ===
+
+[ops.invoices_create]
+summary     = "Opprett en postet faktura direkte (uten utkast-steg)."
+when_to_use = "Brukes for å opprette en faktura i ett trinn. For en iterativ arbeidsflyt, foretrekk utkast."
+returns     = "Location-URL for den nye fakturaen."
+example     = "fiken invoices create --company acme --from-file ./invoice.json"
+
+[ops.invoices_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher invoiceRequest. Påkrevd."
+
+[ops.invoices_update]
+summary     = "Oppdater muterbare felter på en postet faktura."
+when_to_use = "Brukes for å endre KID, referanser eller betalingskonto på en allerede postet faktura."
+returns     = "Location-URL for den oppdaterte fakturaen."
+example     = "fiken invoices update --company acme --invoice-id 1234 --from-file ./patch.json"
+
+[ops.invoices_update.flags]
+company    = "Slug for selskapet. Påkrevd."
+invoice_id = "Numerisk id for fakturaen som skal oppdateres. Påkrevd."
+from_file  = "Sti til JSON-body som matcher updateInvoiceRequest. Påkrevd."
+
+[ops.invoices_counter_get]
+summary     = "Hent gjeldende fakturatellerverdi for regnskapsåret."
+when_to_use = "Brukes for å inspisere neste fakturanummer før postering eller initialisering."
+returns     = "Tellerverdi (int32)."
+example     = "fiken invoices counter get --company acme"
+
+[ops.invoices_counter_get.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.credit_notes_counter_get]
+summary     = "Hent gjeldende kreditnotatellerverdi for regnskapsåret."
+when_to_use = "Brukes for å inspisere neste kreditnotanummer før postering eller initialisering."
+returns     = "Tellerverdi (int32)."
+example     = "fiken credit-notes counter get --company acme"
+
+[ops.credit_notes_counter_get.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.offers_counter_get]
+summary     = "Hent gjeldende tilbudstellerverdi for regnskapsåret."
+when_to_use = "Brukes for å inspisere neste tilbudsnummer før postering eller initialisering."
+returns     = "Tellerverdi (int32)."
+example     = "fiken offers counter get --company acme"
+
+[ops.offers_counter_get.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.order_confirmations_counter_get]
+summary     = "Hent gjeldende ordrebekreftelse-tellerverdi for regnskapsåret."
+when_to_use = "Brukes for å inspisere neste ordrebekreftelse-nummer før postering eller initialisering."
+returns     = "Tellerverdi (int32)."
+example     = "fiken order-confirmations counter get --company acme"
+
+[ops.order_confirmations_counter_get.flags]
+company = "Slug for selskapet. Påkrevd."
+
+[ops.transactions_delete]
+summary     = "Myk-arkiver en transaksjon. Endepunktet er en PATCH med påkrevd beskrivelse."
+when_to_use = "Brukes for å markere en transaksjon slettet samtidig som hovedboksoppføringen bevares for revisjon."
+returns     = "Transaksjonsbilde etter sletting."
+example     = "fiken transactions delete --company acme --transaction-id 5 --description 'duplikat'"
+
+[ops.transactions_delete.flags]
+company             = "Slug for selskapet. Påkrevd."
+transaction_id      = "Numerisk id for transaksjonen. Påkrevd."
+delete_description  = "Beskrivelse for revisjonssporet. Påkrevd."
+
+[ops.contacts_attachments_attach]
+summary     = "Legg ved en fil (PDF / bilde) på en kontakt."
+when_to_use = "Brukes for å laste opp støttedokumenter knyttet til en kunde eller leverandør."
+returns     = "Location-URL for det nye vedlegget."
+example     = "fiken contacts attachments attach --company acme --contact-id 1 --file ./doc.pdf"
+
+[ops.contacts_attachments_attach.flags]
+company    = "Slug for selskapet. Påkrevd."
+contact_id = "Numerisk id for kontakten. Påkrevd."
+file       = "Lokal filsti som skal lastes opp. Påkrevd."
+filename   = "Overstyr filnavn (standard er basename av --file)."
+comment    = "Valgfri fri tekst-annotasjon."
+
+[ops.sales_drafts_list]
+summary     = "List salgsutkast for et selskap."
+when_to_use = "Brukes for å vise kontant- og kredittsalg-utkast før promotering."
+returns     = "Objekt med `items` (hver: draft_id, uuid, invoice_issue_date, contact_id, currency, lines[]) og pagineringsmeta."
+example     = "fiken sales drafts list --company acme"
+
+[ops.sales_drafts_list.flags]
+company   = "Slug for selskapet. Påkrevd."
+page      = "Sidetall (0-indeksert)."
+page_size = "Sidestørrelse (maks 100)."
+
+[ops.sales_drafts_get]
+summary     = "Hent ett salgsutkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payload-en før redigering eller promotering."
+returns     = "SaleDraft-objekt."
+example     = "fiken sales drafts get --company acme --draft-id 1"
+
+[ops.sales_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.sales_drafts_create]
+summary     = "Lag et nytt salgsutkast."
+when_to_use = "Brukes for å forberede et salg (kontant eller kreditt) før det posteres som et endelig salg."
+returns     = "Location-URL for det nye utkastet."
+example     = "fiken sales drafts create --company acme --from-file ./draft.json"
+
+[ops.sales_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher draftRequest. Påkrevd."
+
+[ops.sales_drafts_update]
+summary     = "Oppdater et eksisterende salgsutkast."
+when_to_use = "Brukes for å redigere et salgsutkast på plass."
+returns     = "Location-URL for det oppdaterte utkastet."
+example     = "fiken sales drafts update --company acme --draft-id 1 --from-file ./draft.json"
+
+[ops.sales_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body som matcher draftRequest. Påkrevd."
+
+[ops.sales_drafts_delete]
+summary     = "Slett et salgsutkast."
+when_to_use = "Brukes for å forkaste et upostet salgsutkast."
+returns     = "Sletteflagg."
+example     = "fiken sales drafts delete --company acme --draft-id 1"
+
+[ops.sales_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.sales_drafts_create_from]
+summary     = "Promoter et salgsutkast til et postet salg."
+when_to_use = "Brukes for å finalisere et salgsutkast etter at redigeringer er fullført."
+returns     = "Location-URL for det nye salget."
+example     = "fiken sales drafts create-from --company acme --draft-id 1"
+
+[ops.sales_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kildeutkastet. Påkrevd."
+
+[ops.sales_drafts_attachments_list]
+summary     = "List vedlegg for et salgsutkast."
+when_to_use = "Brukes for å finne identifikatorer og filtyper knyttet til et spesifikt salgsutkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken sales drafts attachments list --company acme --draft-id 1"
+
+[ops.sales_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.sales_drafts_attachments_attach]
+summary     = "Legg ved en fil (PDF / bilde) på et salgsutkast."
+when_to_use = "Brukes for å laste opp støttedokumenter for et upostet salgsutkast."
+returns     = "Location-URL for det nye vedlegget."
+example     = "fiken sales drafts attachments attach --company acme --draft-id 1 --file ./doc.pdf"
+
+[ops.sales_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+file     = "Lokal filsti som skal lastes opp. Påkrevd."
+filename = "Overstyr filnavn (standard er basename av --file)."
+
+[ops.purchases_drafts_list]
+summary     = "List kjøpsutkast for et selskap."
+when_to_use = "Brukes for å vise kontant- og kredittkjøp-utkast før promotering."
+returns     = "Objekt med `items` (hver: draft_id, uuid, invoice_issue_date, contact_id, currency, lines[]) og pagineringsmeta."
+example     = "fiken purchases drafts list --company acme"
+
+[ops.purchases_drafts_list.flags]
+company   = "Slug for selskapet. Påkrevd."
+page      = "Sidetall (0-indeksert)."
+page_size = "Sidestørrelse (maks 100)."
+
+[ops.purchases_drafts_get]
+summary     = "Hent ett kjøpsutkast via id."
+when_to_use = "Brukes når du har en draft_id og trenger hele payload-en før redigering eller promotering."
+returns     = "PurchaseDraft-objekt."
+example     = "fiken purchases drafts get --company acme --draft-id 1"
+
+[ops.purchases_drafts_get.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.purchases_drafts_create]
+summary     = "Lag et nytt kjøpsutkast."
+when_to_use = "Brukes for å forberede et kjøp før det posteres som et endelig kjøp."
+returns     = "Location-URL for det nye utkastet."
+example     = "fiken purchases drafts create --company acme --from-file ./draft.json"
+
+[ops.purchases_drafts_create.flags]
+company   = "Slug for selskapet. Påkrevd."
+from_file = "Sti til JSON-body som matcher draftRequest. Påkrevd."
+
+[ops.purchases_drafts_update]
+summary     = "Oppdater et eksisterende kjøpsutkast."
+when_to_use = "Brukes for å redigere et kjøpsutkast på plass."
+returns     = "Location-URL for det oppdaterte utkastet."
+example     = "fiken purchases drafts update --company acme --draft-id 1 --from-file ./draft.json"
+
+[ops.purchases_drafts_update.flags]
+company   = "Slug for selskapet. Påkrevd."
+draft_id  = "Numerisk id for utkastet som skal oppdateres. Påkrevd."
+from_file = "Sti til JSON-body som matcher draftRequest. Påkrevd."
+
+[ops.purchases_drafts_delete]
+summary     = "Slett et kjøpsutkast."
+when_to_use = "Brukes for å forkaste et upostet kjøpsutkast."
+returns     = "Sletteflagg."
+example     = "fiken purchases drafts delete --company acme --draft-id 1"
+
+[ops.purchases_drafts_delete.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet som skal slettes. Påkrevd."
+
+[ops.purchases_drafts_create_from]
+summary     = "Promoter et kjøpsutkast til et postet kjøp."
+when_to_use = "Brukes for å finalisere et kjøpsutkast etter at redigeringer er fullført."
+returns     = "Location-URL for det nye kjøpet."
+example     = "fiken purchases drafts create-from --company acme --draft-id 1"
+
+[ops.purchases_drafts_create_from.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for kildeutkastet. Påkrevd."
+
+[ops.purchases_drafts_attachments_list]
+summary     = "List vedlegg for et kjøpsutkast."
+when_to_use = "Brukes for å finne identifikatorer og filtyper knyttet til et spesifikt kjøpsutkast."
+returns     = "Objekt med `items` (hver: identifier, download_url, comment, type) og minimal meta."
+example     = "fiken purchases drafts attachments list --company acme --draft-id 1"
+
+[ops.purchases_drafts_attachments_list.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+
+[ops.purchases_drafts_attachments_attach]
+summary     = "Legg ved en fil (PDF / bilde) på et kjøpsutkast."
+when_to_use = "Brukes for å laste opp støttedokumenter for et upostet kjøpsutkast."
+returns     = "Location-URL for det nye vedlegget."
+example     = "fiken purchases drafts attachments attach --company acme --draft-id 1 --file ./doc.pdf"
+
+[ops.purchases_drafts_attachments_attach.flags]
+company  = "Slug for selskapet. Påkrevd."
+draft_id = "Numerisk id for utkastet. Påkrevd."
+file     = "Lokal filsti som skal lastes opp. Påkrevd."
+filename = "Overstyr filnavn (standard er basename av --file)."
+
+[error.auth_missing]
+short = "Ingen token konfigurert. Kjør `fiken auth login` først."
+
+[error.auth_invalid]
+short = "Token er ugyldig. Kjør `fiken auth login` for å oppdatere."
+
+[error.auth_forbidden]
+short = "Token mangler tilgang til denne ressursen."
+
+[error.not_found]
+short = "Ressurs ikke funnet."
+
+[error.validation]
+short = "Forespørsel avvist: {{detail}}"
+
+[error.conflict]
+short = "Forespørsel er i konflikt med nåværende tilstand."
+
+[error.payment_required]
+short = "Fiken returnerte 402 — denne funksjonen krever et betalt abonnement."
+
+[error.rate_limited]
+short = "Begrenset av Fiken: {{detail}}"
+
+[error.server_error]
+short = "Fiken returnerte en serverfeil: {{detail}}"
+
+[error.network]
+short = "Nettverksfeil mot Fiken: {{detail}}"
+
+[error.cancelled]
+short = "Operasjon avbrutt."
+
+[error.internal]
+short = "Intern klientfeil: {{detail}}"
+
+[error.read_only_violation]
+short = "Read-only MCP-modus blokkerte en muterende operasjon: {{detail}}"

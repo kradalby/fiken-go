@@ -1,0 +1,1756 @@
+# fiken-go runtime English catalog.
+# Keys organized by surface:
+#   ops.<op>.{summary,when_to_use,returns,example}
+#   ops.<op>.flags.<flag>
+#   auth.<subcmd>.<msg>
+#   error.<code>
+
+[ops.companies_list]
+summary     = "List all companies the authenticated user has access to."
+when_to_use = "Use to discover available company slugs before any company-scoped op (e.g. invoices, contacts)."
+returns     = "Object with `items` (each: slug, name, organizationNumber) and pagination meta."
+example     = "fiken companies list"
+
+[ops.companies_get]
+summary     = "Get a single company by slug."
+when_to_use = "Use when you have a slug and need company-level fields (organization number, address, locale)."
+returns     = "Company object with name, slug, organizationNumber, address, defaultLanguage."
+example     = "fiken companies get --company my-co"
+
+[ops.companies_get.flags]
+company = "Slug of the company to fetch. Required. Example: --company=acme-as"
+
+[ops.contacts_list]
+summary     = "List contacts for a company."
+when_to_use = "Use to find a contact_id before invoicing, attaching files, or fetching contact persons."
+returns     = "Object with `items` (each: contact_id, name, email, organization_number, currency, language, customer, supplier, inactive) and pagination meta."
+example     = "fiken contacts list --company acme"
+
+[ops.contacts_list.flags]
+company   = "Slug of the company to query. Required. Example: --company=acme-as"
+page      = "Page number (0-indexed). Example: --page=2"
+page_size = "Page size (max 100). Example: --page-size=50"
+
+[ops.contacts_get]
+summary     = "Get a single contact by id."
+when_to_use = "Use when you already have a contact_id and need the full contact record."
+returns     = "Contact object with contact_id, name, email, phone_number, organization_number, currency, language, customer, supplier, inactive."
+example     = "fiken contacts get --company acme --contact-id 42"
+
+[ops.contacts_get.flags]
+company    = "Slug of the company that owns the contact. Required. Example: --company=acme-as"
+contact_id = "Numeric id of the contact to fetch. Required. Example: --contact-id=42"
+
+[ops.contacts_create]
+summary     = "Create a new contact. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Created Contact (when implemented)."
+example     = "fiken contacts create --company acme  # not yet wired"
+
+[ops.contacts_create.flags]
+company = "Slug of the company that owns the contact. Required."
+
+[ops.contacts_update]
+summary     = "Update an existing contact. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Updated Contact (when implemented)."
+example     = "fiken contacts update --company acme --contact-id 42  # not yet wired"
+
+[ops.contacts_update.flags]
+company    = "Slug of the company that owns the contact. Required."
+contact_id = "Numeric id of the contact to update. Required."
+
+[ops.contacts_delete]
+summary     = "Delete or deactivate a contact. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented). If the contact has bound records, Fiken sets it inactive instead of deleting."
+example     = "fiken contacts delete --company acme --contact-id 42  # not yet wired"
+
+[ops.contacts_delete.flags]
+company    = "Slug of the company that owns the contact. Required."
+contact_id = "Numeric id of the contact to delete. Required."
+
+[ops.contacts_persons_list]
+summary     = "List the contact persons attached to a contact."
+when_to_use = "Use to find a contact_person_id before addressing invoices/offers to a named person."
+returns     = "Object with `items` (each: contact_person_id, name, email, phone_number) and a minimal meta."
+example     = "fiken contacts persons list --company acme --contact-id 42"
+
+[ops.contacts_persons_list.flags]
+company    = "Slug of the company. Required. Example: --company=acme-as"
+contact_id = "Numeric id of the parent contact. Required. Example: --contact-id=42"
+
+[ops.contacts_persons_get]
+summary     = "Get a single contact person."
+when_to_use = "Use when you have a contact_person_id and need its full record."
+returns     = "ContactPerson object with contact_person_id, name, email, phone_number."
+example     = "fiken contacts persons get --company acme --contact-id 42 --contact-person-id 7"
+
+[ops.contacts_persons_get.flags]
+company           = "Slug of the company. Required."
+contact_id        = "Numeric id of the parent contact. Required."
+contact_person_id = "Numeric id of the contact person. Required."
+
+[ops.contacts_persons_create]
+summary     = "Add a contact person to a contact. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Created ContactPerson (when implemented)."
+example     = "fiken contacts persons create --company acme --contact-id 42  # not yet wired"
+
+[ops.contacts_persons_create.flags]
+company    = "Slug of the company. Required."
+contact_id = "Numeric id of the parent contact. Required."
+
+[ops.contacts_persons_update]
+summary     = "Update a contact person. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Updated ContactPerson (when implemented)."
+example     = "fiken contacts persons update --company acme --contact-id 42 --contact-person-id 7  # not yet wired"
+
+[ops.contacts_persons_update.flags]
+company           = "Slug of the company. Required."
+contact_id        = "Numeric id of the parent contact. Required."
+contact_person_id = "Numeric id of the contact person. Required."
+
+[ops.contacts_persons_delete]
+summary     = "Delete a contact person. (Stub: not yet implemented in Plan C Task 1.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented)."
+example     = "fiken contacts persons delete --company acme --contact-id 42 --contact-person-id 7  # not yet wired"
+
+[ops.contacts_persons_delete.flags]
+company           = "Slug of the company. Required."
+contact_id        = "Numeric id of the parent contact. Required."
+contact_person_id = "Numeric id of the contact person. Required."
+
+[ops.accounts_list]
+summary     = "List bookkeeping accounts for a company."
+when_to_use = "Use to discover account codes (e.g. 3020, 1500:10001) before posting transactions or filtering ledgers."
+returns     = "Object with `items` (each: code, name) and pagination meta."
+example     = "fiken accounts list --company acme --range 3000-3999"
+
+[ops.accounts_list.flags]
+company      = "Slug of the company to query. Required. Example: --company=acme-as"
+page         = "Page number (0-indexed). Example: --page=2"
+page_size    = "Page size (max 100). Example: --page-size=50"
+from_account = "Lower bound account number (excluding subaccount). Example: --from-account=3000"
+to_account   = "Upper bound account number (excluding subaccount). Example: --to-account=3999"
+range        = "Comma-separated codes or ranges. Example: --range=\"1000-1500,3020,7000-7004\""
+
+[ops.accounts_get]
+summary     = "Get a single bookkeeping account by code."
+when_to_use = "Use when you already have an account code and need its canonical name."
+returns     = "Account object with code and name."
+example     = "fiken accounts get --company acme --account-code 3020"
+
+[ops.accounts_get.flags]
+company      = "Slug of the company that owns the account. Required. Example: --company=acme-as"
+account_code = "Account code (four digits, optionally with `:<sub>` reskontro suffix). Required. Example: --account-code=1500:10001"
+
+[ops.bank_accounts_list]
+summary     = "List bank accounts for a company."
+when_to_use = "Use to discover bank_account_id values, IBANs, or balances before reconciling or posting payments."
+returns     = "Object with `items` (each: bank_account_id, name, account_code, bank_account_number, iban, bic, foreign_service, type, reconciled_balance in øre, reconciled_date, inactive) and pagination meta."
+example     = "fiken bank-accounts list --company acme"
+
+[ops.bank_accounts_list.flags]
+company   = "Slug of the company to query. Required. Example: --company=acme-as"
+page      = "Page number (0-indexed). Example: --page=2"
+page_size = "Page size (max 100). Example: --page-size=50"
+inactive  = "Return inactive bank accounts instead of active. Example: --inactive"
+
+[ops.bank_accounts_get]
+summary     = "Get a single bank account by id."
+when_to_use = "Use when you already have a bank_account_id and need the full account record (number, balance, type)."
+returns     = "BankAccount object with bank_account_id, name, account_code, bank_account_number, iban, bic, foreign_service, type, reconciled_balance (øre), reconciled_date, inactive."
+example     = "fiken bank-accounts get --company acme --bank-account-id 2747365"
+
+[ops.bank_accounts_get.flags]
+company         = "Slug of the company that owns the bank account. Required. Example: --company=acme-as"
+bank_account_id = "Numeric id of the bank account. Required. Example: --bank-account-id=2747365"
+
+[ops.bank_accounts_create]
+summary     = "Create a new bank account. (Stub: not yet implemented in Plan C.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Created BankAccount (when implemented)."
+example     = "fiken bank-accounts create --company acme  # not yet wired"
+
+[ops.bank_accounts_create.flags]
+company = "Slug of the company that owns the bank account. Required."
+
+[ops.journal_entries_list]
+summary     = "List journal entries for a company."
+when_to_use = "Use to inspect the company's general-ledger postings, optionally filtered by date or last-modified bounds."
+returns     = "Object with `items` (each: journal_entry_id, journal_entry_number, description, transaction_date, transaction_id, lines[]) and pagination meta. Line amounts are int64 øre."
+example     = "fiken journal-entries list --company acme --date-ge 2024-01-01 --date-le 2024-01-31"
+
+[ops.journal_entries_list.flags]
+company          = "Slug of the company to query. Required. Example: --company=acme-as"
+page             = "Page number (0-indexed). Example: --page=2"
+page_size        = "Page size (max 100). Example: --page-size=50"
+date             = "Filter by exact posting date (YYYY-MM-DD). Example: --date=2024-03-01"
+date_le          = "Filter posting date <= value. Example: --date-le=2024-12-31"
+date_lt          = "Filter posting date < value."
+date_ge          = "Filter posting date >= value."
+date_gt          = "Filter posting date > value."
+last_modified    = "Filter by exact last-modified date."
+last_modified_le = "Filter last-modified <= value."
+last_modified_lt = "Filter last-modified < value."
+last_modified_ge = "Filter last-modified >= value."
+last_modified_gt = "Filter last-modified > value."
+created_date     = "Filter by exact created date."
+created_date_le  = "Filter created-date <= value."
+created_date_lt  = "Filter created-date < value."
+created_date_ge  = "Filter created-date >= value."
+created_date_gt  = "Filter created-date > value."
+
+[ops.journal_entries_get]
+summary     = "Get a single journal entry by id."
+when_to_use = "Use when you already have a journal_entry_id and need the full posting with its line items and attachment metadata."
+returns     = "JournalEntry object with journal_entry_id, journal_entry_number, description, transaction_date, transaction_id, offset_transaction_id, lines[] (amount øre, account, vat_code), and attachments[]."
+example     = "fiken journal-entries get --company acme --journal-entry-id 1234"
+
+[ops.journal_entries_get.flags]
+company          = "Slug of the company that owns the entry. Required."
+journal_entry_id = "Numeric id of the journal entry. Required. Example: --journal-entry-id=1234"
+
+[ops.journal_entries_create]
+summary     = "Create a general journal entry (fri postering). (Stub: not yet implemented in Plan C Task 4.)"
+when_to_use = "Reserved for follow-up Plan C task; currently returns internal/not-implemented."
+returns     = "Created JournalEntry (when implemented)."
+example     = "fiken journal-entries create --company acme  # not yet wired"
+
+[ops.journal_entries_create.flags]
+company = "Slug of the company. Required."
+
+[ops.journal_entries_attachments_list]
+summary     = "List attachments for a journal entry."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific journal entry."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken journal-entries attachments --company acme --journal-entry-id 1234"
+
+[ops.journal_entries_attachments_list.flags]
+company          = "Slug of the company. Required."
+journal_entry_id = "Numeric id of the journal entry. Required."
+
+[ops.journal_entries_attachments_attach]
+summary     = "Attach a file to a journal entry. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken journal-entries attach --company acme --journal-entry-id 1234 --file ./invoice.pdf  # not yet wired"
+
+[ops.journal_entries_attachments_attach.flags]
+company          = "Slug of the company. Required."
+journal_entry_id = "Numeric id of the journal entry. Required."
+filename         = "Override filename (defaults to basename of --file)."
+file             = "Local file path to upload. Required."
+
+[ops.transactions_list]
+summary     = "List transactions for a company."
+when_to_use = "Use to enumerate posted transactions (sales, purchases, journal entries) for the company, optionally filtered by created or last-modified date."
+returns     = "Object with `items` (each: transaction_id, type, description, created_date, last_modified_date, deleted, entries[]) and pagination meta. Each entry mirrors a JournalEntry with int64 øre line amounts."
+example     = "fiken transactions list --company acme --created-date-ge 2024-01-01"
+
+[ops.transactions_list.flags]
+company          = "Slug of the company to query. Required. Example: --company=acme-as"
+page             = "Page number (0-indexed). Example: --page=2"
+page_size        = "Page size (max 100). Example: --page-size=50"
+last_modified    = "Filter by exact last-modified date (YYYY-MM-DD)."
+last_modified_le = "Filter last-modified <= value."
+last_modified_lt = "Filter last-modified < value."
+last_modified_ge = "Filter last-modified >= value."
+last_modified_gt = "Filter last-modified > value."
+created_date     = "Filter by exact created date."
+created_date_le  = "Filter created-date <= value."
+created_date_lt  = "Filter created-date < value."
+created_date_ge  = "Filter created-date >= value."
+created_date_gt  = "Filter created-date > value."
+
+[ops.transactions_get]
+summary     = "Get a single transaction by id."
+when_to_use = "Use when you already have a transaction_id (returned from sales, purchases, or journal-entry responses) and need the full ledger event with its associated journal entries."
+returns     = "Transaction object with transaction_id, type, description, created_date, last_modified_date, deleted, and entries[] (each a JournalEntry shape with int64 øre line amounts)."
+example     = "fiken transactions get --company acme --transaction-id 9988"
+
+[ops.transactions_get.flags]
+company        = "Slug of the company that owns the transaction. Required."
+transaction_id = "Numeric id of the transaction. Required. Example: --transaction-id=9988"
+
+[ops.invoices_list]
+summary     = "List invoices for a company."
+when_to_use = "Use to enumerate issued invoices, optionally filtered by issue/due/last-modified bounds, customer, settlement state, or order reference."
+returns     = "Object with `items` (each: invoice_id, invoice_number, issue_date, due_date, gross/net/vat in int64 øre, customer_id/name, lines[], attachments[]) and pagination meta."
+example     = "fiken invoices list --company acme --issue-date-ge 2024-01-01 --settled=false"
+
+[ops.invoices_list.flags]
+company            = "Slug of the company to query. Required. Example: --company=acme-as"
+page               = "Page number (0-indexed)."
+page_size          = "Page size (max 100)."
+issue_date         = "Filter by exact issue date (YYYY-MM-DD)."
+issue_date_le      = "Filter issue-date <= value."
+issue_date_lt      = "Filter issue-date < value."
+issue_date_ge      = "Filter issue-date >= value."
+issue_date_gt      = "Filter issue-date > value."
+last_modified      = "Filter by exact last-modified date."
+last_modified_le   = "Filter last-modified <= value."
+last_modified_lt   = "Filter last-modified < value."
+last_modified_ge   = "Filter last-modified >= value."
+last_modified_gt   = "Filter last-modified > value."
+due_date           = "Filter by exact due date."
+due_date_le        = "Filter due-date <= value."
+due_date_lt        = "Filter due-date < value."
+due_date_ge        = "Filter due-date >= value."
+due_date_gt        = "Filter due-date > value."
+customer_id        = "Filter by customer contact id."
+settled            = "Filter to settled invoices."
+order_reference    = "Filter by order reference."
+invoice_draft_uuid = "Filter by source draft UUID."
+invoice_number     = "Filter by exact invoice number string."
+
+[ops.invoices_get]
+summary     = "Get a single invoice by id."
+when_to_use = "Use when you have an invoice_id (returned from list, drafts, or sale flows) and need the full document including lines, attachments, and customer."
+returns     = "Invoice object with invoice_id, invoice_number, issue/due dates, gross/net/vat int64 øre, lines[], attachments[], and flattened customer_id/name."
+example     = "fiken invoices get --company acme --invoice-id 1234"
+
+[ops.invoices_get.flags]
+company    = "Slug of the company that owns the invoice. Required."
+invoice_id = "Numeric id of the invoice (not the invoice number). Required."
+
+[ops.invoices_send]
+summary     = "Send an invoice to its customer. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented)."
+example     = "fiken invoices send --company acme --invoice-id 1234  # not yet wired"
+
+[ops.invoices_send.flags]
+company    = "Slug of the company. Required."
+invoice_id = "Numeric id of the invoice to send. Required."
+
+[ops.invoices_counter_create]
+summary     = "Initialize the invoice counter for the fiscal year. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Counter value (when implemented)."
+example     = "fiken invoices counter create --company acme --value 1000  # not yet wired"
+
+[ops.invoices_counter_create.flags]
+company = "Slug of the company. Required."
+value   = "Starting counter value. Required."
+
+[ops.invoices_drafts_list]
+summary     = "List invoice drafts for a company."
+when_to_use = "Use to enumerate drafts (unposted invoices and credit notes) before promotion, optionally filtered by order reference or UUID."
+returns     = "Object with `items` (each: draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[], customer_ids[]) and pagination meta."
+example     = "fiken invoices drafts list --company acme"
+
+[ops.invoices_drafts_list.flags]
+company         = "Slug of the company. Required."
+page            = "Page number (0-indexed)."
+page_size       = "Page size (max 100)."
+order_reference = "Filter by order reference."
+uuid            = "Filter by draft UUID."
+
+[ops.invoices_drafts_get]
+summary     = "Get a single invoice draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "InvoiceDraft object with draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[], and customer_ids[]."
+example     = "fiken invoices drafts get --company acme --draft-id 1"
+
+[ops.invoices_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.invoices_drafts_create]
+summary     = "Create a new invoice draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Created InvoiceDraft (when implemented)."
+example     = "fiken invoices drafts create --company acme --from-file ./draft.json  # not yet wired"
+
+[ops.invoices_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching invoiceishDraftRequest (not yet wired)."
+
+[ops.invoices_drafts_update]
+summary     = "Update an existing invoice draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Updated InvoiceDraft (when implemented)."
+example     = "fiken invoices drafts update --company acme --draft-id 1 --from-file ./draft.json  # not yet wired"
+
+[ops.invoices_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body (not yet wired)."
+
+[ops.invoices_drafts_delete]
+summary     = "Delete an invoice draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Deleted flag (when implemented)."
+example     = "fiken invoices drafts delete --company acme --draft-id 1  # not yet wired"
+
+[ops.invoices_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.invoices_drafts_create_from]
+summary     = "Promote a draft to a posted invoice. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new invoice (when implemented)."
+example     = "fiken invoices drafts create-from --company acme --draft-id 1  # not yet wired"
+
+[ops.invoices_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.invoices_attachments_list]
+summary     = "List attachments for an invoice."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific invoice."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken invoices attachments list --company acme --invoice-id 1234"
+
+[ops.invoices_attachments_list.flags]
+company    = "Slug of the company. Required."
+invoice_id = "Numeric id of the invoice. Required."
+
+[ops.invoices_attachments_attach]
+summary     = "Attach a file to an invoice. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken invoices attachments attach --company acme --invoice-id 1234 --file ./contract.pdf  # not yet wired"
+
+[ops.invoices_attachments_attach.flags]
+company    = "Slug of the company. Required."
+invoice_id = "Numeric id of the invoice. Required."
+filename   = "Override filename (defaults to basename of --file)."
+file       = "Local file path to upload. Required."
+
+[ops.invoices_drafts_attachments_list]
+summary     = "List attachments for an invoice draft."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific invoice draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken invoices drafts attachments list --company acme --draft-id 1"
+
+[ops.invoices_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.invoices_drafts_attachments_attach]
+summary     = "Attach a file to an invoice draft. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken invoices drafts attachments attach --company acme --draft-id 1 --file ./contract.pdf  # not yet wired"
+
+[ops.invoices_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+filename = "Override filename (defaults to basename of --file)."
+file     = "Local file path to upload. Required."
+
+[ops.credit_notes_list]
+summary     = "List credit notes for a company."
+when_to_use = "Use to enumerate issued credit notes, optionally filtered by issue/last-modified date, customer, settlement state, or source draft UUID."
+returns     = "Object with `items` (each: credit_note_id, credit_note_number, issue_date, gross/net/vat in int64 øre, associated_invoice_id, customer_id/name, lines[]) and pagination meta."
+example     = "fiken credit-notes list --company acme --issue-date-ge 2024-01-01"
+
+[ops.credit_notes_list.flags]
+company                = "Slug of the company to query. Required."
+page                   = "Page number (0-indexed)."
+page_size              = "Page size (max 100)."
+issue_date             = "Filter by exact issue date (YYYY-MM-DD)."
+issue_date_le          = "Filter issue-date <= value."
+issue_date_lt          = "Filter issue-date < value."
+issue_date_ge          = "Filter issue-date >= value."
+issue_date_gt          = "Filter issue-date > value."
+last_modified          = "Filter by exact last-modified date."
+last_modified_le       = "Filter last-modified <= value."
+last_modified_lt       = "Filter last-modified < value."
+last_modified_ge       = "Filter last-modified >= value."
+last_modified_gt       = "Filter last-modified > value."
+customer_id            = "Filter by customer contact id."
+settled                = "Filter to settled credit notes."
+credit_note_draft_uuid = "Filter by source draft UUID (uavhengig kreditnota)."
+
+[ops.credit_notes_get]
+summary     = "Get a single credit note by id."
+when_to_use = "Use when you have a credit_note_id and need the full document including lines, associated invoice, and customer."
+returns     = "CreditNote object with credit_note_id, credit_note_number, gross/net/vat int64 øre, lines[], associated_invoice_id, and flattened customer_id/name."
+example     = "fiken credit-notes get --company acme --credit-note-id 7"
+
+[ops.credit_notes_get.flags]
+company        = "Slug of the company that owns the credit note. Required."
+credit_note_id = "Id of the credit note (path-param string, not the credit-note number). Required."
+
+[ops.credit_notes_send]
+summary     = "Send a credit note to its customer. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented)."
+example     = "fiken credit-notes send --company acme --credit-note-id 7  # not yet wired"
+
+[ops.credit_notes_send.flags]
+company        = "Slug of the company. Required."
+credit_note_id = "Numeric id of the credit note to send. Required."
+
+[ops.credit_notes_counter_create]
+summary     = "Initialize the credit-note counter for the fiscal year. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Counter value (when implemented)."
+example     = "fiken credit-notes counter create --company acme --value 10000  # not yet wired"
+
+[ops.credit_notes_counter_create.flags]
+company = "Slug of the company. Required."
+value   = "Starting counter value. Required."
+
+[ops.credit_notes_full_create]
+summary     = "Create a credit note that covers the full amount of an invoice. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new credit note (when implemented)."
+example     = "fiken credit-notes full-create --company acme --from-file ./full.json  # not yet wired"
+
+[ops.credit_notes_full_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching fullCreditNoteRequest (not yet wired)."
+
+[ops.credit_notes_partial_create]
+summary     = "Create a credit note for a partial amount of an invoice. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new credit note (when implemented)."
+example     = "fiken credit-notes partial-create --company acme --from-file ./partial.json  # not yet wired"
+
+[ops.credit_notes_partial_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching partialCreditNoteRequest (not yet wired)."
+
+[ops.credit_notes_drafts_list]
+summary     = "List credit-note drafts for a company."
+when_to_use = "Use to enumerate credit-note drafts (uavhengig kreditnotaer) before promotion."
+returns     = "Object with `items` (each: draft_id, uuid, type, issue_date, due_days, net/gross int64 øre, lines[], attachments[], customer_ids[]) and pagination meta."
+example     = "fiken credit-notes drafts list --company acme"
+
+[ops.credit_notes_drafts_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.credit_notes_drafts_get]
+summary     = "Get a single credit-note draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "InvoiceDraft object (type=credit_note) with draft_id, uuid, issue_date, due_days, net/gross int64 øre, lines[], attachments[], and customer_ids[]."
+example     = "fiken credit-notes drafts get --company acme --draft-id 1"
+
+[ops.credit_notes_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.credit_notes_drafts_create]
+summary     = "Create a new credit-note draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Created InvoiceDraft (when implemented)."
+example     = "fiken credit-notes drafts create --company acme --from-file ./draft.json  # not yet wired"
+
+[ops.credit_notes_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching invoiceishDraftRequest (not yet wired)."
+
+[ops.credit_notes_drafts_update]
+summary     = "Update an existing credit-note draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Updated InvoiceDraft (when implemented)."
+example     = "fiken credit-notes drafts update --company acme --draft-id 1 --from-file ./draft.json  # not yet wired"
+
+[ops.credit_notes_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body (not yet wired)."
+
+[ops.credit_notes_drafts_delete]
+summary     = "Delete a credit-note draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Deleted flag (when implemented)."
+example     = "fiken credit-notes drafts delete --company acme --draft-id 1  # not yet wired"
+
+[ops.credit_notes_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.credit_notes_drafts_create_from]
+summary     = "Promote a credit-note draft to a posted credit note. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new credit note (when implemented)."
+example     = "fiken credit-notes drafts create-from --company acme --draft-id 1  # not yet wired"
+
+[ops.credit_notes_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.credit_notes_drafts_attachments_list]
+summary     = "List attachments for a credit-note draft."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific credit-note draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken credit-notes drafts attachments list --company acme --draft-id 1"
+
+[ops.credit_notes_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.credit_notes_drafts_attachments_attach]
+summary     = "Attach a file to a credit-note draft. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken credit-notes drafts attachments attach --company acme --draft-id 1 --file ./contract.pdf  # not yet wired"
+
+[ops.credit_notes_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+filename = "Override filename (defaults to basename of --file)."
+file     = "Local file path to upload. Required."
+
+[ops.offers_list]
+summary     = "List offers for a company."
+when_to_use = "Use to enumerate issued offers (tilbud) and inspect their gross/net totals, dates, and acceptance state."
+returns     = "Object with `items` (each: offer_id, offer_number, date, gross/net/vat int64 øre, contact_id, accepted, lines[]) and pagination meta."
+example     = "fiken offers list --company acme --page-size 50"
+
+[ops.offers_list.flags]
+company     = "Slug of the company to query. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.offers_get]
+summary     = "Get a single offer by id."
+when_to_use = "Use when you have an offer_id and need the full document including lines, accepted date, and customer reference."
+returns     = "Offer object with offer_id, offer_number, date, gross/net/vat int64 øre, lines[], and contact_id."
+example     = "fiken offers get --company acme --offer-id 11"
+
+[ops.offers_get.flags]
+company  = "Slug of the company that owns the offer. Required."
+offer_id = "Id of the offer (path-param string, not the offer number). Required."
+
+[ops.offers_send]
+summary     = "Send an offer to its customer. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented)."
+example     = "fiken offers send --company acme --offer-id 11  # not yet wired"
+
+[ops.offers_send.flags]
+company  = "Slug of the company. Required."
+offer_id = "Numeric id of the offer to send. Required."
+
+[ops.offers_counter_create]
+summary     = "Initialize the offer counter for the fiscal year. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Counter value (when implemented)."
+example     = "fiken offers counter create --company acme --value 10000  # not yet wired"
+
+[ops.offers_counter_create.flags]
+company = "Slug of the company. Required."
+value   = "Starting counter value. Required."
+
+[ops.offers_drafts_list]
+summary     = "List offer drafts for a company."
+when_to_use = "Use to enumerate offer drafts before promotion to a posted offer."
+returns     = "Object with `items` (each: draft_id, uuid, type=offer, issue_date, net/gross int64 øre, lines[], attachments[], customer_ids[]) and pagination meta."
+example     = "fiken offers drafts list --company acme"
+
+[ops.offers_drafts_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.offers_drafts_get]
+summary     = "Get a single offer draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "InvoiceDraft object (type=offer) with draft_id, uuid, issue_date, net/gross int64 øre, lines[], attachments[], and customer_ids[]."
+example     = "fiken offers drafts get --company acme --draft-id 1"
+
+[ops.offers_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.offers_drafts_create]
+summary     = "Create a new offer draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Created InvoiceDraft (when implemented)."
+example     = "fiken offers drafts create --company acme --from-file ./draft.json  # not yet wired"
+
+[ops.offers_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching invoiceishDraftRequest (not yet wired)."
+
+[ops.offers_drafts_update]
+summary     = "Update an existing offer draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Updated InvoiceDraft (when implemented)."
+example     = "fiken offers drafts update --company acme --draft-id 1 --from-file ./draft.json  # not yet wired"
+
+[ops.offers_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body (not yet wired)."
+
+[ops.offers_drafts_delete]
+summary     = "Delete an offer draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Deleted flag (when implemented)."
+example     = "fiken offers drafts delete --company acme --draft-id 1  # not yet wired"
+
+[ops.offers_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.offers_drafts_create_from]
+summary     = "Promote an offer draft to a posted offer. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new offer (when implemented)."
+example     = "fiken offers drafts create-from --company acme --draft-id 1  # not yet wired"
+
+[ops.offers_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.offers_drafts_attachments_list]
+summary     = "List attachments for an offer draft."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific offer draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken offers drafts attachments list --company acme --draft-id 1"
+
+[ops.offers_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.offers_drafts_attachments_attach]
+summary     = "Attach a file to an offer draft. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken offers drafts attachments attach --company acme --draft-id 1 --file ./contract.pdf  # not yet wired"
+
+[ops.offers_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+filename = "Override filename (defaults to basename of --file)."
+file     = "Local file path to upload. Required."
+
+[ops.order_confirmations_list]
+summary     = "List order confirmations for a company."
+when_to_use = "Use to enumerate issued order confirmations (ordrebekreftelser) and inspect their gross/net totals, dates, and any linked invoice."
+returns     = "Object with `items` (each: confirmation_id, confirmation_number, date, gross/net/vat int64 øre, contact_id, created_invoice, lines[]) and pagination meta."
+example     = "fiken order-confirmations list --company acme --page-size 50"
+
+[ops.order_confirmations_list.flags]
+company     = "Slug of the company to query. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.order_confirmations_get]
+summary     = "Get a single order confirmation by id."
+when_to_use = "Use when you have a confirmation_id and need the full document including lines, internal comment, and linked invoice (if any)."
+returns     = "OrderConfirmation object with confirmation_id, confirmation_number, date, gross/net/vat int64 øre, lines[], contact_id, and created_invoice."
+example     = "fiken order-confirmations get --company acme --confirmation-id 11"
+
+[ops.order_confirmations_get.flags]
+company         = "Slug of the company that owns the order confirmation. Required."
+confirmation_id = "Id of the order confirmation (path-param string). Required."
+
+[ops.order_confirmations_counter_create]
+summary     = "Initialize the order confirmation counter for the fiscal year. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Counter value (when implemented)."
+example     = "fiken order-confirmations counter create --company acme --value 10000  # not yet wired"
+
+[ops.order_confirmations_counter_create.flags]
+company = "Slug of the company. Required."
+value   = "Starting counter value. Required."
+
+[ops.order_confirmations_create_invoice_draft]
+summary     = "Create an invoice draft from an order confirmation. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new invoice draft (when implemented)."
+example     = "fiken order-confirmations create-invoice-draft --company acme --confirmation-id 11  # not yet wired"
+
+[ops.order_confirmations_create_invoice_draft.flags]
+company         = "Slug of the company. Required."
+confirmation_id = "Source order confirmation id. Required."
+
+[ops.order_confirmations_drafts_list]
+summary     = "List order confirmation drafts for a company."
+when_to_use = "Use to enumerate order confirmation drafts before promotion to a posted order confirmation."
+returns     = "Object with `items` (each: draft_id, uuid, type=order_confirmation, issue_date, net/gross int64 øre, lines[], attachments[], customer_ids[]) and pagination meta."
+example     = "fiken order-confirmations drafts list --company acme"
+
+[ops.order_confirmations_drafts_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.order_confirmations_drafts_get]
+summary     = "Get a single order confirmation draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "InvoiceDraft object (type=order_confirmation) with draft_id, uuid, issue_date, net/gross int64 øre, lines[], attachments[], and customer_ids[]."
+example     = "fiken order-confirmations drafts get --company acme --draft-id 1"
+
+[ops.order_confirmations_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.order_confirmations_drafts_create]
+summary     = "Create a new order confirmation draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Created InvoiceDraft (when implemented)."
+example     = "fiken order-confirmations drafts create --company acme --from-file ./draft.json  # not yet wired"
+
+[ops.order_confirmations_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching invoiceishDraftRequest (not yet wired)."
+
+[ops.order_confirmations_drafts_update]
+summary     = "Update an existing order confirmation draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Updated InvoiceDraft (when implemented)."
+example     = "fiken order-confirmations drafts update --company acme --draft-id 1 --from-file ./draft.json  # not yet wired"
+
+[ops.order_confirmations_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body (not yet wired)."
+
+[ops.order_confirmations_drafts_delete]
+summary     = "Delete an order confirmation draft. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Deleted flag (when implemented)."
+example     = "fiken order-confirmations drafts delete --company acme --draft-id 1  # not yet wired"
+
+[ops.order_confirmations_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.order_confirmations_drafts_create_from]
+summary     = "Promote an order confirmation draft to a posted order confirmation. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location URL of the new order confirmation (when implemented)."
+example     = "fiken order-confirmations drafts create-from --company acme --draft-id 1  # not yet wired"
+
+[ops.order_confirmations_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.order_confirmations_drafts_attachments_list]
+summary     = "List attachments for an order confirmation draft."
+when_to_use = "Use to discover identifiers, download URLs, or types of files attached to a specific order confirmation draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken order-confirmations drafts attachments list --company acme --draft-id 1"
+
+[ops.order_confirmations_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.order_confirmations_drafts_attachments_attach]
+summary     = "Attach a file to an order confirmation draft. (Stub: multipart upload wires in Plan D.)"
+when_to_use = "Reserved for Plan D; currently returns internal/not-implemented. MCP exposes this tool only when EnableAttachments is set."
+returns     = "Location URL of the created attachment (when implemented)."
+example     = "fiken order-confirmations drafts attachments attach --company acme --draft-id 1 --file ./contract.pdf  # not yet wired"
+
+[ops.order_confirmations_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+filename = "Override filename (defaults to basename of --file)."
+file     = "Local file path to upload. Required."
+
+[ops.products_list]
+summary     = "List products in the catalog for a company."
+when_to_use = "Use to enumerate the product catalog, find product_id by name/number, or inspect unit prices, VAT type, and stock."
+returns     = "Object with `items` (each: product_id, name, product_number, unit_price int64 øre, income_account, vat_type, active, stock, note) and pagination meta."
+example     = "fiken products list --company acme --page-size 50"
+
+[ops.products_list.flags]
+company     = "Slug of the company to query. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.products_get]
+summary     = "Get a single product by id."
+when_to_use = "Use when you have a product_id and need the full product record."
+returns     = "Product object with product_id, name, product_number, unit_price int64 øre, income_account, vat_type, active, stock, note, and createdDate/lastModifiedDate."
+example     = "fiken products get --company acme --product-id 7"
+
+[ops.products_get.flags]
+company    = "Slug of the company that owns the product. Required."
+product_id = "Numeric id of the product to fetch. Required."
+
+[ops.products_create]
+summary     = "Create a new product. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Created Product (when implemented)."
+example     = "fiken products create --company acme --from-file ./product.json  # not yet wired"
+
+[ops.products_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching the product schema (not yet wired)."
+
+[ops.products_update]
+summary     = "Update an existing product. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Updated Product (when implemented)."
+example     = "fiken products update --company acme --product-id 7 --from-file ./product.json  # not yet wired"
+
+[ops.products_update.flags]
+company    = "Slug of the company. Required."
+product_id = "Numeric id of the product to update. Required."
+from_file  = "Path to JSON body (not yet wired)."
+
+[ops.products_delete]
+summary     = "Delete a product. (Stub: mutating wiring lands in a follow-up Plan C task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Empty success envelope (when implemented)."
+example     = "fiken products delete --company acme --product-id 7  # not yet wired"
+
+[ops.products_delete.flags]
+company    = "Slug of the company. Required."
+product_id = "Numeric id of the product to delete. Required."
+
+[ops.products_sales_report_create]
+summary     = "Generate a product sales report for a date window."
+when_to_use = "Use to aggregate per-product sales (count, gross, net, VAT) over a date window — both sold and credited movement, plus the net sum."
+returns     = "Object with `items` (each row: product, sold, credited, sum — each aggregate carries count, sales, net_amount, vat_amount, gross_amount in int64 øre) and a minimal meta."
+example     = "fiken products sales-report create --company acme --from 2024-01-01 --to 2024-12-31"
+
+[ops.products_sales_report_create.flags]
+company = "Slug of the company. Required."
+from    = "Start date inclusive, YYYY-MM-DD. Required."
+to      = "End date inclusive, YYYY-MM-DD. Required."
+
+[ops.sales_list]
+summary     = "List sales for a company."
+when_to_use = "Use to enumerate sales (cash, invoice, or external_invoice). Filter by date, last-modified, sale number, customer, or settled flag."
+returns     = "Object with `items` (each: sale_id, sale_number, date, kind, net_amount int64 øre, vat_amount int64 øre, total_paid int64 øre, outstanding_balance int64 øre, customer, lines, payments, attachments) and pagination meta."
+example     = "fiken sales list --company acme --settled=false"
+
+[ops.sales_list.flags]
+company          = "Slug of the company to query. Required."
+page             = "Page number (0-indexed)."
+page_size        = "Page size (max 100)."
+date             = "Filter by exact sale date (YYYY-MM-DD)."
+date_le          = "Filter date <= value."
+date_lt          = "Filter date < value."
+date_ge          = "Filter date >= value."
+date_gt          = "Filter date > value."
+last_modified    = "Filter by exact last-modified date."
+last_modified_le = "Filter last-modified <= value."
+last_modified_lt = "Filter last-modified < value."
+last_modified_ge = "Filter last-modified >= value."
+last_modified_gt = "Filter last-modified > value."
+sale_number      = "Filter by sale number string."
+settled          = "Filter to settled sales (default: include unsettled)."
+contact_id       = "Filter by customer contact id."
+
+[ops.sales_get]
+summary     = "Get a single sale by id."
+when_to_use = "Use when you have a sale_id and need the full sale record including payments and attachments."
+returns     = "Sale object with sale_id, sale_number, date, kind, monetary aggregates in int64 øre, customer, lines, payments, attachments."
+example     = "fiken sales get --company acme --sale-id 42"
+
+[ops.sales_get.flags]
+company = "Slug of the company that owns the sale. Required."
+sale_id = "Numeric id of the sale to fetch. Required."
+
+[ops.sales_create]
+summary     = "Create a new sale. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location header pointing at the newly-created sale (when implemented)."
+example     = "fiken sales create --company acme --from-file ./sale.json  # not yet wired"
+
+[ops.sales_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching the SaleRequest schema (not yet wired)."
+
+[ops.sales_delete]
+summary     = "Mark a sale deleted. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented. Upstream creates a reverse transaction and sets the deleted flag (the sale itself is preserved)."
+returns     = "Post-delete sale snapshot (when implemented)."
+example     = "fiken sales delete --company acme --sale-id 42 --description 'duplicate'  # not yet wired"
+
+[ops.sales_delete.flags]
+company             = "Slug of the company. Required."
+sale_id             = "Numeric id of the sale to delete. Required."
+delete_description  = "Required audit description for deleting the sale."
+
+[ops.sales_settle]
+summary     = "Mark a sale settled without payment. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented. Equivalent to 'sett til oppgjort uten betaling' in the Fiken GUI."
+returns     = "Updated sale snapshot (when implemented)."
+example     = "fiken sales settle --company acme --sale-id 42 --settled-date 2024-06-01  # not yet wired"
+
+[ops.sales_settle.flags]
+company      = "Slug of the company. Required."
+sale_id      = "Numeric id of the sale to mark settled. Required."
+settled_date = "Settlement date, YYYY-MM-DD. Required."
+
+[ops.sales_write_off]
+summary     = "Register a write-off (tapsføring) for a sale. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented. The sale must not be a cash sale, already written off, settled, or deleted, and must have an outstanding balance."
+returns     = "Updated sale snapshot (when implemented)."
+example     = "fiken sales write-off --company acme --sale-id 42 --from-file ./writeoff.json  # not yet wired"
+
+[ops.sales_write_off.flags]
+company   = "Slug of the company. Required."
+sale_id   = "Numeric id of the sale to write off. Required."
+from_file = "Path to JSON body matching the WriteOffRequest schema (not yet wired)."
+
+[ops.sales_attachments_list]
+summary     = "List attachments for a sale."
+when_to_use = "Use to enumerate the files (invoices, receipts) attached to a sale."
+returns     = "Object with `items` (each: identifier, type, download_url, comment) and a minimal meta."
+example     = "fiken sales attachments list --company acme --sale-id 42"
+
+[ops.sales_attachments_list.flags]
+company = "Slug of the company. Required."
+sale_id = "Numeric id of the sale. Required."
+
+[ops.sales_attachments_attach]
+summary     = "Attach a file to a sale. (Plan D — not yet wired.)"
+when_to_use = "Reserved for Plan D; multipart upload wiring lands once EnableAttachments is threaded through both frontends."
+returns     = "Location header for the newly-created attachment (when implemented)."
+example     = "fiken sales attachments attach --company acme --sale-id 42 --file ./receipt.pdf  # Plan D"
+
+[ops.sales_attachments_attach.flags]
+company           = "Slug of the company. Required."
+sale_id           = "Numeric id of the sale. Required."
+filename          = "Override filename (defaults to basename of --file)."
+file              = "Local file path to upload. Required."
+attach_to_sale    = "True if this attachment documents the sale (invoice etc.)."
+attach_to_payment = "True if this attachment documents the payment (receipt etc.)."
+
+[ops.sales_payments_list]
+summary     = "List payments for a sale."
+when_to_use = "Use to enumerate the payments (full or partial) registered against a sale."
+returns     = "Object with `items` (each: payment_id, date, account, amount int64 øre, currency, fee int64 øre) and a minimal meta."
+example     = "fiken sales payments list --company acme --sale-id 42"
+
+[ops.sales_payments_list.flags]
+company = "Slug of the company. Required."
+sale_id = "Numeric id of the sale. Required."
+
+[ops.sales_payments_get]
+summary     = "Get a single sale-payment by id."
+when_to_use = "Use when you have a payment_id and need the full payment record."
+returns     = "Payment object with payment_id, date, account, amount int64 øre, currency, fee."
+example     = "fiken sales payments get --company acme --sale-id 42 --payment-id 7"
+
+[ops.sales_payments_get.flags]
+company    = "Slug of the company. Required."
+sale_id    = "Numeric id of the sale. Required."
+payment_id = "Numeric id of the payment. Required."
+
+[ops.sales_payments_create]
+summary     = "Register a payment for a sale. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location header for the newly-created payment (when implemented)."
+example     = "fiken sales payments create --company acme --sale-id 42 --from-file ./payment.json  # not yet wired"
+
+[ops.sales_payments_create.flags]
+company   = "Slug of the company. Required."
+sale_id   = "Numeric id of the sale. Required."
+from_file = "Path to JSON body matching the Payment schema (not yet wired)."
+
+[ops.purchases_list]
+summary     = "List purchases for a company."
+when_to_use = "Use to enumerate purchases (cash purchase or supplier invoice). Filter by date, settled date, or paid flag."
+returns     = "Object with `items` (each: purchase_id, identifier, date, kind, paid, supplier, lines, payments, attachments) and pagination meta."
+example     = "fiken purchases list --company acme --paid=false"
+
+[ops.purchases_list.flags]
+company         = "Slug of the company to query. Required."
+page            = "Page number (0-indexed)."
+page_size       = "Page size (max 100)."
+date            = "Filter by exact purchase date (YYYY-MM-DD)."
+date_le         = "Filter date <= value."
+date_lt         = "Filter date < value."
+date_ge         = "Filter date >= value."
+date_gt         = "Filter date > value."
+settled_date    = "Filter by exact settled date."
+settled_date_le = "Filter settled-date <= value."
+settled_date_lt = "Filter settled-date < value."
+settled_date_ge = "Filter settled-date >= value."
+settled_date_gt = "Filter settled-date > value."
+paid            = "Filter to paid purchases (default: include unpaid)."
+
+[ops.purchases_get]
+summary     = "Get a single purchase by id."
+when_to_use = "Use when you have a purchase_id and need the full purchase record including payments and attachments."
+returns     = "Purchase object with purchase_id, identifier, date, kind, supplier, lines, payments, attachments."
+example     = "fiken purchases get --company acme --purchase-id 99"
+
+[ops.purchases_get.flags]
+company     = "Slug of the company that owns the purchase. Required."
+purchase_id = "Numeric id of the purchase to fetch. Required."
+
+[ops.purchases_create]
+summary     = "Create a new purchase. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location header pointing at the newly-created purchase (when implemented)."
+example     = "fiken purchases create --company acme --from-file ./purchase.json  # not yet wired"
+
+[ops.purchases_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching the PurchaseRequest schema (not yet wired)."
+
+[ops.purchases_delete]
+summary     = "Mark a purchase deleted. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented. Upstream creates a reverse transaction and sets the deleted flag (the purchase itself is preserved)."
+returns     = "Post-delete purchase snapshot (when implemented)."
+example     = "fiken purchases delete --company acme --purchase-id 99 --description 'duplicate'  # not yet wired"
+
+[ops.purchases_delete.flags]
+company             = "Slug of the company. Required."
+purchase_id         = "Numeric id of the purchase to delete. Required."
+delete_description  = "Required audit description for deleting the purchase."
+
+[ops.purchases_attachments_list]
+summary     = "List attachments for a purchase."
+when_to_use = "Use to enumerate the files (invoices, receipts) attached to a purchase."
+returns     = "Object with `items` (each: identifier, type, download_url, comment) and a minimal meta."
+example     = "fiken purchases attachments list --company acme --purchase-id 99"
+
+[ops.purchases_attachments_list.flags]
+company     = "Slug of the company. Required."
+purchase_id = "Numeric id of the purchase. Required."
+
+[ops.purchases_attachments_attach]
+summary     = "Attach a file to a purchase. (Plan D — not yet wired.)"
+when_to_use = "Reserved for Plan D; multipart upload wiring lands once EnableAttachments is threaded through both frontends."
+returns     = "Location header for the newly-created attachment (when implemented)."
+example     = "fiken purchases attachments attach --company acme --purchase-id 99 --file ./receipt.pdf  # Plan D"
+
+[ops.purchases_attachments_attach.flags]
+company           = "Slug of the company. Required."
+purchase_id       = "Numeric id of the purchase. Required."
+filename          = "Override filename (defaults to basename of --file)."
+file              = "Local file path to upload. Required."
+attach_to_sale    = "True if this attachment documents the purchase invoice."
+attach_to_payment = "True if this attachment documents the payment (receipt etc.)."
+
+[ops.purchases_payments_list]
+summary     = "List payments for a purchase."
+when_to_use = "Use to enumerate the payments (full or partial) registered against a purchase."
+returns     = "Object with `items` (each: payment_id, date, account, amount int64 øre, currency, fee int64 øre) and a minimal meta."
+example     = "fiken purchases payments list --company acme --purchase-id 99"
+
+[ops.purchases_payments_list.flags]
+company     = "Slug of the company. Required."
+purchase_id = "Numeric id of the purchase. Required."
+
+[ops.purchases_payments_get]
+summary     = "Get a single purchase-payment by id."
+when_to_use = "Use when you have a payment_id and need the full payment record."
+returns     = "Payment object with payment_id, date, account, amount int64 øre, currency, fee."
+example     = "fiken purchases payments get --company acme --purchase-id 99 --payment-id 11"
+
+[ops.purchases_payments_get.flags]
+company     = "Slug of the company. Required."
+purchase_id = "Numeric id of the purchase. Required."
+payment_id  = "Numeric id of the payment. Required."
+
+[ops.purchases_payments_create]
+summary     = "Register a payment for a purchase. (Stub: mutating wiring lands in a follow-up task.)"
+when_to_use = "Reserved for follow-up task; currently returns internal/not-implemented."
+returns     = "Location header for the newly-created payment (when implemented)."
+example     = "fiken purchases payments create --company acme --purchase-id 99 --from-file ./payment.json  # not yet wired"
+
+[ops.purchases_payments_create.flags]
+company     = "Slug of the company. Required."
+purchase_id = "Numeric id of the purchase. Required."
+from_file   = "Path to JSON body matching the Payment schema (not yet wired)."
+
+[ops.inbox_list]
+summary     = "List documents in the company inbox."
+when_to_use = "Use to enumerate inbox documents (uploaded but not yet attached to a sale/purchase). Filter by status (used/unused) or a case-insensitive name substring."
+returns     = "Object with `items` (each: document_id, name, filename, status, created_at, document_url) and pagination meta."
+example     = "fiken inbox list --company acme --status unused"
+
+[ops.inbox_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+sort_by     = "Sort order: 'createdDate asc', 'createdDate desc', 'name asc', 'name desc'."
+status      = "Filter by status: all, unused, used."
+name        = "Case-insensitive substring filter on document name."
+
+[ops.inbox_get]
+summary     = "Get a single inbox document by id."
+when_to_use = "Use when you have a document_id and need the full inbox-document record, including the document URL."
+returns     = "Inbox document object with document_id, name, filename, status, created_at, document_url."
+example     = "fiken inbox get --company acme --document-id 42"
+
+[ops.inbox_get.flags]
+company     = "Slug of the company. Required."
+document_id = "Numeric id of the inbox document. Required."
+
+[ops.inbox_send]
+summary     = "Upload a document to the inbox. (Plan D — not yet wired.)"
+when_to_use = "Reserved for Plan D; multipart upload wiring lands once EnableAttachments is fully threaded through both frontends."
+returns     = "Location header for the newly-uploaded inbox document (when implemented)."
+example     = "fiken inbox send --company acme --file ./invoice.pdf  # Plan D"
+
+[ops.inbox_send.flags]
+company          = "Slug of the company. Required."
+name             = "Document name (defaults to filename)."
+filename         = "Override filename (defaults to basename of --file)."
+doc_description  = "Additional description for the document (TOML key avoids the i18n 'description' reserved word)."
+file             = "Local file path to upload. Required."
+
+[ops.projects_list]
+summary     = "List projects for a company."
+when_to_use = "Use to enumerate projects, optionally filtered by completion state, name, or project number."
+returns     = "Object with `items` (each: project_id, number, name, description, start_date, end_date, contact_id, contact_name, completed) and pagination meta."
+example     = "fiken projects list --company acme --completed false"
+
+[ops.projects_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+completed   = "Filter by completion state: 'true', 'false', or omit for all."
+proj_name   = "Filter by project name (TOML key avoids the i18n 'name' reserved word)."
+number      = "Filter by project number."
+
+[ops.projects_get]
+summary     = "Get a single project by id."
+when_to_use = "Use when you have a project_id and need the full project record."
+returns     = "Project object with project_id, number, name, description, start_date, end_date, contact_id, contact_name, completed."
+example     = "fiken projects get --company acme --project-id 42"
+
+[ops.projects_get.flags]
+company    = "Slug of the company. Required."
+project_id = "Numeric id of the project. Required."
+
+[ops.projects_create]
+summary     = "Create a project. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the newly-created project (when implemented)."
+example     = "fiken projects create --company acme  # not yet implemented"
+
+[ops.projects_create.flags]
+company = "Slug of the company. Required."
+
+[ops.projects_update]
+summary     = "Update a project. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the updated project (when implemented)."
+example     = "fiken projects update --company acme --project-id 42  # not yet implemented"
+
+[ops.projects_update.flags]
+company    = "Slug of the company. Required."
+project_id = "Numeric id of the project. Required."
+
+[ops.projects_delete]
+summary     = "Delete a project. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Empty success envelope on 204 No Content (when implemented)."
+example     = "fiken projects delete --company acme --project-id 42  # not yet implemented"
+
+[ops.projects_delete.flags]
+company    = "Slug of the company. Required."
+project_id = "Numeric id of the project. Required."
+
+[ops.user_get]
+summary     = "Show the authenticated user's name and email."
+when_to_use = "Use to verify which user the configured token belongs to; the only op that does not require a company slug."
+returns     = "User object with name and email."
+example     = "fiken user me"
+
+[ops.user_get.flags]
+
+[ops.account_balances_list]
+summary     = "List bookkeeping account closing balances as of a date."
+when_to_use = "Use to render a trial balance for a given date or to fetch account balances in bulk."
+returns     = "Object with `items` (each: code, name, balance in cents) and pagination meta."
+example     = "fiken account-balances list --company acme --date 2024-12-31"
+
+[ops.account_balances_list.flags]
+company      = "Slug of the company. Required."
+date         = "Closing-balance date YYYY-MM-DD. Required."
+page         = "Page number (0-indexed)."
+page_size    = "Page size (max 100)."
+from_account = "Lower bound account number (inclusive)."
+to_account   = "Upper bound account number (inclusive)."
+
+[ops.account_balances_get]
+summary     = "Get a single bookkeeping account closing balance as of a date."
+when_to_use = "Use when you have a specific account code and need its balance on a given date."
+returns     = "AccountBalance object with code, name, balance in cents."
+example     = "fiken account-balances get --company acme --account-code 3020 --date 2024-12-31"
+
+[ops.account_balances_get.flags]
+company      = "Slug of the company. Required."
+account_code = "Account code (e.g. 3020 or 1500:10001). Required."
+date         = "Closing-balance date YYYY-MM-DD. Required."
+
+[ops.bank_balances_list]
+summary     = "List bank balances for a company."
+when_to_use = "Use to compare bank account balances against the reconciled / bookkept totals for cash reconciliation."
+returns     = "Object with `items` (each: source, bank_account_id, bank_account_code, date, amount in cents) and pagination meta."
+example     = "fiken bank-balances list --company acme --date 2024-12-31"
+
+[ops.bank_balances_list.flags]
+company     = "Slug of the company. Required."
+date        = "Balance date YYYY-MM-DD. Optional."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.groups_list]
+summary     = "List customer groups for a company."
+when_to_use = "Use to enumerate the customer groups configured on the company. Group names are returned as a flat list."
+returns     = "Object with `items` (each: name) and pagination meta."
+example     = "fiken groups list --company acme"
+
+[ops.groups_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+
+[ops.activities_list]
+summary     = "List activities for time tracking."
+when_to_use = "Use to enumerate activities (work types) configured on the company, optionally filtered by name or archived state."
+returns     = "Object with `items` (each: activity_id, name, hourly_rate in cents, description, billable, archived, product_id, project_id) and pagination meta."
+example     = "fiken activities list --company acme --archived false"
+
+[ops.activities_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+act_name    = "Filter by name (partial match)."
+archived    = "Filter by archived state: 'true', 'false', or omit for all."
+
+[ops.activities_get]
+summary     = "Get a single activity by id."
+when_to_use = "Use when you have an activity_id and need the full record."
+returns     = "Activity object with activity_id, name, hourly_rate in cents, description, billable, archived, product_id, project_id."
+example     = "fiken activities get --company acme --activity-id 11"
+
+[ops.activities_get.flags]
+company     = "Slug of the company. Required."
+activity_id = "Numeric id of the activity. Required."
+
+[ops.activities_create]
+summary     = "Create an activity. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the newly-created activity (when implemented)."
+example     = "fiken activities create --company acme  # not yet implemented"
+
+[ops.activities_create.flags]
+company = "Slug of the company. Required."
+
+[ops.activities_update]
+summary     = "Update an activity. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the updated activity (when implemented)."
+example     = "fiken activities update --company acme --activity-id 11  # not yet implemented"
+
+[ops.activities_update.flags]
+company     = "Slug of the company. Required."
+activity_id = "Numeric id of the activity. Required."
+
+[ops.activities_delete]
+summary     = "Delete (or archive) an activity. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up. If the activity has time entries or is set as a default on a project, the upstream archives it instead of deleting."
+returns     = "Empty success envelope on 204 No Content (when implemented)."
+example     = "fiken activities delete --company acme --activity-id 11  # not yet implemented"
+
+[ops.activities_delete.flags]
+company     = "Slug of the company. Required."
+activity_id = "Numeric id of the activity. Required."
+
+[ops.time_entries_list]
+summary     = "List time entries for a company."
+when_to_use = "Use to enumerate time entries, optionally filtered by exact date or date range, project, activity, time user, or invoiced status."
+returns     = "Object with `items` (each: time_entry_id, date, hours, start_time, end_time, description, internal_note, activity_id, project_id, time_user_id, invoiced, invoice_id, locked) and pagination meta."
+example     = "fiken time-entries list --company acme --date-ge 2024-01-01 --invoiced false"
+
+[ops.time_entries_list.flags]
+company      = "Slug of the company. Required."
+page         = "Page number (0-indexed)."
+page_size    = "Page size (max 100)."
+date         = "Exact date YYYY-MM-DD."
+date_ge      = "Date >= YYYY-MM-DD."
+date_le      = "Date <= YYYY-MM-DD."
+project_id   = "Filter by project id."
+activity_id  = "Filter by activity id."
+time_user_id = "Filter by time user id."
+invoiced     = "Filter by invoiced status: 'true', 'false', or omit for all."
+
+[ops.time_entries_get]
+summary     = "Get a single time entry by id."
+when_to_use = "Use when you have a time_entry_id and need the full record."
+returns     = "TimeEntry object with time_entry_id, date, hours, start_time, end_time, description, internal_note, activity_id, project_id, time_user_id, invoiced, invoice_id, locked."
+example     = "fiken time-entries get --company acme --time-entry-id 100"
+
+[ops.time_entries_get.flags]
+company       = "Slug of the company. Required."
+time_entry_id = "Numeric id of the time entry. Required."
+
+[ops.time_entries_create]
+summary     = "Create a time entry. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the newly-created time entry (when implemented)."
+example     = "fiken time-entries create --company acme  # not yet implemented"
+
+[ops.time_entries_create.flags]
+company = "Slug of the company. Required."
+
+[ops.time_entries_update]
+summary     = "Update a time entry. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up; mutating wiring lands once the read-path canonical surface is stable."
+returns     = "Location header for the updated time entry (when implemented)."
+example     = "fiken time-entries update --company acme --time-entry-id 100  # not yet implemented"
+
+[ops.time_entries_update.flags]
+company       = "Slug of the company. Required."
+time_entry_id = "Numeric id of the time entry. Required."
+
+[ops.time_entries_delete]
+summary     = "Delete a time entry. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up. The upstream rejects deletion of invoiced entries or entries in closed periods."
+returns     = "Empty success envelope on 204 No Content (when implemented)."
+example     = "fiken time-entries delete --company acme --time-entry-id 100  # not yet implemented"
+
+[ops.time_entries_delete.flags]
+company       = "Slug of the company. Required."
+time_entry_id = "Numeric id of the time entry. Required."
+
+[ops.time_entries_invoice_draft_create]
+summary     = "Create an invoice draft from time entries. (Plan C follow-up — not yet wired.)"
+when_to_use = "Reserved for a Plan C follow-up. The upstream bundles selected time entries into a new invoice draft with configurable grouping (activity / activityAndPerson / none)."
+returns     = "Invoice draft id (when implemented)."
+example     = "fiken time-entries invoice-draft --company acme  # not yet implemented"
+
+[ops.time_entries_invoice_draft_create.flags]
+company = "Slug of the company. Required."
+
+[ops.time_users_list]
+summary     = "List persons who can register time entries."
+when_to_use = "Use to enumerate the time users configured on the company, optionally filtered by name or email."
+returns     = "Object with `items` (each: time_user_id, name, email) and pagination meta."
+example     = "fiken time-users list --company acme"
+
+[ops.time_users_list.flags]
+company     = "Slug of the company. Required."
+page        = "Page number (0-indexed)."
+page_size   = "Page size (max 100)."
+tu_name     = "Filter by name (partial match)."
+email       = "Filter by email."
+
+[ops.time_users_get]
+summary     = "Get a single time user by id."
+when_to_use = "Use when you have a time_user_id and need the full record."
+returns     = "TimeUser object with time_user_id, name, email."
+example     = "fiken time-users get --company acme --time-user-id 5"
+
+[ops.time_users_get.flags]
+company      = "Slug of the company. Required."
+time_user_id = "Numeric id of the time user. Required."
+
+[auth.login]
+prompt_url       = "Create a personal API token at: https://fiken.no/foretak/<co>/api-tokens"
+prompt_paste     = "Paste token (input hidden):"
+verifying        = "Verifying token..."
+saved_keyring    = "Saved to OS keyring (service=fiken-go, profile={{profile}})"
+saved_file       = "Saved to file {{path}} (mode 0600)"
+overwrite_prompt = "Profile {{profile}} already has a credential. Overwrite? [y/N]:"
+
+[auth.status]
+header   = "Profile: {{profile}}"
+user     = "User: {{name}}"
+co_count = "Companies: {{count}}"
+source   = "Source: {{source}}"
+
+[auth.logout]
+removed = "Removed credential for profile {{profile}}."
+
+[auth.list]
+header = "Profiles in {{path}}:"
+
+# === Plan D / 21-op tail ===
+
+[ops.invoices_create]
+summary     = "Create a posted invoice directly (no draft step)."
+when_to_use = "Use to create an invoice in one shot. For an iterative workflow, prefer drafts."
+returns     = "Location URL of the new invoice."
+example     = "fiken invoices create --company acme --from-file ./invoice.json"
+
+[ops.invoices_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching invoiceRequest. Required."
+
+[ops.invoices_update]
+summary     = "Update mutable fields on a posted invoice."
+when_to_use = "Use to amend KID, references, or payment account on an already-posted invoice."
+returns     = "Location URL of the updated invoice."
+example     = "fiken invoices update --company acme --invoice-id 1234 --from-file ./patch.json"
+
+[ops.invoices_update.flags]
+company    = "Slug of the company. Required."
+invoice_id = "Numeric id of the invoice to update. Required."
+from_file  = "Path to JSON body matching updateInvoiceRequest. Required."
+
+[ops.invoices_counter_get]
+summary     = "Get the current invoice counter value for the fiscal year."
+when_to_use = "Use to inspect the next invoice number before posting or initializing."
+returns     = "Counter value (int32)."
+example     = "fiken invoices counter get --company acme"
+
+[ops.invoices_counter_get.flags]
+company = "Slug of the company. Required."
+
+[ops.credit_notes_counter_get]
+summary     = "Get the current credit-note counter value for the fiscal year."
+when_to_use = "Use to inspect the next credit-note number before posting or initializing."
+returns     = "Counter value (int32)."
+example     = "fiken credit-notes counter get --company acme"
+
+[ops.credit_notes_counter_get.flags]
+company = "Slug of the company. Required."
+
+[ops.offers_counter_get]
+summary     = "Get the current offer counter value for the fiscal year."
+when_to_use = "Use to inspect the next offer number before posting or initializing."
+returns     = "Counter value (int32)."
+example     = "fiken offers counter get --company acme"
+
+[ops.offers_counter_get.flags]
+company = "Slug of the company. Required."
+
+[ops.order_confirmations_counter_get]
+summary     = "Get the current order-confirmation counter value for the fiscal year."
+when_to_use = "Use to inspect the next order-confirmation number before posting or initializing."
+returns     = "Counter value (int32)."
+example     = "fiken order-confirmations counter get --company acme"
+
+[ops.order_confirmations_counter_get.flags]
+company = "Slug of the company. Required."
+
+[ops.transactions_delete]
+summary     = "Soft-archive a transaction. The upstream route is a PATCH with a required description."
+when_to_use = "Use to mark a transaction deleted while keeping the ledger entry for audit."
+returns     = "Post-delete transaction snapshot."
+example     = "fiken transactions delete --company acme --transaction-id 5 --description 'duplicate'"
+
+[ops.transactions_delete.flags]
+company             = "Slug of the company. Required."
+transaction_id      = "Numeric id of the transaction. Required."
+delete_description  = "Audit-trail description. Required."
+
+[ops.contacts_attachments_attach]
+summary     = "Attach a file (PDF / image) to a contact."
+when_to_use = "Use to upload supporting documents linked to a customer or supplier."
+returns     = "Location URL of the new attachment."
+example     = "fiken contacts attachments attach --company acme --contact-id 1 --file ./doc.pdf"
+
+[ops.contacts_attachments_attach.flags]
+company    = "Slug of the company. Required."
+contact_id = "Numeric id of the contact. Required."
+file       = "Local file path to upload. Required."
+filename   = "Override filename (defaults to basename of --file)."
+comment    = "Optional free-text annotation."
+
+[ops.sales_drafts_list]
+summary     = "List sale drafts for a company."
+when_to_use = "Use to enumerate cash- and credit-sale drafts before promotion."
+returns     = "Object with `items` (each: draft_id, uuid, invoice_issue_date, contact_id, currency, lines[]) and pagination meta."
+example     = "fiken sales drafts list --company acme"
+
+[ops.sales_drafts_list.flags]
+company   = "Slug of the company. Required."
+page      = "Page number (0-indexed)."
+page_size = "Page size (max 100)."
+
+[ops.sales_drafts_get]
+summary     = "Get a single sale draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "SaleDraft object."
+example     = "fiken sales drafts get --company acme --draft-id 1"
+
+[ops.sales_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.sales_drafts_create]
+summary     = "Create a new sale draft."
+when_to_use = "Use to stage a sale (cash or credit) before posting it as a finalized sale."
+returns     = "Location URL of the new draft."
+example     = "fiken sales drafts create --company acme --from-file ./draft.json"
+
+[ops.sales_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching draftRequest. Required."
+
+[ops.sales_drafts_update]
+summary     = "Update an existing sale draft."
+when_to_use = "Use to edit a sale draft in place."
+returns     = "Location URL of the updated draft."
+example     = "fiken sales drafts update --company acme --draft-id 1 --from-file ./draft.json"
+
+[ops.sales_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body matching draftRequest. Required."
+
+[ops.sales_drafts_delete]
+summary     = "Delete a sale draft."
+when_to_use = "Use to discard an unposted sale draft."
+returns     = "Deleted flag."
+example     = "fiken sales drafts delete --company acme --draft-id 1"
+
+[ops.sales_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.sales_drafts_create_from]
+summary     = "Promote a sale draft to a posted sale."
+when_to_use = "Use to finalize a sale draft after edits are complete."
+returns     = "Location URL of the new sale."
+example     = "fiken sales drafts create-from --company acme --draft-id 1"
+
+[ops.sales_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.sales_drafts_attachments_list]
+summary     = "List attachments for a sale draft."
+when_to_use = "Use to discover identifiers and types of files attached to a specific sale draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken sales drafts attachments list --company acme --draft-id 1"
+
+[ops.sales_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.sales_drafts_attachments_attach]
+summary     = "Attach a file (PDF / image) to a sale draft."
+when_to_use = "Use to upload supporting documents for an unposted sale draft."
+returns     = "Location URL of the new attachment."
+example     = "fiken sales drafts attachments attach --company acme --draft-id 1 --file ./doc.pdf"
+
+[ops.sales_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+file     = "Local file path to upload. Required."
+filename = "Override filename (defaults to basename of --file)."
+
+[ops.purchases_drafts_list]
+summary     = "List purchase drafts for a company."
+when_to_use = "Use to enumerate cash- and credit-purchase drafts before promotion."
+returns     = "Object with `items` (each: draft_id, uuid, invoice_issue_date, contact_id, currency, lines[]) and pagination meta."
+example     = "fiken purchases drafts list --company acme"
+
+[ops.purchases_drafts_list.flags]
+company   = "Slug of the company. Required."
+page      = "Page number (0-indexed)."
+page_size = "Page size (max 100)."
+
+[ops.purchases_drafts_get]
+summary     = "Get a single purchase draft by id."
+when_to_use = "Use when you have a draft_id and need its full payload before editing or promoting it."
+returns     = "PurchaseDraft object."
+example     = "fiken purchases drafts get --company acme --draft-id 1"
+
+[ops.purchases_drafts_get.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.purchases_drafts_create]
+summary     = "Create a new purchase draft."
+when_to_use = "Use to stage a purchase before posting it as a finalized purchase."
+returns     = "Location URL of the new draft."
+example     = "fiken purchases drafts create --company acme --from-file ./draft.json"
+
+[ops.purchases_drafts_create.flags]
+company   = "Slug of the company. Required."
+from_file = "Path to JSON body matching draftRequest. Required."
+
+[ops.purchases_drafts_update]
+summary     = "Update an existing purchase draft."
+when_to_use = "Use to edit a purchase draft in place."
+returns     = "Location URL of the updated draft."
+example     = "fiken purchases drafts update --company acme --draft-id 1 --from-file ./draft.json"
+
+[ops.purchases_drafts_update.flags]
+company   = "Slug of the company. Required."
+draft_id  = "Numeric id of the draft to update. Required."
+from_file = "Path to JSON body matching draftRequest. Required."
+
+[ops.purchases_drafts_delete]
+summary     = "Delete a purchase draft."
+when_to_use = "Use to discard an unposted purchase draft."
+returns     = "Deleted flag."
+example     = "fiken purchases drafts delete --company acme --draft-id 1"
+
+[ops.purchases_drafts_delete.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft to delete. Required."
+
+[ops.purchases_drafts_create_from]
+summary     = "Promote a purchase draft to a posted purchase."
+when_to_use = "Use to finalize a purchase draft after edits are complete."
+returns     = "Location URL of the new purchase."
+example     = "fiken purchases drafts create-from --company acme --draft-id 1"
+
+[ops.purchases_drafts_create_from.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the source draft. Required."
+
+[ops.purchases_drafts_attachments_list]
+summary     = "List attachments for a purchase draft."
+when_to_use = "Use to discover identifiers and types of files attached to a specific purchase draft."
+returns     = "Object with `items` (each: identifier, download_url, comment, type) and a minimal meta."
+example     = "fiken purchases drafts attachments list --company acme --draft-id 1"
+
+[ops.purchases_drafts_attachments_list.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+
+[ops.purchases_drafts_attachments_attach]
+summary     = "Attach a file (PDF / image) to a purchase draft."
+when_to_use = "Use to upload supporting documents for an unposted purchase draft."
+returns     = "Location URL of the new attachment."
+example     = "fiken purchases drafts attachments attach --company acme --draft-id 1 --file ./doc.pdf"
+
+[ops.purchases_drafts_attachments_attach.flags]
+company  = "Slug of the company. Required."
+draft_id = "Numeric id of the draft. Required."
+file     = "Local file path to upload. Required."
+filename = "Override filename (defaults to basename of --file)."
+
+[error.auth_missing]
+short = "No token configured. Run `fiken auth login` first."
+
+[error.auth_invalid]
+short = "Token is invalid. Run `fiken auth login` to refresh."
+
+[error.auth_forbidden]
+short = "Token lacks access to this resource."
+
+[error.not_found]
+short = "Resource not found."
+
+[error.validation]
+short = "Request rejected: {{detail}}"
+
+[error.conflict]
+short = "Request conflicts with current state."
+
+[error.payment_required]
+short = "Fiken returned 402 — this feature requires a paid plan."
+
+[error.rate_limited]
+short = "Rate-limited by Fiken: {{detail}}"
+
+[error.server_error]
+short = "Fiken returned a server error: {{detail}}"
+
+[error.network]
+short = "Network error reaching Fiken: {{detail}}"
+
+[error.cancelled]
+short = "Operation cancelled."
+
+[error.internal]
+short = "Internal client error: {{detail}}"
+
+[error.read_only_violation]
+short = "Read-only MCP mode blocked a mutating operation: {{detail}}"

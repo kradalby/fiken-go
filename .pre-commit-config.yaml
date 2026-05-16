@@ -1,0 +1,122 @@
+# All local hooks run inside `nix develop` via `pre-commit-utils` style entries
+# so the tool versions match the flake exactly. We rely on prek (Rust drop-in
+# for pre-commit) reading the same file.
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+        exclude: '^api/fiken-openapi\.yaml$'
+      - id: detect-private-key
+      - id: fix-byte-order-marker
+      - id: end-of-file-fixer
+        exclude: '^api/fiken-openapi\.yaml$'
+      - id: trailing-whitespace
+        exclude: '^api/fiken-openapi\.yaml$'
+      - id: mixed-line-ending
+
+  - repo: local
+    hooks:
+      - id: nixfmt
+        name: nixfmt
+        language: system
+        entry: nix develop -c nixfmt
+        files: '\.nix$'
+
+      - id: prettier
+        name: prettier
+        language: system
+        entry: nix develop -c prettier --write
+        files: '\.(json|yaml|yml|md)$'
+        exclude: '^(api/|fiken/|.*\.gen\.go$|i18n/locales/.*\.template\.toml$)'
+
+      - id: gofumpt
+        name: gofumpt
+        language: system
+        entry: nix develop -c gofumpt -w
+        files: '\.go$'
+        exclude: '^fiken/|\.gen\.go$'
+
+      - id: goimports
+        name: goimports
+        language: system
+        entry: nix develop -c goimports -w -local github.com/kradalby/fiken-go
+        files: '\.go$'
+        exclude: '^fiken/|\.gen\.go$'
+
+      - id: golangci-lint
+        name: golangci-lint
+        language: system
+        entry: nix develop -c golangci-lint run --fix --timeout=5m
+        pass_filenames: false
+        types: [go]
+
+      - id: codegen-clean
+        name: codegen-clean
+        language: system
+        # Snapshot status before and after `go generate ./...`. Hook
+        # fails if generation introduced ANY change (modified tracked
+        # file, new untracked file, or removed file). This is more
+        # correct than `git diff --exit-code` (misses untracked) and
+        # than `test -z "$(git status --porcelain)"` (false-positives
+        # on pre-existing untracked files, e.g. the very first
+        # `prek run --all-files` before the bootstrap commit lands).
+        entry: bash -c 'BEFORE=$(git status --porcelain); nix develop -c go generate ./...; test "$BEFORE" = "$(git status --porcelain)"'
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: go-test
+        name: go-test-short
+        language: system
+        entry: nix develop -c go test -race -count=1 -short ./...
+        pass_filenames: false
+        stages: [pre-commit]
+        types: [go]
+
+      - id: i18n-keys
+        name: i18n-keys
+        language: system
+        entry: bash -c 'nix develop -c go test -run TestEveryEnKeyHasNbCounterpart ./i18n/...'
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: oas-units
+        name: oas-units
+        language: system
+        entry: bash -c 'nix develop -c go run ./cmd/fiken-spec-lint -ignore startTime,endTime'
+        pass_filenames: false
+        files: '^api/fiken-openapi\.yaml$'
+        stages: [pre-commit]
+
+      - id: vendor-hash
+        name: vendor-hash
+        language: system
+        entry: bash scripts/update-vendor-hash.sh
+        pass_filenames: false
+        files: '^go\.(mod|sum)$'
+        stages: [pre-commit]
+
+      - id: go-test-full
+        name: go-test-full
+        language: system
+        entry: nix develop -c go test -race -count=1 ./...
+        pass_filenames: false
+        stages: [pre-push]
+        types: [go]
+
+      - id: golangci-lint-strict
+        name: golangci-lint (no --fix)
+        language: system
+        entry: nix develop -c golangci-lint run --timeout=5m
+        pass_filenames: false
+        stages: [pre-push]
+        types: [go]

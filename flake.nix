@@ -12,21 +12,35 @@
       nixpkgs,
       flake-utils,
     }:
-    flake-utils.lib.eachDefaultSystem (
+    (flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
 
-        # Prefer Go 1.26 if available, else 1.25.
         go = pkgs.go_1_26 or pkgs.go_1_25;
+
+        fiken = pkgs.buildGoModule {
+          pname = "fiken-go";
+          version = "0.0.0-dev";
+          src = ./.;
+          inherit go;
+          vendorHash = "sha256-sVh7G41xdcoX9YlAHUxqxw52auA2pRKHSuf99ACqoLY=";
+          subPackages = [ "./..." ];
+        };
       in
       {
+        packages = {
+          fiken = fiken;
+          fiken-mcp = fiken;
+          default = fiken;
+        };
+
         devShells.default = pkgs.mkShell {
           packages = [
             go
             pkgs.gopls
             pkgs.gofumpt
-            pkgs.gotools # provides goimports
+            pkgs.gotools
             pkgs.golangci-lint
             pkgs.gotestsum
             pkgs.gotests
@@ -45,5 +59,11 @@
 
         formatter = pkgs.nixfmt-rfc-style;
       }
-    );
+    ))
+    // {
+      overlays.default = final: prev: {
+        fiken = self.packages.${prev.system}.fiken;
+        fiken-mcp = self.packages.${prev.system}.fiken-mcp;
+      };
+    };
 }
