@@ -53,6 +53,34 @@ fiken mcp --tsnet --tsnet-hostname fiken-mcp
 claude mcp add fiken -- fiken mcp
 ```
 
+## NixOS
+
+The flake exposes `nixosModules.fiken-mcp` and `packages.fiken-mcp`. Add the
+flake as an input, apply the overlay, and import the module:
+
+```nix
+{
+  imports = [ inputs.fiken-go.nixosModules.fiken-mcp ];
+  nixpkgs.overlays = [ inputs.fiken-go.overlays.default ];
+
+  services.fiken-mcp = {
+    enable = true;
+    fikenTokenFile = "/run/secrets/fiken-token";
+
+    # Pick ONE listener:
+    #   listen = "127.0.0.1:8765";              # plain HTTP
+    tsnet = {
+      enable = true;
+      hostname = "fiken-mcp";
+      authKeyFile = "/run/secrets/tailscale-authkey";
+    };
+  };
+}
+```
+
+See [`nix/example-configuration.nix`](nix/example-configuration.nix) for a
+full example.
+
 ## Configuration
 
 ```toml
