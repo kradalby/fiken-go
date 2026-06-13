@@ -26,10 +26,10 @@ repos:
 
   - repo: local
     hooks:
-      - id: nixfmt
-        name: nixfmt
+      - id: nixpkgs-fmt
+        name: nixpkgs-fmt
         language: system
-        entry: nix develop -c nixfmt
+        entry: nix develop -c nixpkgs-fmt
         files: '\.nix$'
 
       - id: prettier

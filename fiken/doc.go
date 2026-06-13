@@ -9,3 +9,5 @@
 package fiken
 
 //go:generate go run github.com/ogen-go/ogen/cmd/ogen --target . --package fiken --clean ../api/fiken-openapi.yaml
+//go:generate bash -c "gofumpt -w *.go"
+//go:generate bash -c "goimports -w *.go"

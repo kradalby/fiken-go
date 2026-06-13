@@ -86,7 +86,7 @@
             pkgs.prek
             pkgs.ogen
             pkgs.prettier
-            pkgs.nixfmt-rfc-style
+            pkgs.nixpkgs-fmt
             pkgs.git
           ];
 
