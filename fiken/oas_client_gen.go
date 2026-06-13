@@ -1083,7 +1083,8 @@ func (c *Client) sendAddAttachmentToContact(ctx context.Context, request OptAddA
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1231,7 +1232,8 @@ func (c *Client) sendAddAttachmentToCreditNoteDraft(ctx context.Context, request
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToCreditNoteDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1379,7 +1381,8 @@ func (c *Client) sendAddAttachmentToInvoice(ctx context.Context, request OptAddA
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToInvoiceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1527,7 +1530,8 @@ func (c *Client) sendAddAttachmentToInvoiceDraft(ctx context.Context, request Op
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToInvoiceDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1675,7 +1679,8 @@ func (c *Client) sendAddAttachmentToJournalEntry(ctx context.Context, request Op
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToJournalEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1823,7 +1828,8 @@ func (c *Client) sendAddAttachmentToOfferDraft(ctx context.Context, request OptA
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToOfferDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -1971,7 +1977,8 @@ func (c *Client) sendAddAttachmentToOrderConfirmationDraft(ctx context.Context, 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToOrderConfirmationDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2119,7 +2126,8 @@ func (c *Client) sendAddAttachmentToPurchase(ctx context.Context, request OptAdd
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToPurchaseOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToPurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2305,7 +2313,8 @@ func (c *Client) sendAddAttachmentToPurchaseDraft(ctx context.Context, request O
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToPurchaseDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToPurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2453,7 +2462,8 @@ func (c *Client) sendAddAttachmentToSale(ctx context.Context, request OptAddAtta
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2639,7 +2649,8 @@ func (c *Client) sendAddAttachmentToSaleDraft(ctx context.Context, request OptAd
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddAttachmentToSaleDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddAttachmentToSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2787,7 +2798,8 @@ func (c *Client) sendAddContactPersonToContact(ctx context.Context, request *Con
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, AddContactPersonToContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, AddContactPersonToContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -2935,7 +2947,8 @@ func (c *Client) sendCreateActivity(ctx context.Context, request *ActivityReques
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateActivityOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3067,7 +3080,8 @@ func (c *Client) sendCreateBankAccount(ctx context.Context, request *BankAccount
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateBankAccountOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateBankAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3196,7 +3210,8 @@ func (c *Client) sendCreateContact(ctx context.Context, request *Contact, params
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3327,7 +3342,8 @@ func (c *Client) sendCreateCreditNoteCounter(ctx context.Context, request OptCou
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateCreditNoteCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateCreditNoteCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3457,7 +3473,8 @@ func (c *Client) sendCreateCreditNoteDraft(ctx context.Context, request *Invoice
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateCreditNoteDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3586,7 +3603,8 @@ func (c *Client) sendCreateCreditNoteFromDraft(ctx context.Context, params Creat
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateCreditNoteFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateCreditNoteFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3731,7 +3749,8 @@ func (c *Client) sendCreateFullCreditNote(ctx context.Context, request *FullCred
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateFullCreditNoteOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateFullCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3860,7 +3879,8 @@ func (c *Client) sendCreateGeneralJournalEntry(ctx context.Context, request *Gen
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateGeneralJournalEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateGeneralJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -3989,7 +4009,8 @@ func (c *Client) sendCreateInboxDocument(ctx context.Context, request *CreateInb
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInboxDocumentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInboxDocumentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4128,7 +4149,8 @@ func (c *Client) sendCreateInvoice(ctx context.Context, request *InvoiceRequest,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4259,7 +4281,8 @@ func (c *Client) sendCreateInvoiceCounter(ctx context.Context, request OptCounte
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4388,7 +4411,8 @@ func (c *Client) sendCreateInvoiceDraft(ctx context.Context, request *Invoiceish
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4517,7 +4541,8 @@ func (c *Client) sendCreateInvoiceDraftFromOrderConfirmation(ctx context.Context
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceDraftFromOrderConfirmationOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceDraftFromOrderConfirmationOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4673,7 +4698,8 @@ func (c *Client) sendCreateInvoiceDraftFromTimeEntries(ctx context.Context, requ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceDraftFromTimeEntriesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceDraftFromTimeEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4802,7 +4828,8 @@ func (c *Client) sendCreateInvoiceFromDraft(ctx context.Context, params CreateIn
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateInvoiceFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateInvoiceFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -4949,7 +4976,8 @@ func (c *Client) sendCreateOfferCounter(ctx context.Context, request OptCounter,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOfferCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOfferCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5078,7 +5106,8 @@ func (c *Client) sendCreateOfferDraft(ctx context.Context, request *InvoiceishDr
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOfferDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5207,7 +5236,8 @@ func (c *Client) sendCreateOfferFromDraft(ctx context.Context, params CreateOffe
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOfferFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOfferFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5354,7 +5384,8 @@ func (c *Client) sendCreateOrderConfirmationCounter(ctx context.Context, request
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOrderConfirmationCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOrderConfirmationCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5483,7 +5514,8 @@ func (c *Client) sendCreateOrderConfirmationDraft(ctx context.Context, request *
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOrderConfirmationDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5612,7 +5644,8 @@ func (c *Client) sendCreateOrderConfirmationFromDraft(ctx context.Context, param
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateOrderConfirmationFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateOrderConfirmationFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5757,7 +5790,8 @@ func (c *Client) sendCreatePartialCreditNote(ctx context.Context, request *Parti
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreatePartialCreditNoteOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreatePartialCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -5886,7 +5920,8 @@ func (c *Client) sendCreateProduct(ctx context.Context, request *Product, params
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateProductOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6015,7 +6050,8 @@ func (c *Client) sendCreateProductSalesReport(ctx context.Context, request *Prod
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateProductSalesReportOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateProductSalesReportOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6144,7 +6180,8 @@ func (c *Client) sendCreateProject(ctx context.Context, request *ProjectRequest,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateProjectOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6273,7 +6310,8 @@ func (c *Client) sendCreatePurchase(ctx context.Context, request *PurchaseReques
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreatePurchaseOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreatePurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6402,7 +6440,8 @@ func (c *Client) sendCreatePurchaseDraft(ctx context.Context, request *DraftRequ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreatePurchaseDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreatePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6531,7 +6570,8 @@ func (c *Client) sendCreatePurchaseFromDraft(ctx context.Context, params CreateP
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreatePurchaseFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreatePurchaseFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6676,7 +6716,8 @@ func (c *Client) sendCreatePurchasePayment(ctx context.Context, request *Payment
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreatePurchasePaymentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreatePurchasePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6826,7 +6867,8 @@ func (c *Client) sendCreateSale(ctx context.Context, request *SaleRequest, param
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -6955,7 +6997,8 @@ func (c *Client) sendCreateSaleDraft(ctx context.Context, request *DraftRequest,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateSaleDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7084,7 +7127,8 @@ func (c *Client) sendCreateSaleFromDraft(ctx context.Context, params CreateSaleF
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateSaleFromDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateSaleFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7229,7 +7273,8 @@ func (c *Client) sendCreateSalePayment(ctx context.Context, request *Payment, pa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateSalePaymentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateSalePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7377,7 +7422,8 @@ func (c *Client) sendCreateTimeEntry(ctx context.Context, request *TimeEntryRequ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, CreateTimeEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, CreateTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7514,7 +7560,8 @@ func (c *Client) sendDeleteActivity(ctx context.Context, params DeleteActivityPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteActivityOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7659,7 +7706,8 @@ func (c *Client) sendDeleteContact(ctx context.Context, params DeleteContactPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7803,7 +7851,8 @@ func (c *Client) sendDeleteContactContactPerson(ctx context.Context, params Dele
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteContactContactPersonOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -7966,7 +8015,8 @@ func (c *Client) sendDeleteCreditNoteDraft(ctx context.Context, params DeleteCre
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteCreditNoteDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8110,7 +8160,8 @@ func (c *Client) sendDeleteInvoiceDraft(ctx context.Context, params DeleteInvoic
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteInvoiceDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8254,7 +8305,8 @@ func (c *Client) sendDeleteOfferDraft(ctx context.Context, params DeleteOfferDra
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteOfferDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8398,7 +8450,8 @@ func (c *Client) sendDeleteOrderConfirmationDraft(ctx context.Context, params De
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteOrderConfirmationDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8542,7 +8595,8 @@ func (c *Client) sendDeleteProduct(ctx context.Context, params DeleteProductPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteProductOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8686,7 +8740,8 @@ func (c *Client) sendDeleteProject(ctx context.Context, params DeleteProjectPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteProjectOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8831,7 +8886,8 @@ func (c *Client) sendDeletePurchase(ctx context.Context, params DeletePurchasePa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeletePurchaseOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeletePurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -8994,7 +9050,8 @@ func (c *Client) sendDeletePurchaseDraft(ctx context.Context, params DeletePurch
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeletePurchaseDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeletePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9139,7 +9196,8 @@ func (c *Client) sendDeleteSale(ctx context.Context, params DeleteSaleParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9302,7 +9360,8 @@ func (c *Client) sendDeleteSaleDraft(ctx context.Context, params DeleteSaleDraft
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteSaleDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9450,7 +9509,8 @@ func (c *Client) sendDeleteTimeEntry(ctx context.Context, params DeleteTimeEntry
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteTimeEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9596,7 +9656,8 @@ func (c *Client) sendDeleteTransaction(ctx context.Context, params DeleteTransac
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, DeleteTransactionOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, DeleteTransactionOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9763,7 +9824,8 @@ func (c *Client) sendGetAccount(ctx context.Context, params GetAccountParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetAccountOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -9907,7 +9969,8 @@ func (c *Client) sendGetAccountBalance(ctx context.Context, params GetAccountBal
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetAccountBalanceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetAccountBalanceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10073,7 +10136,8 @@ func (c *Client) sendGetAccountBalances(ctx context.Context, params GetAccountBa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetAccountBalancesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetAccountBalancesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10285,7 +10349,8 @@ func (c *Client) sendGetAccounts(ctx context.Context, params GetAccountsParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetAccountsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetAccountsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10500,7 +10565,8 @@ func (c *Client) sendGetActivities(ctx context.Context, params GetActivitiesPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetActivitiesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetActivitiesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10698,7 +10764,8 @@ func (c *Client) sendGetActivity(ctx context.Context, params GetActivityParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetActivityOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10842,7 +10909,8 @@ func (c *Client) sendGetBankAccount(ctx context.Context, params GetBankAccountPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetBankAccountOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetBankAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -10986,7 +11054,8 @@ func (c *Client) sendGetBankAccounts(ctx context.Context, params GetBankAccounts
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetBankAccountsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetBankAccountsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11167,7 +11236,8 @@ func (c *Client) sendGetBankBalances(ctx context.Context, params GetBankBalances
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetBankBalancesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetBankBalancesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11350,7 +11420,8 @@ func (c *Client) sendGetCompanies(ctx context.Context, params GetCompaniesParams
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCompaniesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCompaniesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11512,7 +11583,8 @@ func (c *Client) sendGetCompany(ctx context.Context, params GetCompanyParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCompanyOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCompanyOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11639,7 +11711,8 @@ func (c *Client) sendGetContact(ctx context.Context, params GetContactParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11783,7 +11856,8 @@ func (c *Client) sendGetContactContactPerson(ctx context.Context, params GetCont
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetContactContactPersonOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -11928,7 +12002,8 @@ func (c *Client) sendGetContactPerson(ctx context.Context, params GetContactPers
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetContactPersonOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -12091,7 +12166,8 @@ func (c *Client) sendGetContacts(ctx context.Context, params GetContactsParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetContactsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetContactsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -12646,7 +12722,8 @@ func (c *Client) sendGetCreditNote(ctx context.Context, params GetCreditNotePara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNoteOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -12790,7 +12867,8 @@ func (c *Client) sendGetCreditNoteCounter(ctx context.Context, params GetCreditN
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNoteCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNoteCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -12916,7 +12994,8 @@ func (c *Client) sendGetCreditNoteDraft(ctx context.Context, params GetCreditNot
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNoteDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -13060,7 +13139,8 @@ func (c *Client) sendGetCreditNoteDraftAttachments(ctx context.Context, params G
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNoteDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNoteDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -13205,7 +13285,8 @@ func (c *Client) sendGetCreditNoteDrafts(ctx context.Context, params GetCreditNo
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNoteDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNoteDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -13369,7 +13450,8 @@ func (c *Client) sendGetCreditNotes(ctx context.Context, params GetCreditNotesPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetCreditNotesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetCreditNotesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -13754,7 +13836,8 @@ func (c *Client) sendGetGroups(ctx context.Context, params GetGroupsParams) (res
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetGroupsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetGroupsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -13918,7 +14001,8 @@ func (c *Client) sendGetInbox(ctx context.Context, params GetInboxParams) (res *
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInboxOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInboxOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14133,7 +14217,8 @@ func (c *Client) sendGetInboxDocument(ctx context.Context, params GetInboxDocume
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInboxDocumentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInboxDocumentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14277,7 +14362,8 @@ func (c *Client) sendGetInvoice(ctx context.Context, params GetInvoiceParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14421,7 +14507,8 @@ func (c *Client) sendGetInvoiceAttachments(ctx context.Context, params GetInvoic
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14566,7 +14653,8 @@ func (c *Client) sendGetInvoiceCounter(ctx context.Context, params GetInvoiceCou
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14692,7 +14780,8 @@ func (c *Client) sendGetInvoiceDraft(ctx context.Context, params GetInvoiceDraft
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14836,7 +14925,8 @@ func (c *Client) sendGetInvoiceDraftAttachments(ctx context.Context, params GetI
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -14981,7 +15071,8 @@ func (c *Client) sendGetInvoiceDrafts(ctx context.Context, params GetInvoiceDraf
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoiceDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoiceDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -15180,7 +15271,8 @@ func (c *Client) sendGetInvoices(ctx context.Context, params GetInvoicesParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetInvoicesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetInvoicesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -15684,7 +15776,8 @@ func (c *Client) sendGetJournalEntries(ctx context.Context, params GetJournalEnt
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetJournalEntriesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetJournalEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16103,7 +16196,8 @@ func (c *Client) sendGetJournalEntry(ctx context.Context, params GetJournalEntry
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetJournalEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16247,7 +16341,8 @@ func (c *Client) sendGetJournalEntryAttachments(ctx context.Context, params GetJ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetJournalEntryAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetJournalEntryAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16392,7 +16487,8 @@ func (c *Client) sendGetOffer(ctx context.Context, params GetOfferParams) (res *
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOfferOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOfferOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16536,7 +16632,8 @@ func (c *Client) sendGetOfferCounter(ctx context.Context, params GetOfferCounter
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOfferCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOfferCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16662,7 +16759,8 @@ func (c *Client) sendGetOfferDraft(ctx context.Context, params GetOfferDraftPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOfferDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16806,7 +16904,8 @@ func (c *Client) sendGetOfferDraftAttachments(ctx context.Context, params GetOff
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOfferDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOfferDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -16951,7 +17050,8 @@ func (c *Client) sendGetOfferDrafts(ctx context.Context, params GetOfferDraftsPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOfferDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOfferDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17115,7 +17215,8 @@ func (c *Client) sendGetOffers(ctx context.Context, params GetOffersParams) (res
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOffersOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOffersOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17279,7 +17380,8 @@ func (c *Client) sendGetOrderConfirmation(ctx context.Context, params GetOrderCo
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17423,7 +17525,8 @@ func (c *Client) sendGetOrderConfirmationCounter(ctx context.Context, params Get
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationCounterOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17549,7 +17652,8 @@ func (c *Client) sendGetOrderConfirmationDraft(ctx context.Context, params GetOr
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17693,7 +17797,8 @@ func (c *Client) sendGetOrderConfirmationDraftAttachments(ctx context.Context, p
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -17838,7 +17943,8 @@ func (c *Client) sendGetOrderConfirmationDrafts(ctx context.Context, params GetO
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -18002,7 +18108,8 @@ func (c *Client) sendGetOrderConfirmations(ctx context.Context, params GetOrderC
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetOrderConfirmationsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetOrderConfirmationsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -18166,7 +18273,8 @@ func (c *Client) sendGetProduct(ctx context.Context, params GetProductParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetProductOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -18310,7 +18418,8 @@ func (c *Client) sendGetProducts(ctx context.Context, params GetProductsParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetProductsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetProductsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -18695,7 +18804,8 @@ func (c *Client) sendGetProject(ctx context.Context, params GetProjectParams) (r
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetProjectOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -18839,7 +18949,8 @@ func (c *Client) sendGetProjects(ctx context.Context, params GetProjectsParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetProjectsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetProjectsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19054,7 +19165,8 @@ func (c *Client) sendGetPurchase(ctx context.Context, params GetPurchaseParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchaseOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19198,7 +19310,8 @@ func (c *Client) sendGetPurchaseAttachments(ctx context.Context, params GetPurch
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchaseAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchaseAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19343,7 +19456,8 @@ func (c *Client) sendGetPurchaseDraft(ctx context.Context, params GetPurchaseDra
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchaseDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19487,7 +19601,8 @@ func (c *Client) sendGetPurchaseDraftAttachments(ctx context.Context, params Get
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchaseDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchaseDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19632,7 +19747,8 @@ func (c *Client) sendGetPurchaseDrafts(ctx context.Context, params GetPurchaseDr
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchaseDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchaseDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19796,7 +19912,8 @@ func (c *Client) sendGetPurchasePayment(ctx context.Context, params GetPurchaseP
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchasePaymentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchasePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -19959,7 +20076,8 @@ func (c *Client) sendGetPurchasePayments(ctx context.Context, params GetPurchase
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchasePaymentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchasePaymentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20104,7 +20222,8 @@ func (c *Client) sendGetPurchases(ctx context.Context, params GetPurchasesParams
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetPurchasesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetPurchasesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20472,7 +20591,8 @@ func (c *Client) sendGetSale(ctx context.Context, params GetSaleParams) (res *Sa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20616,7 +20736,8 @@ func (c *Client) sendGetSaleAttachments(ctx context.Context, params GetSaleAttac
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSaleAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSaleAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20761,7 +20882,8 @@ func (c *Client) sendGetSaleDraft(ctx context.Context, params GetSaleDraftParams
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSaleDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -20905,7 +21027,8 @@ func (c *Client) sendGetSaleDraftAttachments(ctx context.Context, params GetSale
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSaleDraftAttachmentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSaleDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -21050,7 +21173,8 @@ func (c *Client) sendGetSaleDrafts(ctx context.Context, params GetSaleDraftsPara
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSaleDraftsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSaleDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -21214,7 +21338,8 @@ func (c *Client) sendGetSalePayment(ctx context.Context, params GetSalePaymentPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSalePaymentOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSalePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -21377,7 +21502,8 @@ func (c *Client) sendGetSalePayments(ctx context.Context, params GetSalePayments
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSalePaymentsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSalePaymentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -21522,7 +21648,8 @@ func (c *Client) sendGetSales(ctx context.Context, params GetSalesParams) (res *
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetSalesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetSalesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -21907,7 +22034,8 @@ func (c *Client) sendGetTimeEntries(ctx context.Context, params GetTimeEntriesPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTimeEntriesOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTimeEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -22224,7 +22352,8 @@ func (c *Client) sendGetTimeEntry(ctx context.Context, params GetTimeEntryParams
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTimeEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -22368,7 +22497,8 @@ func (c *Client) sendGetTimeUser(ctx context.Context, params GetTimeUserParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTimeUserOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTimeUserOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -22512,7 +22642,8 @@ func (c *Client) sendGetTimeUsers(ctx context.Context, params GetTimeUsersParams
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTimeUsersOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTimeUsersOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -22711,7 +22842,8 @@ func (c *Client) sendGetTransaction(ctx context.Context, params GetTransactionPa
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTransactionOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTransactionOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -22855,7 +22987,8 @@ func (c *Client) sendGetTransactions(ctx context.Context, params GetTransactions
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetTransactionsOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetTransactionsOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23189,7 +23322,8 @@ func (c *Client) sendGetUser(ctx context.Context) (res *Userinfo, err error) {
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, GetUserOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, GetUserOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23296,7 +23430,8 @@ func (c *Client) sendSendCreditNote(ctx context.Context, request *SendCreditNote
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, SendCreditNoteOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, SendCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23425,7 +23560,8 @@ func (c *Client) sendSendInvoice(ctx context.Context, request *SendInvoiceReques
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, SendInvoiceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, SendInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23554,7 +23690,8 @@ func (c *Client) sendSendOffer(ctx context.Context, request *SendOfferRequest, p
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, SendOfferOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, SendOfferOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23684,7 +23821,8 @@ func (c *Client) sendSettledSale(ctx context.Context, params SettledSaleParams) 
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, SettledSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, SettledSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23847,7 +23985,8 @@ func (c *Client) sendUpdateActivity(ctx context.Context, request *UpdateActivity
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateActivityOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -23994,7 +24133,8 @@ func (c *Client) sendUpdateContact(ctx context.Context, request *Contact, params
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateContactOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24141,7 +24281,8 @@ func (c *Client) sendUpdateContactContactPerson(ctx context.Context, request *Co
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateContactContactPersonOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24307,7 +24448,8 @@ func (c *Client) sendUpdateCreditNoteDraft(ctx context.Context, request *Invoice
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateCreditNoteDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24455,7 +24597,8 @@ func (c *Client) sendUpdateInvoice(ctx context.Context, request *UpdateInvoiceRe
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateInvoiceOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24602,7 +24745,8 @@ func (c *Client) sendUpdateInvoiceDraft(ctx context.Context, request *Invoiceish
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateInvoiceDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24749,7 +24893,8 @@ func (c *Client) sendUpdateOfferDraft(ctx context.Context, request *InvoiceishDr
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateOfferDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -24896,7 +25041,8 @@ func (c *Client) sendUpdateOrderConfirmationDraft(ctx context.Context, request *
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateOrderConfirmationDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25043,7 +25189,8 @@ func (c *Client) sendUpdateProduct(ctx context.Context, request *Product, params
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateProductOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25190,7 +25337,8 @@ func (c *Client) sendUpdateProject(ctx context.Context, request *UpdateProjectRe
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateProjectOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25337,7 +25485,8 @@ func (c *Client) sendUpdatePurchaseDraft(ctx context.Context, request *DraftRequ
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdatePurchaseDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdatePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25484,7 +25633,8 @@ func (c *Client) sendUpdateSaleDraft(ctx context.Context, request *DraftRequest,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateSaleDraftOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25631,7 +25781,8 @@ func (c *Client) sendUpdateTimeEntry(ctx context.Context, request *UpdateTimeEnt
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, UpdateTimeEntryOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, UpdateTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -25780,7 +25931,8 @@ func (c *Client) sendWriteOffSale(ctx context.Context, request *WriteOffRequest,
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, WriteOffSaleOperation,
+	ctx, span := c.cfg.Tracer.Start(
+		ctx, WriteOffSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)

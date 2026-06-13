@@ -561,7 +561,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								case 's': // Prefix: "s"
@@ -626,7 +625,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								}
@@ -707,7 +705,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
 
 							}
@@ -790,7 +787,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
 
 							case 'B': // Prefix: "Balances"
@@ -1031,13 +1027,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 													return
 												}
-
 											}
 
 										}
-
 									}
-
 								}
 
 							case 'r': // Prefix: "reditNotes"
@@ -1260,9 +1253,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -1379,7 +1370,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
 
 							}
@@ -1530,7 +1520,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
 
 							case 'v': // Prefix: "voices"
@@ -1757,9 +1746,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -1857,9 +1844,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
-
 								}
 
 							}
@@ -1958,9 +1943,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
-
 							}
 
 						case 'o': // Prefix: "o"
@@ -2195,9 +2178,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -2258,7 +2239,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 										return
 									}
-
 								}
 
 							case 'r': // Prefix: "rderConfirmations"
@@ -2481,9 +2461,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -2543,9 +2521,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
-
 								}
 
 							}
@@ -2683,7 +2659,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								case 'j': // Prefix: "jects"
@@ -2762,7 +2737,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								}
@@ -2959,9 +2933,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -3136,13 +3108,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 													return
 												}
-
 											}
 
 										}
-
 									}
-
 								}
 
 							}
@@ -3339,9 +3308,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 												}
 
 											}
-
 										}
-
 									}
 
 									elem = origElem
@@ -3516,7 +3483,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 												return
 											}
-
 										}
 
 									case 's': // Prefix: "settled"
@@ -3576,9 +3542,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 										}
 
 									}
-
 								}
-
 							}
 
 						case 't': // Prefix: "t"
@@ -3714,7 +3678,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								case 'U': // Prefix: "Users"
@@ -3779,7 +3742,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
 
 								}
@@ -3873,17 +3835,13 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 											return
 										}
-
 									}
-
 								}
 
 							}
 
 						}
-
 					}
-
 				}
 
 			case 'u': // Prefix: "user"
@@ -3912,7 +3870,6 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				}
 
 			}
-
 		}
 	}
 	s.notFound(w, r)
@@ -4161,7 +4118,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								case 's': // Prefix: "s"
@@ -4221,7 +4177,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								}
@@ -4310,7 +4265,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
 
 							}
@@ -4393,7 +4347,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
 
 							case 'B': // Prefix: "Balances"
@@ -4640,13 +4593,10 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 														return
 													}
 												}
-
 											}
 
 										}
-
 									}
-
 								}
 
 							case 'r': // Prefix: "reditNotes"
@@ -4876,9 +4826,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -4986,7 +4934,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
 
 							}
@@ -5133,7 +5080,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
 
 							case 'v': // Prefix: "voices"
@@ -5372,9 +5318,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -5472,9 +5416,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
-
 								}
 
 							}
@@ -5569,9 +5511,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
-
 							}
 
 						case 'o': // Prefix: "o"
@@ -5813,9 +5753,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -5871,7 +5809,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 											return
 										}
 									}
-
 								}
 
 							case 'r': // Prefix: "rderConfirmations"
@@ -6101,9 +6038,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -6157,9 +6092,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
-
 								}
 
 							}
@@ -6303,7 +6236,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								case 'j': // Prefix: "jects"
@@ -6390,7 +6322,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								}
@@ -6596,9 +6527,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													}
 
 												}
-
 											}
-
 										}
 
 										elem = origElem
@@ -6765,13 +6694,10 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 														return
 													}
 												}
-
 											}
 
 										}
-
 									}
-
 								}
 
 							}
@@ -6977,9 +6903,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												}
 
 											}
-
 										}
-
 									}
 
 									elem = origElem
@@ -7146,7 +7070,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 													return
 												}
 											}
-
 										}
 
 									case 's': // Prefix: "settled"
@@ -7200,9 +7123,7 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 										}
 
 									}
-
 								}
-
 							}
 
 						case 't': // Prefix: "t"
@@ -7344,7 +7265,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								case 'U': // Prefix: "Users"
@@ -7404,7 +7324,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
 
 								}
@@ -7490,17 +7409,13 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 												return
 											}
 										}
-
 									}
-
 								}
 
 							}
 
 						}
-
 					}
-
 				}
 
 			case 'u': // Prefix: "user"
@@ -7529,7 +7444,6 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 				}
 
 			}
-
 		}
 	}
 	return r, false

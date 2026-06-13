@@ -50,7 +50,8 @@ func (s *Server) handleAddAttachmentToContactRequest(args [2]string, argsEscaped
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -256,7 +257,8 @@ func (s *Server) handleAddAttachmentToCreditNoteDraftRequest(args [2]string, arg
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToCreditNoteDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -462,7 +464,8 @@ func (s *Server) handleAddAttachmentToInvoiceRequest(args [2]string, argsEscaped
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToInvoiceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -668,7 +671,8 @@ func (s *Server) handleAddAttachmentToInvoiceDraftRequest(args [2]string, argsEs
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToInvoiceDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -874,7 +878,8 @@ func (s *Server) handleAddAttachmentToJournalEntryRequest(args [2]string, argsEs
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToJournalEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -1080,7 +1085,8 @@ func (s *Server) handleAddAttachmentToOfferDraftRequest(args [2]string, argsEsca
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToOfferDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -1286,7 +1292,8 @@ func (s *Server) handleAddAttachmentToOrderConfirmationDraftRequest(args [2]stri
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToOrderConfirmationDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -1492,7 +1499,8 @@ func (s *Server) handleAddAttachmentToPurchaseRequest(args [2]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToPurchaseOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToPurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -1706,7 +1714,8 @@ func (s *Server) handleAddAttachmentToPurchaseDraftRequest(args [2]string, argsE
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToPurchaseDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToPurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -1912,7 +1921,8 @@ func (s *Server) handleAddAttachmentToSaleRequest(args [2]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -2126,7 +2136,8 @@ func (s *Server) handleAddAttachmentToSaleDraftRequest(args [2]string, argsEscap
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddAttachmentToSaleDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddAttachmentToSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -2332,7 +2343,8 @@ func (s *Server) handleAddContactPersonToContactRequest(args [2]string, argsEsca
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), AddContactPersonToContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), AddContactPersonToContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -2538,7 +2550,8 @@ func (s *Server) handleCreateActivityRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateActivityOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -2743,7 +2756,8 @@ func (s *Server) handleCreateBankAccountRequest(args [1]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateBankAccountOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateBankAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -2945,7 +2959,8 @@ func (s *Server) handleCreateContactRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -3149,7 +3164,8 @@ func (s *Server) handleCreateCreditNoteCounterRequest(args [1]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateCreditNoteCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateCreditNoteCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -3352,7 +3368,8 @@ func (s *Server) handleCreateCreditNoteDraftRequest(args [1]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateCreditNoteDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -3554,7 +3571,8 @@ func (s *Server) handleCreateCreditNoteFromDraftRequest(args [2]string, argsEsca
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateCreditNoteFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateCreditNoteFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -3745,7 +3763,8 @@ func (s *Server) handleCreateFullCreditNoteRequest(args [1]string, argsEscaped b
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateFullCreditNoteOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateFullCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -3947,7 +3966,8 @@ func (s *Server) handleCreateGeneralJournalEntryRequest(args [1]string, argsEsca
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateGeneralJournalEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateGeneralJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -4149,7 +4169,8 @@ func (s *Server) handleCreateInboxDocumentRequest(args [1]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInboxDocumentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInboxDocumentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -4361,7 +4382,8 @@ func (s *Server) handleCreateInvoiceRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -4565,7 +4587,8 @@ func (s *Server) handleCreateInvoiceCounterRequest(args [1]string, argsEscaped b
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -4767,7 +4790,8 @@ func (s *Server) handleCreateInvoiceDraftRequest(args [1]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -4969,7 +4993,8 @@ func (s *Server) handleCreateInvoiceDraftFromOrderConfirmationRequest(args [2]st
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceDraftFromOrderConfirmationOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceDraftFromOrderConfirmationOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -5171,7 +5196,8 @@ func (s *Server) handleCreateInvoiceDraftFromTimeEntriesRequest(args [1]string, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceDraftFromTimeEntriesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceDraftFromTimeEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -5373,7 +5399,8 @@ func (s *Server) handleCreateInvoiceFromDraftRequest(args [2]string, argsEscaped
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateInvoiceFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateInvoiceFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -5566,7 +5593,8 @@ func (s *Server) handleCreateOfferCounterRequest(args [1]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOfferCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOfferCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -5768,7 +5796,8 @@ func (s *Server) handleCreateOfferDraftRequest(args [1]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOfferDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -5970,7 +5999,8 @@ func (s *Server) handleCreateOfferFromDraftRequest(args [2]string, argsEscaped b
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOfferFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOfferFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -6163,7 +6193,8 @@ func (s *Server) handleCreateOrderConfirmationCounterRequest(args [1]string, arg
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOrderConfirmationCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOrderConfirmationCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -6365,7 +6396,8 @@ func (s *Server) handleCreateOrderConfirmationDraftRequest(args [1]string, argsE
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOrderConfirmationDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -6567,7 +6599,8 @@ func (s *Server) handleCreateOrderConfirmationFromDraftRequest(args [2]string, a
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateOrderConfirmationFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateOrderConfirmationFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -6758,7 +6791,8 @@ func (s *Server) handleCreatePartialCreditNoteRequest(args [1]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreatePartialCreditNoteOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreatePartialCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -6960,7 +6994,8 @@ func (s *Server) handleCreateProductRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateProductOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -7162,7 +7197,8 @@ func (s *Server) handleCreateProductSalesReportRequest(args [1]string, argsEscap
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateProductSalesReportOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateProductSalesReportOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -7364,7 +7400,8 @@ func (s *Server) handleCreateProjectRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateProjectOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -7566,7 +7603,8 @@ func (s *Server) handleCreatePurchaseRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreatePurchaseOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreatePurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -7768,7 +7806,8 @@ func (s *Server) handleCreatePurchaseDraftRequest(args [1]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreatePurchaseDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreatePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -7970,7 +8009,8 @@ func (s *Server) handleCreatePurchaseFromDraftRequest(args [2]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreatePurchaseFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreatePurchaseFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -8161,7 +8201,8 @@ func (s *Server) handleCreatePurchasePaymentRequest(args [2]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreatePurchasePaymentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreatePurchasePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -8369,7 +8410,8 @@ func (s *Server) handleCreateSaleRequest(args [1]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -8571,7 +8613,8 @@ func (s *Server) handleCreateSaleDraftRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateSaleDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -8773,7 +8816,8 @@ func (s *Server) handleCreateSaleFromDraftRequest(args [2]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateSaleFromDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateSaleFromDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -8964,7 +9008,8 @@ func (s *Server) handleCreateSalePaymentRequest(args [2]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateSalePaymentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateSalePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -9170,7 +9215,8 @@ func (s *Server) handleCreateTimeEntryRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), CreateTimeEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), CreateTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -9380,7 +9426,8 @@ func (s *Server) handleDeleteActivityRequest(args [2]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteActivityOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -9572,7 +9619,8 @@ func (s *Server) handleDeleteContactRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -9763,7 +9811,8 @@ func (s *Server) handleDeleteContactContactPersonRequest(args [3]string, argsEsc
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteContactContactPersonOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -9958,7 +10007,8 @@ func (s *Server) handleDeleteCreditNoteDraftRequest(args [2]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteCreditNoteDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -10149,7 +10199,8 @@ func (s *Server) handleDeleteInvoiceDraftRequest(args [2]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteInvoiceDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -10340,7 +10391,8 @@ func (s *Server) handleDeleteOfferDraftRequest(args [2]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteOfferDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -10531,7 +10583,8 @@ func (s *Server) handleDeleteOrderConfirmationDraftRequest(args [2]string, argsE
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteOrderConfirmationDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -10722,7 +10775,8 @@ func (s *Server) handleDeleteProductRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteProductOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -10913,7 +10967,8 @@ func (s *Server) handleDeleteProjectRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteProjectOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -11105,7 +11160,8 @@ func (s *Server) handleDeletePurchaseRequest(args [2]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeletePurchaseOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeletePurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -11300,7 +11356,8 @@ func (s *Server) handleDeletePurchaseDraftRequest(args [2]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeletePurchaseDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeletePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -11492,7 +11549,8 @@ func (s *Server) handleDeleteSaleRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -11687,7 +11745,8 @@ func (s *Server) handleDeleteSaleDraftRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteSaleDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -11882,7 +11941,8 @@ func (s *Server) handleDeleteTimeEntryRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteTimeEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -12075,7 +12135,8 @@ func (s *Server) handleDeleteTransactionRequest(args [2]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), DeleteTransactionOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), DeleteTransactionOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -12274,7 +12335,8 @@ func (s *Server) handleGetAccountRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetAccountOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -12465,7 +12527,8 @@ func (s *Server) handleGetAccountBalanceRequest(args [2]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetAccountBalanceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetAccountBalanceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -12664,7 +12727,8 @@ func (s *Server) handleGetAccountBalancesRequest(args [1]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetAccountBalancesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetAccountBalancesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -12871,7 +12935,8 @@ func (s *Server) handleGetAccountsRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetAccountsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetAccountsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -13078,7 +13143,8 @@ func (s *Server) handleGetActivitiesRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetActivitiesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetActivitiesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -13281,7 +13347,8 @@ func (s *Server) handleGetActivityRequest(args [2]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetActivityOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -13472,7 +13539,8 @@ func (s *Server) handleGetBankAccountRequest(args [2]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetBankAccountOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetBankAccountOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -13663,7 +13731,8 @@ func (s *Server) handleGetBankAccountsRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetBankAccountsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetBankAccountsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -13862,7 +13931,8 @@ func (s *Server) handleGetBankBalancesRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetBankBalancesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetBankBalancesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -14063,7 +14133,8 @@ func (s *Server) handleGetCompaniesRequest(args [0]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCompaniesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCompaniesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -14258,7 +14329,8 @@ func (s *Server) handleGetCompanyRequest(args [1]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCompanyOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCompanyOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -14447,7 +14519,8 @@ func (s *Server) handleGetContactRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -14638,7 +14711,8 @@ func (s *Server) handleGetContactContactPersonRequest(args [2]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetContactContactPersonOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -14829,7 +14903,8 @@ func (s *Server) handleGetContactPersonRequest(args [3]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetContactPersonOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -15024,7 +15099,8 @@ func (s *Server) handleGetContactsRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetContactsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetContactsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -15311,7 +15387,8 @@ func (s *Server) handleGetCreditNoteRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNoteOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -15502,7 +15579,8 @@ func (s *Server) handleGetCreditNoteCounterRequest(args [1]string, argsEscaped b
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNoteCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNoteCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -15689,7 +15767,8 @@ func (s *Server) handleGetCreditNoteDraftRequest(args [2]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNoteDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -15880,7 +15959,8 @@ func (s *Server) handleGetCreditNoteDraftAttachmentsRequest(args [2]string, args
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNoteDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNoteDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -16071,7 +16151,8 @@ func (s *Server) handleGetCreditNoteDraftsRequest(args [1]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNoteDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNoteDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -16266,7 +16347,8 @@ func (s *Server) handleGetCreditNotesRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetCreditNotesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetCreditNotesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -16513,7 +16595,8 @@ func (s *Server) handleGetGroupsRequest(args [1]string, argsEscaped bool, w http
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetGroupsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetGroupsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -16708,7 +16791,8 @@ func (s *Server) handleGetInboxRequest(args [1]string, argsEscaped bool, w http.
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInboxOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInboxOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -16915,7 +16999,8 @@ func (s *Server) handleGetInboxDocumentRequest(args [2]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInboxDocumentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInboxDocumentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -17106,7 +17191,8 @@ func (s *Server) handleGetInvoiceRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -17297,7 +17383,8 @@ func (s *Server) handleGetInvoiceAttachmentsRequest(args [2]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -17488,7 +17575,8 @@ func (s *Server) handleGetInvoiceCounterRequest(args [1]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -17675,7 +17763,8 @@ func (s *Server) handleGetInvoiceDraftRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -17866,7 +17955,8 @@ func (s *Server) handleGetInvoiceDraftAttachmentsRequest(args [2]string, argsEsc
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -18057,7 +18147,8 @@ func (s *Server) handleGetInvoiceDraftsRequest(args [1]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoiceDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoiceDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -18261,7 +18352,8 @@ func (s *Server) handleGetInvoicesRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetInvoicesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetInvoicesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -18536,7 +18628,8 @@ func (s *Server) handleGetJournalEntriesRequest(args [1]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetJournalEntriesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetJournalEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -18791,7 +18884,8 @@ func (s *Server) handleGetJournalEntryRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetJournalEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetJournalEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -18982,7 +19076,8 @@ func (s *Server) handleGetJournalEntryAttachmentsRequest(args [2]string, argsEsc
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetJournalEntryAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetJournalEntryAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -19173,7 +19268,8 @@ func (s *Server) handleGetOfferRequest(args [2]string, argsEscaped bool, w http.
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOfferOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOfferOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -19364,7 +19460,8 @@ func (s *Server) handleGetOfferCounterRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOfferCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOfferCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -19551,7 +19648,8 @@ func (s *Server) handleGetOfferDraftRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOfferDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -19742,7 +19840,8 @@ func (s *Server) handleGetOfferDraftAttachmentsRequest(args [2]string, argsEscap
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOfferDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOfferDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -19933,7 +20032,8 @@ func (s *Server) handleGetOfferDraftsRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOfferDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOfferDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -20128,7 +20228,8 @@ func (s *Server) handleGetOffersRequest(args [1]string, argsEscaped bool, w http
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOffersOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOffersOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -20323,7 +20424,8 @@ func (s *Server) handleGetOrderConfirmationRequest(args [2]string, argsEscaped b
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -20514,7 +20616,8 @@ func (s *Server) handleGetOrderConfirmationCounterRequest(args [1]string, argsEs
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationCounterOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationCounterOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -20701,7 +20804,8 @@ func (s *Server) handleGetOrderConfirmationDraftRequest(args [2]string, argsEsca
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -20892,7 +20996,8 @@ func (s *Server) handleGetOrderConfirmationDraftAttachmentsRequest(args [2]strin
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -21083,7 +21188,8 @@ func (s *Server) handleGetOrderConfirmationDraftsRequest(args [1]string, argsEsc
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -21278,7 +21384,8 @@ func (s *Server) handleGetOrderConfirmationsRequest(args [1]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetOrderConfirmationsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetOrderConfirmationsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -21473,7 +21580,8 @@ func (s *Server) handleGetProductRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetProductOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -21664,7 +21772,8 @@ func (s *Server) handleGetProductsRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetProductsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetProductsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -21911,7 +22020,8 @@ func (s *Server) handleGetProjectRequest(args [2]string, argsEscaped bool, w htt
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetProjectOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -22102,7 +22212,8 @@ func (s *Server) handleGetProjectsRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetProjectsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetProjectsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -22309,7 +22420,8 @@ func (s *Server) handleGetPurchaseRequest(args [2]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchaseOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchaseOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -22500,7 +22612,8 @@ func (s *Server) handleGetPurchaseAttachmentsRequest(args [2]string, argsEscaped
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchaseAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchaseAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -22691,7 +22804,8 @@ func (s *Server) handleGetPurchaseDraftRequest(args [2]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchaseDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -22882,7 +22996,8 @@ func (s *Server) handleGetPurchaseDraftAttachmentsRequest(args [2]string, argsEs
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchaseDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchaseDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -23073,7 +23188,8 @@ func (s *Server) handleGetPurchaseDraftsRequest(args [1]string, argsEscaped bool
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchaseDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchaseDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -23268,7 +23384,8 @@ func (s *Server) handleGetPurchasePaymentRequest(args [3]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchasePaymentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchasePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -23463,7 +23580,8 @@ func (s *Server) handleGetPurchasePaymentsRequest(args [2]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchasePaymentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchasePaymentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -23654,7 +23772,8 @@ func (s *Server) handleGetPurchasesRequest(args [1]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetPurchasesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetPurchasesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -23897,7 +24016,8 @@ func (s *Server) handleGetSaleRequest(args [2]string, argsEscaped bool, w http.R
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -24088,7 +24208,8 @@ func (s *Server) handleGetSaleAttachmentsRequest(args [2]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSaleAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSaleAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -24279,7 +24400,8 @@ func (s *Server) handleGetSaleDraftRequest(args [2]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSaleDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -24470,7 +24592,8 @@ func (s *Server) handleGetSaleDraftAttachmentsRequest(args [2]string, argsEscape
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSaleDraftAttachmentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSaleDraftAttachmentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -24661,7 +24784,8 @@ func (s *Server) handleGetSaleDraftsRequest(args [1]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSaleDraftsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSaleDraftsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -24856,7 +24980,8 @@ func (s *Server) handleGetSalePaymentRequest(args [3]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSalePaymentOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSalePaymentOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -25051,7 +25176,8 @@ func (s *Server) handleGetSalePaymentsRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSalePaymentsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSalePaymentsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -25242,7 +25368,8 @@ func (s *Server) handleGetSalesRequest(args [1]string, argsEscaped bool, w http.
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetSalesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetSalesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -25489,7 +25616,8 @@ func (s *Server) handleGetTimeEntriesRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTimeEntriesOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTimeEntriesOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -25720,7 +25848,8 @@ func (s *Server) handleGetTimeEntryRequest(args [2]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTimeEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -25911,7 +26040,8 @@ func (s *Server) handleGetTimeUserRequest(args [2]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTimeUserOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTimeUserOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -26102,7 +26232,8 @@ func (s *Server) handleGetTimeUsersRequest(args [1]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTimeUsersOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTimeUsersOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -26306,7 +26437,8 @@ func (s *Server) handleGetTransactionRequest(args [2]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTransactionOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTransactionOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -26497,7 +26629,8 @@ func (s *Server) handleGetTransactionsRequest(args [1]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetTransactionsOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetTransactionsOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -26732,7 +26865,8 @@ func (s *Server) handleGetUserRequest(args [0]string, argsEscaped bool, w http.R
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), GetUserOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), GetUserOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -26904,7 +27038,8 @@ func (s *Server) handleSendCreditNoteRequest(args [1]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), SendCreditNoteOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), SendCreditNoteOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -27106,7 +27241,8 @@ func (s *Server) handleSendInvoiceRequest(args [1]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), SendInvoiceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), SendInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -27308,7 +27444,8 @@ func (s *Server) handleSendOfferRequest(args [1]string, argsEscaped bool, w http
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), SendOfferOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), SendOfferOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -27511,7 +27648,8 @@ func (s *Server) handleSettledSaleRequest(args [2]string, argsEscaped bool, w ht
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), SettledSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), SettledSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -27706,7 +27844,8 @@ func (s *Server) handleUpdateActivityRequest(args [2]string, argsEscaped bool, w
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateActivityOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateActivityOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -27912,7 +28051,8 @@ func (s *Server) handleUpdateContactRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateContactOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateContactOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -28118,7 +28258,8 @@ func (s *Server) handleUpdateContactContactPersonRequest(args [3]string, argsEsc
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateContactContactPersonOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateContactContactPersonOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -28328,7 +28469,8 @@ func (s *Server) handleUpdateCreditNoteDraftRequest(args [2]string, argsEscaped 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateCreditNoteDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateCreditNoteDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -28535,7 +28677,8 @@ func (s *Server) handleUpdateInvoiceRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateInvoiceOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateInvoiceOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -28741,7 +28884,8 @@ func (s *Server) handleUpdateInvoiceDraftRequest(args [2]string, argsEscaped boo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateInvoiceDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateInvoiceDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -28947,7 +29091,8 @@ func (s *Server) handleUpdateOfferDraftRequest(args [2]string, argsEscaped bool,
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateOfferDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateOfferDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -29153,7 +29298,8 @@ func (s *Server) handleUpdateOrderConfirmationDraftRequest(args [2]string, argsE
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateOrderConfirmationDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateOrderConfirmationDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -29359,7 +29505,8 @@ func (s *Server) handleUpdateProductRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateProductOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateProductOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -29565,7 +29712,8 @@ func (s *Server) handleUpdateProjectRequest(args [2]string, argsEscaped bool, w 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateProjectOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateProjectOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -29771,7 +29919,8 @@ func (s *Server) handleUpdatePurchaseDraftRequest(args [2]string, argsEscaped bo
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdatePurchaseDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdatePurchaseDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -29977,7 +30126,8 @@ func (s *Server) handleUpdateSaleDraftRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateSaleDraftOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateSaleDraftOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -30183,7 +30333,8 @@ func (s *Server) handleUpdateTimeEntryRequest(args [2]string, argsEscaped bool, 
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), UpdateTimeEntryOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), UpdateTimeEntryOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -30391,7 +30542,8 @@ func (s *Server) handleWriteOffSaleRequest(args [2]string, argsEscaped bool, w h
 	otelAttrs = append(otelAttrs, s.cfg.Attributes...)
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), WriteOffSaleOperation,
+	ctx, span := s.cfg.Tracer.Start(
+		r.Context(), WriteOffSaleOperation,
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)

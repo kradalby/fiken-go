@@ -4,13 +4,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-checks.url = "github:kradalby/flake-checks";
+    flake-checks.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
+    { self
+    , nixpkgs
+    , flake-utils
+    , flake-checks
+    ,
     }:
     # Per-system outputs (packages, devShells, formatter) are merged
     # via // with system-agnostic outputs (overlays) below.
@@ -19,27 +22,28 @@
       let
         pkgs = import nixpkgs { inherit system; };
         inherit (pkgs) lib;
+        fc = flake-checks.lib;
 
         # Prefer Go 1.26 if available, else 1.25. go.mod sets the
         # language version separately; this just selects the
         # toolchain in the devShell and package builder.
         go = pkgs.go_1_26 or pkgs.go_1_25;
 
-        # Build the fiken-go binary. The vendorHash placeholder must be
-        # updated after the first `go mod tidy` produces a vendor tree.
-        fiken = pkgs.buildGoModule {
+        # Shared context for the flake-checks Go helpers. i18n/i18n.go
+        # embeds locale files via //go:embed, so the locale directory must
+        # be part of the fileset-filtered source or the build fails with
+        # "no matching files found".
+        common = {
+          inherit pkgs;
+          root = ./.;
           pname = "fiken-go";
-          version = "0.0.0-dev";
-          src = ./.;
-          inherit go;
-          # First-time setup: nix build will fail with a hash mismatch and
-          # print the correct value — replace this placeholder with that
-          # output. Until cmd/fiken/main.go exists in Plan B this also
-          # has no entrypoint, so expect `nix build` to error on a
-          # different message until then.
+          version = "0.0.1";
           vendorHash = "sha256-mtnfJM9FxiEEQvLxoTty+1QZjJy7tf3R7R1DcCnGLq8=";
-          subPackages = [ "./..." ];
+          goPkg = go;
+          embedDirs = [ (./. + "/i18n/locales") ];
         };
+
+        fiken = fc.goBuild common;
       in
       {
         packages = {
@@ -48,9 +52,17 @@
           default = fiken;
         };
 
+        formatter = fc.formatter common;
+
+        checks = {
+          build = fc.goBuild common;
+          gotest = fc.goTest common;
+          golangci-lint = fc.goLint common;
+          formatting = fc.goFormat common;
+        }
         # NixOS VM test for the fiken-mcp module. Plain-HTTP only;
         # tsnet can't reach the control plane inside the sandbox.
-        checks = lib.optionalAttrs pkgs.stdenv.isLinux {
+        // lib.optionalAttrs pkgs.stdenv.isLinux {
           fiken-mcp-module = pkgs.testers.nixosTest (
             import ./nix/tests/fiken-mcp.nix {
               inherit pkgs;
@@ -82,8 +94,6 @@
             echo "fiken-go devShell — Go $(${go}/bin/go version | cut -d' ' -f3)"
           '';
         };
-
-        formatter = pkgs.nixfmt-rfc-style;
       }
     ))
     // {

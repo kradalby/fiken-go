@@ -20,6 +20,7 @@ import (
 var regexMap = map[string]ogenregex.Regexp{
 	"^[A-Z]{3}$": ogenregex.MustCompile("^[A-Z]{3}$"),
 }
+
 var (
 	// Allocate option closure once.
 	clientSpanKind = trace.WithSpanKind(trace.SpanKindClient)
@@ -47,10 +48,12 @@ func (cfg *otelConfig) initOTEL() {
 	if cfg.MeterProvider == nil {
 		cfg.MeterProvider = otel.GetMeterProvider()
 	}
-	cfg.Tracer = cfg.TracerProvider.Tracer(otelogen.Name,
+	cfg.Tracer = cfg.TracerProvider.Tracer(
+		otelogen.Name,
 		trace.WithInstrumentationVersion(otelogen.SemVersion()),
 	)
-	cfg.Meter = cfg.MeterProvider.Meter(otelogen.Name,
+	cfg.Meter = cfg.MeterProvider.Meter(
+		otelogen.Name,
 		metric.WithInstrumentationVersion(otelogen.SemVersion()),
 	)
 }
@@ -73,13 +76,13 @@ type ServerOption interface {
 	applyServer(*serverConfig)
 }
 
-var _ ServerOption = (optionFunc[serverConfig])(nil)
+var _ ServerOption = optionFunc[serverConfig](nil)
 
 func (o optionFunc[C]) applyServer(c *C) {
 	o(c)
 }
 
-var _ ServerOption = (otelOptionFunc)(nil)
+var _ ServerOption = otelOptionFunc(nil)
 
 func (o otelOptionFunc) applyServer(c *serverConfig) {
 	o(&c.otelConfig)
@@ -175,13 +178,13 @@ type ClientOption interface {
 	applyClient(*clientConfig)
 }
 
-var _ ClientOption = (optionFunc[clientConfig])(nil)
+var _ ClientOption = optionFunc[clientConfig](nil)
 
 func (o optionFunc[C]) applyClient(c *C) {
 	o(c)
 }
 
-var _ ClientOption = (otelOptionFunc)(nil)
+var _ ClientOption = otelOptionFunc(nil)
 
 func (o otelOptionFunc) applyClient(c *clientConfig) {
 	o(&c.otelConfig)
