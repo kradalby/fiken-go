@@ -11,16 +11,19 @@ permissions:
   issues: write
   pull-requests: write
 
+# Every `run:` step executes inside `nix develop`, so tools (difft, go) come
+# straight from the flake devShell with no per-step prefix.
+defaults:
+  run:
+    shell: nix develop --command bash -e {0}
+
 jobs:
   detect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v31
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: NixOS/nix-installer-action@main
+      - uses: Mic92/hestia/action@main
 
       - name: Fetch upstream spec
         run: curl -fsSL https://api.fiken.no/api/v2/docs/swagger.yaml -o /tmp/upstream.yaml
@@ -28,7 +31,7 @@ jobs:
       - name: Diff vs vendored
         id: diff
         run: |
-          if nix develop -c difft --exit-code api/fiken-openapi.yaml /tmp/upstream.yaml; then
+          if difft --exit-code api/fiken-openapi.yaml /tmp/upstream.yaml; then
             echo "drift=false" >> "$GITHUB_OUTPUT"
           else
             echo "drift=true" >> "$GITHUB_OUTPUT"
@@ -36,7 +39,7 @@ jobs:
 
       - name: Open or update drift issue
         if: steps.diff.outputs.drift == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
             const { execSync } = require('child_process');
@@ -66,14 +69,14 @@ jobs:
         env:
           SPEC_BOT_PAT: ${{ secrets.SPEC_BOT_PAT }}
         run: |
-          nix develop -c go run ./cmd/fiken-spec-update --apply
-          nix develop -c go generate ./...
+          go run ./cmd/fiken-spec-update --apply
+          go generate ./...
 
       - name: Open update PR (gated on PAT)
         if: steps.diff.outputs.drift == 'true' && env.SPEC_BOT_PAT != ''
         env:
           SPEC_BOT_PAT: ${{ secrets.SPEC_BOT_PAT }}
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           token: ${{ secrets.SPEC_BOT_PAT }}
           branch: spec-drift-${{ github.run_id }}
