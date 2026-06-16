@@ -1570,7 +1570,7 @@ type Contact struct {
 	ContactPerson     []ContactPerson `json:"contactPerson"`
 	Notes             []ContactNote   `json:"notes"`
 	// ISO 4217 currency code. Default foreign currency to use when creating invoice to this contact (USD,
-	//  EUR, SEK etc).
+	// EUR, SEK etc).
 	Currency OptString `json:"currency"`
 	// The language to use when sending documents to this contact. NORWEGIAN or ENGLISH. Defaults to
 	// NORWEGIAN.
@@ -1579,8 +1579,8 @@ type Contact struct {
 	Inactive OptBool `json:"inactive"`
 	// Default number of days until due date for invoices.
 	DaysUntilInvoicingDueDate OptInt32 `json:"daysUntilInvoicingDueDate"`
-	// Discount value should be a percent with a value between 0 and 100.
-	// Decimal values such as 25.5 are also allowed.
+	// Discount value should be a percent with a value between 0 and 100. Decimal values such as 25.5 are
+	// also allowed.
 	Discount  OptFloat64   `json:"discount"`
 	Address   OptAddress   `json:"address"`
 	Groups    []string     `json:"groups"`
@@ -2575,9 +2575,9 @@ type CreditNoteResult struct {
 	Settled OptBool `json:"settled"`
 	// Id of associated invoice.
 	AssociatedInvoiceId OptInt64 `json:"associatedInvoiceId"`
-	// The UUID of the credit note draft used to create the credit note.
-	// Credit notes created directly from invoices (POST / creditNotes/full and POST /creditNotes/partial)
-	// will not have a draft uuid as no draft is created in this case.
+	// The UUID of the credit note draft used to create the credit note. Credit notes created directly from
+	// invoices (POST / creditNotes/full and POST /creditNotes/partial) will not have a draft uuid as no
+	// draft is created in this case.
 	CreditNoteDraftUuid OptString        `json:"creditNoteDraftUuid"`
 	CreditNotePdf       OptAttachment    `json:"creditNotePdf"`
 	Project             OptProjectResult `json:"project"`
@@ -2883,9 +2883,8 @@ func (*DeleteTimeEntryNoContent) deleteTimeEntryRes() {}
 type DispatchResult struct {
 	// Date that invoice/offer was sent from Fiken, format yyyy-mm-dd.
 	Date OptDate `json:"date"`
-	// The type of dispatch. Unknown is returned when an invoice/offer was manually sent and Fiken
-	// doesn't know the dispatch method.
-	// Only possible dispatch types for offer are email, sms, or letter.
+	// The type of dispatch. Unknown is returned when an invoice/offer was manually sent and Fiken doesn't
+	// know the dispatch method. Only possible dispatch types for offer are email, sms, or letter.
 	DispatchType OptDispatchResultDispatchType `json:"dispatchType"`
 }
 
@@ -2909,9 +2908,8 @@ func (s *DispatchResult) SetDispatchType(val OptDispatchResultDispatchType) {
 	s.DispatchType = val
 }
 
-// The type of dispatch. Unknown is returned when an invoice/offer was manually sent and Fiken
-// doesn't know the dispatch method.
-// Only possible dispatch types for offer are email, sms, or letter.
+// The type of dispatch. Unknown is returned when an invoice/offer was manually sent and Fiken doesn't
+// know the dispatch method. Only possible dispatch types for offer are email, sms, or letter.
 type DispatchResultDispatchType string
 
 const (
@@ -2993,11 +2991,9 @@ type DraftLineRequest struct {
 	// Description of the sale/purchase line.
 	Text string `json:"text"`
 	// Vat Types for SALES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, EXEMPT_IMPORT_EXPORT, EXEMPT, OUTSIDE,
-	// EXEMPT_REVERSE]
-	// Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT, HIGH_BASIS,
-	// MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS,
-	// HIGH_FOREIGN_SERVICE_DEDUCTIBLE, HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE,
-	// LOW_FOREIGN_SERVICE_DEDUCTIBLE,
+	// EXEMPT_REVERSE] Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT,
+	// HIGH_BASIS, MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS, HIGH_FOREIGN_SERVICE_DEDUCTIBLE,
+	// HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE, LOW_FOREIGN_SERVICE_DEDUCTIBLE,
 	// LOW_FOREIGN_SERVICE_NONDEDUCTIBLE, HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_DEDUCTIBLE,
 	// HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_NONDEDUCTIBLE].
 	VatType string `json:"vatType"`
@@ -3076,11 +3072,9 @@ type DraftLineResult struct {
 	// Description of the sale/purchase line.
 	Text OptString `json:"text"`
 	// Vat Types for SALES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, EXEMPT_IMPORT_EXPORT, EXEMPT, OUTSIDE,
-	// EXEMPT_REVERSE]
-	// Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT, HIGH_BASIS,
-	// MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS,
-	// HIGH_FOREIGN_SERVICE_DEDUCTIBLE, HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE,
-	// LOW_FOREIGN_SERVICE_DEDUCTIBLE,
+	// EXEMPT_REVERSE] Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT,
+	// HIGH_BASIS, MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS, HIGH_FOREIGN_SERVICE_DEDUCTIBLE,
+	// HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE, LOW_FOREIGN_SERVICE_DEDUCTIBLE,
 	// LOW_FOREIGN_SERVICE_NONDEDUCTIBLE, HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_DEDUCTIBLE,
 	// HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_NONDEDUCTIBLE].
 	VatType OptString `json:"vatType"`
@@ -3160,8 +3154,8 @@ type DraftRequest struct {
 	InvoiceIssueDate OptDate `json:"invoiceIssueDate"`
 	// Due date of draft, format yyyy-mm-dd.
 	DueDate OptDate `json:"dueDate"`
-	// If invoice associated with draft, this is the invoice number (not to be confused with the
-	// invoiceId of an invoice issued from Fiken).
+	// If invoice associated with draft, this is the invoice number (not to be confused with the invoiceId
+	// of an invoice issued from Fiken).
 	InvoiceNumber OptString `json:"invoiceNumber"`
 	// Contact Id.
 	ContactId OptInt64 `json:"contactId"`
@@ -3294,15 +3288,15 @@ func (s *DraftRequest) SetLines(val []DraftLineRequest) {
 type DraftResult struct {
 	// Draft ID.
 	DraftId OptInt64 `json:"draftId"`
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters.
 	UUID OptString `json:"uuid"`
 	// Issue date of the draft, format yyyy-mm-dd.
 	InvoiceIssueDate OptDate `json:"invoiceIssueDate"`
 	// Due date of draft, format yyyy-mm-dd.
 	DueDate OptDate `json:"dueDate"`
-	// If invoice associated with draft, this is the invoice number (not to be confused with the
-	// invoiceId of an invoice issued from Fiken).
+	// If invoice associated with draft, this is the invoice number (not to be confused with the invoiceId
+	// of an invoice issued from Fiken).
 	InvoiceNumber OptString        `json:"invoiceNumber"`
 	Contact       OptContact       `json:"contact"`
 	Project       OptProjectResult `json:"project"`
@@ -5533,16 +5527,15 @@ type InvoiceLineRequest struct {
 	Net OptInt64 `json:"net"`
 	// VAT amount of invoice line in cents in original currency.
 	Vat OptInt64 `json:"vat"`
-	// Taken from either 1) the line or 2) the product. At least vatType or vatPercent has to be
-	// specified. If both are specified, Fiken will assert that the given vat type matches the given vat
-	// percent for the issue date.
-	// One of: {"HIGH", "MEDIUM", "LOW", "EXEMPT", "EXEMPT_IMPORT_EXPORT", "EXEMPT_REVERSE", "OUTSIDE",
-	// "NONE"}. "HIGH" is the most common.
+	// Taken from either 1) the line or 2) the product. At least vatType or vatPercent has to be specified.
+	// If both are specified, Fiken will assert that the given vat type matches the given vat percent for
+	// the issue date. One of: {"HIGH", "MEDIUM", "LOW", "EXEMPT", "EXEMPT_IMPORT_EXPORT",
+	// "EXEMPT_REVERSE", "OUTSIDE", "NONE"}. "HIGH" is the most common.
 	VatType OptString `json:"vatType"`
 	// Gross amount of invoice line in cents.
 	Gross OptInt64 `json:"gross"`
-	// Percentage value of VAT charged on invoice line. Should be a value between 0 and 100. Can be
-	// decimal values such as 25.5.
+	// Percentage value of VAT charged on invoice line. Should be a value between 0 and 100. Can be decimal
+	// values such as 25.5.
 	VatInPercent OptFloat64 `json:"vatInPercent"`
 	// Net price per unit in invoice currency (in cents). WARNING - if specified here and different from
 	// unitPrice of the product, then this amount overwrites the product price on the invoice.
@@ -5563,9 +5556,8 @@ type InvoiceLineRequest struct {
 	// Additional information to be printed on invoice.
 	Comment OptString `json:"comment"`
 	// Field is similar to vatType, it defaults to the product's income account. Either the line or the
-	// product needs to have an income account set.
-	// WARNING - if specified here and different from income account of the product, then this account
-	// overwrites the product account on the invoice.
+	// product needs to have an income account set. WARNING - if specified here and different from income
+	// account of the product, then this account overwrites the product account on the invoice.
 	IncomeAccount OptString `json:"incomeAccount"`
 }
 
@@ -5705,19 +5697,18 @@ type InvoiceLineResult struct {
 	Net OptInt64 `json:"net"`
 	// VAT amount of invoice line in cents in original currency.
 	Vat OptInt64 `json:"vat"`
-	// Taken from either 1) the line or 2) the product. At least vatType or vatPercent has to be
-	// specified. If both are specified, Fiken will assert that the given vat type matches the given vat
-	// percent for the issue date.
-	// One of: {"HIGH", "MEDIUM", "LOW", "EXEMPT", "EXEMPT_IMPORT_EXPORT", "EXEMPT_REVERSE", "OUTSIDE",
-	// "NONE"}. "HIGH" is the most common.
+	// Taken from either 1) the line or 2) the product. At least vatType or vatPercent has to be specified.
+	// If both are specified, Fiken will assert that the given vat type matches the given vat percent for
+	// the issue date. One of: {"HIGH", "MEDIUM", "LOW", "EXEMPT", "EXEMPT_IMPORT_EXPORT",
+	// "EXEMPT_REVERSE", "OUTSIDE", "NONE"}. "HIGH" is the most common.
 	VatType OptString `json:"vatType"`
 	// Gross amount of invoice line in cents.
 	Gross OptInt64 `json:"gross"`
-	// Net amount of invoice line in cents in NOK if currency and amounts provided are in foreign
-	// currency. This is calculated by Fiken.
+	// Net amount of invoice line in cents in NOK if currency and amounts provided are in foreign currency.
+	// This is calculated by Fiken.
 	NetInNok OptInt64 `json:"netInNok"`
-	// VAT amount of invoice line in cents in NOK if currency and amounts provided are in foreign
-	// currency. This is calculated by Fiken.
+	// VAT amount of invoice line in cents in NOK if currency and amounts provided are in foreign currency.
+	// This is calculated by Fiken.
 	VatInNok OptInt64 `json:"vatInNok"`
 	// Gross amount of invoice line in cents in NOK if currency and amounts provided are in foreign
 	// currency. This is calculated by Fiken.
@@ -5906,9 +5897,8 @@ func (s *InvoiceLineResult) SetIncomeAccount(val OptString) {
 
 // Ref: #/components/schemas/invoiceRequest
 type InvoiceRequest struct {
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters. If not provided, API will generate a
-	// UUID.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters. If not provided, API will generate a UUID.
 	UUID OptString `json:"uuid"`
 	// Date that the invoice was issued, format yyyy-mm-dd.
 	IssueDate time.Time `json:"issueDate"`
@@ -6488,11 +6478,9 @@ type InvoiceishDraftLine struct {
 	// Net price per unit in invoice currency (in cents).
 	UnitPrice OptInt64 `json:"unitPrice"`
 	// Vat Types for SALES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, EXEMPT_IMPORT_EXPORT, EXEMPT, OUTSIDE,
-	// EXEMPT_REVERSE]
-	// Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT, HIGH_BASIS,
-	// MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS,
-	// HIGH_FOREIGN_SERVICE_DEDUCTIBLE, HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE,
-	// LOW_FOREIGN_SERVICE_DEDUCTIBLE,
+	// EXEMPT_REVERSE] Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT,
+	// HIGH_BASIS, MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS, HIGH_FOREIGN_SERVICE_DEDUCTIBLE,
+	// HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE, LOW_FOREIGN_SERVICE_DEDUCTIBLE,
 	// LOW_FOREIGN_SERVICE_NONDEDUCTIBLE, HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_DEDUCTIBLE,
 	// HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_NONDEDUCTIBLE].
 	VatType OptString `json:"vatType"`
@@ -6612,8 +6600,8 @@ func (s *InvoiceishDraftLine) SetIncomeAccount(val OptString) {
 type InvoiceishDraftRequest struct {
 	// Type of draft.
 	Type InvoiceishDraftRequestType `json:"type"`
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters.
 	UUID OptString `json:"uuid"`
 	// Issue date of the invoice draft, format yyyy-mm-dd.
 	IssueDate OptDate `json:"issueDate"`
@@ -6888,8 +6876,8 @@ func (s *InvoiceishDraftRequestType) UnmarshalText(data []byte) error {
 type InvoiceishDraftResult struct {
 	// Invoice draft ID.
 	DraftId OptInt64 `json:"draftId"`
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters.
 	UUID OptString `json:"uuid"`
 	// Type of invoice draft.
 	Type OptInvoiceishDraftResultType `json:"type"`
@@ -7371,9 +7359,9 @@ func (s *JournalEntry) SetAttachments(val []Attachment) {
 
 // Ref: #/components/schemas/journalEntryLine
 type JournalEntryLine struct {
-	// This will be the net amount (excluding VAT) for debitAccount lines and gross amount
-	// (including VAT) for creditAccount lines. The reason for this difference is due to the
-	// way Fiken calculates VAT based on the debitVatCode and creditVatCode.
+	// This will be the net amount (excluding VAT) for debitAccount lines and gross amount (including VAT)
+	// for creditAccount lines. The reason for this difference is due to the way Fiken calculates VAT based
+	// on the debitVatCode and creditVatCode.
 	Amount        int64     `json:"amount"`
 	Account       OptString `json:"account"`
 	VatCode       OptString `json:"vatCode"`
@@ -7507,8 +7495,8 @@ func (s *Note) SetNote(val OptString) {
 type Offer struct {
 	// Offer ID.
 	OfferId OptInt64 `json:"offerId"`
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters.
 	OfferDraftUuid OptString `json:"offerDraftUuid"`
 	// Date for offer.
 	Date OptDate `json:"date"`
@@ -9408,6 +9396,11 @@ func (o *OptNilString) SetToNull() {
 	o.Value = v
 }
 
+// IsEmpty returns true if the field was omitted from the payload (not Set and not Null).
+func (o OptNilString) IsEmpty() bool {
+	return !o.Set && !o.Null
+}
+
 // Get returns value and boolean that denotes whether value was set.
 func (o OptNilString) Get() (v string, ok bool) {
 	if o.Null {
@@ -10075,8 +10068,8 @@ func (o OptUUID) Or(d uuid.UUID) uuid.UUID {
 type OrderConfirmation struct {
 	// Offer ID.
 	ConfirmationId OptInt64 `json:"confirmationId"`
-	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by
-	// hyphens, in the form 8-4-4-4-12 for a total of 36 characters.
+	// UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens,
+	// in the form 8-4-4-4-12 for a total of 36 characters.
 	ConfirmationDraftUuid OptString `json:"confirmationDraftUuid"`
 	// Date for offer.
 	Date OptDate `json:"date"`
@@ -10105,8 +10098,8 @@ type OrderConfirmation struct {
 	// Contact person associated with the order confirmation. Must belong to given contact.
 	ContactPersonId OptInt64 `json:"contactPersonId"`
 	ProjectId       OptInt64 `json:"projectId"`
-	// If the order confirmation was used to create an invoice, the id of the associated invoice.
-	// Otherwise null is returned.
+	// If the order confirmation was used to create an invoice, the id of the associated invoice. Otherwise
+	// null is returned.
 	CreatedInvoice OptInt64 `json:"createdInvoice"`
 	// If order confirmation has been archived or not.
 	Archived OptBool `json:"archived"`
@@ -10335,11 +10328,9 @@ type OrderLine struct {
 	// Expense account (kostnadskonto) associated with payment.
 	Account OptString `json:"account"`
 	// Vat Types for SALES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, EXEMPT_IMPORT_EXPORT, EXEMPT, OUTSIDE,
-	// EXEMPT_REVERSE]
-	// Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT, HIGH_BASIS,
-	// MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS,
-	// HIGH_FOREIGN_SERVICE_DEDUCTIBLE, HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE,
-	// LOW_FOREIGN_SERVICE_DEDUCTIBLE,
+	// EXEMPT_REVERSE] Vat Types for PURCHASES: [NONE, HIGH, MEDIUM, RAW_FISH, LOW, HIGH_DIRECT,
+	// HIGH_BASIS, MEDIUM_DIRECT, MEDIUM_BASIS, NONE_IMPORT_BASIS, HIGH_FOREIGN_SERVICE_DEDUCTIBLE,
+	// HIGH_FOREIGN_SERVICE_NONDEDUCTIBLE, LOW_FOREIGN_SERVICE_DEDUCTIBLE,
 	// LOW_FOREIGN_SERVICE_NONDEDUCTIBLE, HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_DEDUCTIBLE,
 	// HIGH_PURCHASE_OF_EMISSIONSTRADING_OR_GOLD_NONDEDUCTIBLE].
 	VatType string `json:"vatType"`
@@ -10592,16 +10583,15 @@ type Payment struct {
 	// Formatted in cents (34000 = 340.00).
 	Amount int64 `json:"amount"`
 	// Attribute of a foreign payment only. Is required if amount is provided in currency other than NOK
-	// and should be the actual amount
-	// that was received in the bank account. Fiken calculates the value based on the exchange rate for
-	// the given date if no amountInNok is sent.
-	// Formatted in cents (500000 = 5000.00).
+	// and should be the actual amount that was received in the bank account. Fiken calculates the value
+	// based on the exchange rate for the given date if no amountInNok is sent. Formatted in cents (500000
+	// = 5000.00).
 	AmountInNok OptInt64 `json:"amountInNok"`
 	// Only specify the currency if other than "NOK", otherwise default currency is "NOK". ISO 4217
 	// currency code.
 	Currency OptString `json:"currency"`
-	// Any fees additional to the amount paid in the specified currency. This is always a "NOK" amount
-	// even if the sale currency is a different currency.
+	// Any fees additional to the amount paid in the specified currency. This is always a "NOK" amount even
+	// if the sale currency is a different currency.
 	Fee OptInt64 `json:"fee"`
 }
 
@@ -11148,9 +11138,8 @@ type PurchaseRequest struct {
 	PaymentAccount OptString `json:"paymentAccount"`
 	// Payment date, format yyyy-mm-dd.
 	PaymentDate OptDate `json:"paymentDate"`
-	// Required when creating a purchase with payment in a foreign currency.
-	// This is the actual NOK amount paid from the bank account.
-	// Formatted in cents (115000 = 1150.00 NOK).
+	// Required when creating a purchase with payment in a foreign currency. This is the actual NOK amount
+	// paid from the bank account. Formatted in cents (115000 = 1150.00 NOK).
 	PaymentAmountInNok OptInt64 `json:"paymentAmountInNok"`
 	// Norwegian KID number. Number from 2 to 25 digits long.
 	Kid OptString `json:"kid"`
@@ -12256,18 +12245,14 @@ type SendCreditNoteOK struct{}
 // Merged schema.
 // Ref: #/components/schemas/sendCreditNoteRequest
 type SendCreditNoteRequest struct {
-	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter.
-	// If several methods are provided they should be in prioritized order as Fiken will only send the
-	// invoice to
-	// the first successful available method. Method "auto" tries available methods for given customer
-	// based on
-	// the information registered for the customer. The order of priority is EHF, eFaktura, Sms, and
-	// email.
-	// Method "letter" means physical letter, printed and sent by our postal service partner (extra
-	// charge per
-	// letter, available for recipient addresses in Norway only). The option "includeDocumentAttachments"
-	// is
-	// not supported by method "letter", attachments are not included even if this option is set.
+	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter. If several methods are
+	// provided they should be in prioritized order as Fiken will only send the invoice to the first
+	// successful available method. Method "auto" tries available methods for given customer based on the
+	// information registered for the customer. The order of priority is EHF, eFaktura, Sms, and email.
+	// Method "letter" means physical letter, printed and sent by our postal service partner (extra charge
+	// per letter, available for recipient addresses in Norway only). The option
+	// "includeDocumentAttachments" is not supported by method "letter", attachments are not included even
+	// if this option is set.
 	Method []SendCreditNoteRequestMethodItem `json:"method"`
 	// Whether the document's attachment should be included when sending (True) or not (False).
 	IncludeDocumentAttachments bool      `json:"includeDocumentAttachments"`
@@ -12281,8 +12266,8 @@ type SendCreditNoteRequest struct {
 	MergeInvoiceAndAttachments OptBool `json:"mergeInvoiceAndAttachments"`
 	// Brreg organization number. Defaults to the customers organization number if not provided.
 	OrganizationNumber OptString `json:"organizationNumber"`
-	// Defaults to the customers phone number. Format should include the country code. If a Norwegian
-	// phone number, the country code is not necessary.
+	// Defaults to the customers phone number. Format should include the country code. If a Norwegian phone
+	// number, the country code is not necessary.
 	MobileNumber OptString `json:"mobileNumber"`
 	// Id of credit note to send.
 	CreditNoteId int64 `json:"creditNoteId"`
@@ -12512,18 +12497,14 @@ type SendInvoiceOK struct{}
 // Merged schema.
 // Ref: #/components/schemas/sendInvoiceRequest
 type SendInvoiceRequest struct {
-	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter.
-	// If several methods are provided they should be in prioritized order as Fiken will only send the
-	// invoice to
-	// the first successful available method. Method "auto" tries available methods for given customer
-	// based on
-	// the information registered for the customer. The order of priority is EHF, eFaktura, Sms, and
-	// email.
-	// Method "letter" means physical letter, printed and sent by our postal service partner (extra
-	// charge per
-	// letter, available for recipient addresses in Norway only). The option "includeDocumentAttachments"
-	// is
-	// not supported by method "letter", attachments are not included even if this option is set.
+	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter. If several methods are
+	// provided they should be in prioritized order as Fiken will only send the invoice to the first
+	// successful available method. Method "auto" tries available methods for given customer based on the
+	// information registered for the customer. The order of priority is EHF, eFaktura, Sms, and email.
+	// Method "letter" means physical letter, printed and sent by our postal service partner (extra charge
+	// per letter, available for recipient addresses in Norway only). The option
+	// "includeDocumentAttachments" is not supported by method "letter", attachments are not included even
+	// if this option is set.
 	Method []SendInvoiceRequestMethodItem `json:"method"`
 	// Whether the document's attachment should be included when sending (True) or not (False).
 	IncludeDocumentAttachments bool      `json:"includeDocumentAttachments"`
@@ -12537,8 +12518,8 @@ type SendInvoiceRequest struct {
 	MergeInvoiceAndAttachments OptBool `json:"mergeInvoiceAndAttachments"`
 	// Brreg organization number. Defaults to the customers organization number if not provided.
 	OrganizationNumber OptString `json:"organizationNumber"`
-	// Defaults to the customers phone number. Format should include the country code. If a Norwegian
-	// phone number, the country code is not necessary.
+	// Defaults to the customers phone number. Format should include the country code. If a Norwegian phone
+	// number, the country code is not necessary.
 	MobileNumber OptString `json:"mobileNumber"`
 	// Id of invoice to send.
 	InvoiceId int64 `json:"invoiceId"`
@@ -12768,18 +12749,14 @@ type SendOfferOK struct{}
 // Merged schema.
 // Ref: #/components/schemas/sendOfferRequest
 type SendOfferRequest struct {
-	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter.
-	// If several methods are provided they should be in prioritized order as Fiken will only send the
-	// invoice to
-	// the first successful available method. Method "auto" tries available methods for given customer
-	// based on
-	// the information registered for the customer. The order of priority is EHF, eFaktura, Sms, and
-	// email.
-	// Method "letter" means physical letter, printed and sent by our postal service partner (extra
-	// charge per
-	// letter, available for recipient addresses in Norway only). The option "includeDocumentAttachments"
-	// is
-	// not supported by method "letter", attachments are not included even if this option is set.
+	// The method of sending. Has to be auto, email, ehf, efaktura, sms or letter. If several methods are
+	// provided they should be in prioritized order as Fiken will only send the invoice to the first
+	// successful available method. Method "auto" tries available methods for given customer based on the
+	// information registered for the customer. The order of priority is EHF, eFaktura, Sms, and email.
+	// Method "letter" means physical letter, printed and sent by our postal service partner (extra charge
+	// per letter, available for recipient addresses in Norway only). The option
+	// "includeDocumentAttachments" is not supported by method "letter", attachments are not included even
+	// if this option is set.
 	Method []SendOfferRequestMethodItem `json:"method"`
 	// Whether the document's attachment should be included when sending (True) or not (False).
 	IncludeDocumentAttachments bool      `json:"includeDocumentAttachments"`
@@ -12793,8 +12770,8 @@ type SendOfferRequest struct {
 	MergeInvoiceAndAttachments OptBool `json:"mergeInvoiceAndAttachments"`
 	// Brreg organization number. Defaults to the customers organization number if not provided.
 	OrganizationNumber OptString `json:"organizationNumber"`
-	// Defaults to the customers phone number. Format should include the country code. If a Norwegian
-	// phone number, the country code is not necessary.
+	// Defaults to the customers phone number. Format should include the country code. If a Norwegian phone
+	// number, the country code is not necessary.
 	MobileNumber OptString `json:"mobileNumber"`
 	// Id of offer to send.
 	OfferId int64 `json:"offerId"`
@@ -13028,9 +13005,10 @@ type TimeEntryInvoiceDraftRequest struct {
 	// Number of days until the invoice is due.
 	DaysUntilDueDate int32 `json:"daysUntilDueDate"`
 	// How to group time entries into invoice lines:
-	// - `activity`: One line per activity (default)
-	// - `activityAndPerson`: One line per activity+person combination
-	// - `none`: Each time entry becomes a separate line.
+	//
+	//  - `activity`: One line per activity (default)
+	//  - `activityAndPerson`: One line per activity+person combination
+	//  - `none`: Each time entry becomes a separate line
 	GroupBy OptTimeEntryInvoiceDraftRequestGroupBy `json:"groupBy"`
 	// If true, individual time entry descriptions are included in the invoice line description.
 	IncludeTimeEntryDescriptions OptBool `json:"includeTimeEntryDescriptions"`
@@ -13184,9 +13162,10 @@ func (s *TimeEntryInvoiceDraftRequest) SetBankAccountNumber(val OptString) {
 }
 
 // How to group time entries into invoice lines:
-// - `activity`: One line per activity (default)
-// - `activityAndPerson`: One line per activity+person combination
-// - `none`: Each time entry becomes a separate line.
+//
+//   - `activity`: One line per activity (default)
+//   - `activityAndPerson`: One line per activity+person combination
+//   - `none`: Each time entry becomes a separate line
 type TimeEntryInvoiceDraftRequestGroupBy string
 
 const (
@@ -14160,13 +14139,14 @@ func (s *Userinfo) SetEmail(val OptString) {
 // Ref: #/components/schemas/writeOffRequest
 type WriteOffRequest struct {
 	// Reason for the write-off (tapsføring).
-	// * OVERDUE_6_MONTHS - At least 6 months past due date, and at least 3 reminders or collection
-	// notices have been sent.
-	// * COLLECTION_FAILED - Debt collection has been attempted without success.
-	// * CUSTOMER_BANKRUPTCY - The customer has been declared bankrupt and the estate cannot cover the
-	// outstanding amount.
-	// * DEEMED_IRRECOVERABLE - Based on an overall assessment, the receivable will clearly not be
-	// collected.
+	//
+	//  - OVERDUE_6_MONTHS - At least 6 months past due date, and at least 3 reminders or collection
+	//    notices have been sent.
+	//  - COLLECTION_FAILED - Debt collection has been attempted without success.
+	//  - CUSTOMER_BANKRUPTCY - The customer has been declared bankrupt and the estate cannot cover the
+	//    outstanding amount.
+	//  - DEEMED_IRRECOVERABLE - Based on an overall assessment, the receivable will clearly not be
+	//    collected.
 	Type WriteOffRequestType `json:"type"`
 	// Date of the write-off, format yyyy-mm-dd. Must be after the sale date.
 	Date time.Time `json:"date"`
@@ -14205,13 +14185,14 @@ func (s *WriteOffRequest) SetComment(val OptString) {
 }
 
 // Reason for the write-off (tapsføring).
-// * OVERDUE_6_MONTHS - At least 6 months past due date, and at least 3 reminders or collection
-// notices have been sent.
-// * COLLECTION_FAILED - Debt collection has been attempted without success.
-// * CUSTOMER_BANKRUPTCY - The customer has been declared bankrupt and the estate cannot cover the
-// outstanding amount.
-// * DEEMED_IRRECOVERABLE - Based on an overall assessment, the receivable will clearly not be
-// collected.
+//
+//   - OVERDUE_6_MONTHS - At least 6 months past due date, and at least 3 reminders or collection
+//     notices have been sent.
+//   - COLLECTION_FAILED - Debt collection has been attempted without success.
+//   - CUSTOMER_BANKRUPTCY - The customer has been declared bankrupt and the estate cannot cover the
+//     outstanding amount.
+//   - DEEMED_IRRECOVERABLE - Based on an overall assessment, the receivable will clearly not be
+//     collected.
 type WriteOffRequestType string
 
 const (

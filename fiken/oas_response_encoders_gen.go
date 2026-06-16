@@ -9,7 +9,6 @@ import (
 	"github.com/go-faster/jx"
 	"github.com/ogen-go/ogen/conv"
 	"github.com/ogen-go/ogen/uri"
-	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -35,7 +34,6 @@ func encodeAddAttachmentToContactResponse(response *AddAttachmentToContactCreate
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -62,7 +60,6 @@ func encodeAddAttachmentToCreditNoteDraftResponse(response *AddAttachmentToCredi
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -89,7 +86,6 @@ func encodeAddAttachmentToInvoiceResponse(response *AddAttachmentToInvoiceCreate
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -116,7 +112,6 @@ func encodeAddAttachmentToInvoiceDraftResponse(response *AddAttachmentToInvoiceD
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -143,7 +138,6 @@ func encodeAddAttachmentToJournalEntryResponse(response *AddAttachmentToJournalE
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -170,7 +164,6 @@ func encodeAddAttachmentToOfferDraftResponse(response *AddAttachmentToOfferDraft
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -197,7 +190,6 @@ func encodeAddAttachmentToOrderConfirmationDraftResponse(response *AddAttachment
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -224,7 +216,6 @@ func encodeAddAttachmentToPurchaseResponse(response *AddAttachmentToPurchaseCrea
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -251,7 +242,6 @@ func encodeAddAttachmentToPurchaseDraftResponse(response *AddAttachmentToPurchas
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -278,7 +268,6 @@ func encodeAddAttachmentToSaleResponse(response *AddAttachmentToSaleCreated, w h
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -305,7 +294,6 @@ func encodeAddAttachmentToSaleDraftResponse(response *AddAttachmentToSaleDraftCr
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -332,7 +320,6 @@ func encodeAddContactPersonToContactResponse(response *AddContactPersonToContact
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -359,7 +346,6 @@ func encodeCreateActivityResponse(response *CreateActivityCreated, w http.Respon
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -386,7 +372,6 @@ func encodeCreateBankAccountResponse(response *CreateBankAccountCreated, w http.
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -413,14 +398,12 @@ func encodeCreateContactResponse(response *CreateContactCreated, w http.Response
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
 
 func encodeCreateCreditNoteCounterResponse(response *CreateCreditNoteCounterCreated, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -447,7 +430,6 @@ func encodeCreateCreditNoteDraftResponse(response *CreateCreditNoteDraftCreated,
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -474,7 +456,6 @@ func encodeCreateCreditNoteFromDraftResponse(response *CreateCreditNoteFromDraft
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -501,7 +482,6 @@ func encodeCreateFullCreditNoteResponse(response *CreateFullCreditNoteCreated, w
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -528,7 +508,6 @@ func encodeCreateGeneralJournalEntryResponse(response *CreateGeneralJournalEntry
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -555,7 +534,6 @@ func encodeCreateInboxDocumentResponse(response *CreateInboxDocumentCreated, w h
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -582,14 +560,12 @@ func encodeCreateInvoiceResponse(response *CreateInvoiceCreated, w http.Response
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
 
 func encodeCreateInvoiceCounterResponse(response *CreateInvoiceCounterCreated, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -616,7 +592,6 @@ func encodeCreateInvoiceDraftResponse(response *CreateInvoiceDraftCreated, w htt
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -643,7 +618,6 @@ func encodeCreateInvoiceDraftFromOrderConfirmationResponse(response *CreateInvoi
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -671,7 +645,6 @@ func encodeCreateInvoiceDraftFromTimeEntriesResponse(response *InvoiceishDraftRe
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	e := new(jx.Encoder)
 	response.Response.Encode(e)
@@ -704,14 +677,12 @@ func encodeCreateInvoiceFromDraftResponse(response *CreateInvoiceFromDraftCreate
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
 
 func encodeCreateOfferCounterResponse(response *CreateOfferCounterCreated, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -738,7 +709,6 @@ func encodeCreateOfferDraftResponse(response *CreateOfferDraftCreated, w http.Re
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -765,14 +735,12 @@ func encodeCreateOfferFromDraftResponse(response *CreateOfferFromDraftCreated, w
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
 
 func encodeCreateOrderConfirmationCounterResponse(response *CreateOrderConfirmationCounterCreated, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -799,7 +767,6 @@ func encodeCreateOrderConfirmationDraftResponse(response *CreateOrderConfirmatio
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -826,7 +793,6 @@ func encodeCreateOrderConfirmationFromDraftResponse(response *CreateOrderConfirm
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -853,7 +819,6 @@ func encodeCreatePartialCreditNoteResponse(response *CreatePartialCreditNoteCrea
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -880,7 +845,6 @@ func encodeCreateProductResponse(response *CreateProductCreated, w http.Response
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -888,7 +852,6 @@ func encodeCreateProductResponse(response *CreateProductCreated, w http.Response
 func encodeCreateProductSalesReportResponse(response []ProductSalesReportResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -925,7 +888,6 @@ func encodeCreateProjectResponse(response *CreateProjectCreated, w http.Response
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -952,7 +914,6 @@ func encodeCreatePurchaseResponse(response *CreatePurchaseCreated, w http.Respon
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -979,7 +940,6 @@ func encodeCreatePurchaseDraftResponse(response *CreatePurchaseDraftCreated, w h
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1006,7 +966,6 @@ func encodeCreatePurchaseFromDraftResponse(response *CreatePurchaseFromDraftCrea
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1033,7 +992,6 @@ func encodeCreatePurchasePaymentResponse(response *CreatePurchasePaymentCreated,
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1060,7 +1018,6 @@ func encodeCreateSaleResponse(response *CreateSaleCreated, w http.ResponseWriter
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1087,7 +1044,6 @@ func encodeCreateSaleDraftResponse(response *CreateSaleDraftCreated, w http.Resp
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1114,7 +1070,6 @@ func encodeCreateSaleFromDraftResponse(response *CreateSaleFromDraftCreated, w h
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1141,7 +1096,6 @@ func encodeCreateSalePaymentResponse(response *CreateSalePaymentCreated, w http.
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -1168,14 +1122,12 @@ func encodeCreateTimeEntryResponse(response *CreateTimeEntryCreated, w http.Resp
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
 
 func encodeDeleteActivityResponse(response *DeleteActivityNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
@@ -1185,7 +1137,6 @@ func encodeDeleteContactResponse(response DeleteContactRes, w http.ResponseWrite
 	case *Contact:
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(200)
-		span.SetStatus(codes.Ok, http.StatusText(200))
 
 		e := new(jx.Encoder)
 		response.Encode(e)
@@ -1197,7 +1148,6 @@ func encodeDeleteContactResponse(response DeleteContactRes, w http.ResponseWrite
 
 	case *DeleteContactNoContent:
 		w.WriteHeader(204)
-		span.SetStatus(codes.Ok, http.StatusText(204))
 
 		return nil
 
@@ -1208,49 +1158,42 @@ func encodeDeleteContactResponse(response DeleteContactRes, w http.ResponseWrite
 
 func encodeDeleteContactContactPersonResponse(response *DeleteContactContactPersonNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteCreditNoteDraftResponse(response *DeleteCreditNoteDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteInvoiceDraftResponse(response *DeleteInvoiceDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteOfferDraftResponse(response *DeleteOfferDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteOrderConfirmationDraftResponse(response *DeleteOrderConfirmationDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteProductResponse(response *DeleteProductNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
 
 func encodeDeleteProjectResponse(response *DeleteProjectNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
@@ -1258,7 +1201,6 @@ func encodeDeleteProjectResponse(response *DeleteProjectNoContent, w http.Respon
 func encodeDeletePurchaseResponse(response *PurchaseResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1271,7 +1213,6 @@ func encodeDeletePurchaseResponse(response *PurchaseResult, w http.ResponseWrite
 
 func encodeDeletePurchaseDraftResponse(response *DeletePurchaseDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
@@ -1279,7 +1220,6 @@ func encodeDeletePurchaseDraftResponse(response *DeletePurchaseDraftNoContent, w
 func encodeDeleteSaleResponse(response *SaleResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1292,7 +1232,6 @@ func encodeDeleteSaleResponse(response *SaleResult, w http.ResponseWriter, span 
 
 func encodeDeleteSaleDraftResponse(response *DeleteSaleDraftNoContent, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(204)
-	span.SetStatus(codes.Ok, http.StatusText(204))
 
 	return nil
 }
@@ -1301,13 +1240,11 @@ func encodeDeleteTimeEntryResponse(response DeleteTimeEntryRes, w http.ResponseW
 	switch response := response.(type) {
 	case *DeleteTimeEntryNoContent:
 		w.WriteHeader(204)
-		span.SetStatus(codes.Ok, http.StatusText(204))
 
 		return nil
 
 	case *DeleteTimeEntryBadRequest:
 		w.WriteHeader(400)
-		span.SetStatus(codes.Error, http.StatusText(400))
 
 		return nil
 
@@ -1319,7 +1256,6 @@ func encodeDeleteTimeEntryResponse(response DeleteTimeEntryRes, w http.ResponseW
 func encodeDeleteTransactionResponse(response *Transaction, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1333,7 +1269,6 @@ func encodeDeleteTransactionResponse(response *Transaction, w http.ResponseWrite
 func encodeGetAccountResponse(response *Account, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1347,7 +1282,6 @@ func encodeGetAccountResponse(response *Account, w http.ResponseWriter, span tra
 func encodeGetAccountBalanceResponse(response *AccountBalance, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1426,7 +1360,6 @@ func encodeGetAccountBalancesResponse(response *GetAccountBalancesOKHeaders, w h
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1509,7 +1442,6 @@ func encodeGetAccountsResponse(response *GetAccountsOKHeaders, w http.ResponseWr
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1592,7 +1524,6 @@ func encodeGetActivitiesResponse(response *GetActivitiesOKHeaders, w http.Respon
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1610,7 +1541,6 @@ func encodeGetActivitiesResponse(response *GetActivitiesOKHeaders, w http.Respon
 func encodeGetActivityResponse(response *ActivityResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1624,7 +1554,6 @@ func encodeGetActivityResponse(response *ActivityResult, w http.ResponseWriter, 
 func encodeGetBankAccountResponse(response *BankAccountResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1703,7 +1632,6 @@ func encodeGetBankAccountsResponse(response *GetBankAccountsOKHeaders, w http.Re
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1786,7 +1714,6 @@ func encodeGetBankBalancesResponse(response *GetBankBalancesOKHeaders, w http.Re
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1869,7 +1796,6 @@ func encodeGetCompaniesResponse(response *GetCompaniesOKHeaders, w http.Response
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1887,7 +1813,6 @@ func encodeGetCompaniesResponse(response *GetCompaniesOKHeaders, w http.Response
 func encodeGetCompanyResponse(response *Company, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1901,7 +1826,6 @@ func encodeGetCompanyResponse(response *Company, w http.ResponseWriter, span tra
 func encodeGetContactResponse(response *Contact, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -1915,7 +1839,6 @@ func encodeGetContactResponse(response *Contact, w http.ResponseWriter, span tra
 func encodeGetContactContactPersonResponse(response []ContactPerson, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -1933,7 +1856,6 @@ func encodeGetContactContactPersonResponse(response []ContactPerson, w http.Resp
 func encodeGetContactPersonResponse(response *ContactPerson, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2012,7 +1934,6 @@ func encodeGetContactsResponse(response *GetContactsOKHeaders, w http.ResponseWr
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2030,7 +1951,6 @@ func encodeGetContactsResponse(response *GetContactsOKHeaders, w http.ResponseWr
 func encodeGetCreditNoteResponse(response *CreditNoteResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2044,7 +1964,6 @@ func encodeGetCreditNoteResponse(response *CreditNoteResult, w http.ResponseWrit
 func encodeGetCreditNoteCounterResponse(response *Counter, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2058,7 +1977,6 @@ func encodeGetCreditNoteCounterResponse(response *Counter, w http.ResponseWriter
 func encodeGetCreditNoteDraftResponse(response *InvoiceishDraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2072,7 +1990,6 @@ func encodeGetCreditNoteDraftResponse(response *InvoiceishDraftResult, w http.Re
 func encodeGetCreditNoteDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2155,7 +2072,6 @@ func encodeGetCreditNoteDraftsResponse(response *GetCreditNoteDraftsOKHeaders, w
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2238,7 +2154,6 @@ func encodeGetCreditNotesResponse(response *GetCreditNotesOKHeaders, w http.Resp
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2321,7 +2236,6 @@ func encodeGetGroupsResponse(response *GetGroupsOKHeaders, w http.ResponseWriter
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2404,7 +2318,6 @@ func encodeGetInboxResponse(response *GetInboxOKHeaders, w http.ResponseWriter, 
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2422,7 +2335,6 @@ func encodeGetInboxResponse(response *GetInboxOKHeaders, w http.ResponseWriter, 
 func encodeGetInboxDocumentResponse(response *InboxResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2436,7 +2348,6 @@ func encodeGetInboxDocumentResponse(response *InboxResult, w http.ResponseWriter
 func encodeGetInvoiceResponse(response *InvoiceResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2450,7 +2361,6 @@ func encodeGetInvoiceResponse(response *InvoiceResult, w http.ResponseWriter, sp
 func encodeGetInvoiceAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2468,7 +2378,6 @@ func encodeGetInvoiceAttachmentsResponse(response []Attachment, w http.ResponseW
 func encodeGetInvoiceCounterResponse(response *Counter, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2482,7 +2391,6 @@ func encodeGetInvoiceCounterResponse(response *Counter, w http.ResponseWriter, s
 func encodeGetInvoiceDraftResponse(response *InvoiceishDraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2496,7 +2404,6 @@ func encodeGetInvoiceDraftResponse(response *InvoiceishDraftResult, w http.Respo
 func encodeGetInvoiceDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2579,7 +2486,6 @@ func encodeGetInvoiceDraftsResponse(response *GetInvoiceDraftsOKHeaders, w http.
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2662,7 +2568,6 @@ func encodeGetInvoicesResponse(response *GetInvoicesOKHeaders, w http.ResponseWr
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2745,7 +2650,6 @@ func encodeGetJournalEntriesResponse(response *GetJournalEntriesOKHeaders, w htt
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2763,7 +2667,6 @@ func encodeGetJournalEntriesResponse(response *GetJournalEntriesOKHeaders, w htt
 func encodeGetJournalEntryResponse(response *JournalEntry, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2777,7 +2680,6 @@ func encodeGetJournalEntryResponse(response *JournalEntry, w http.ResponseWriter
 func encodeGetJournalEntryAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2795,7 +2697,6 @@ func encodeGetJournalEntryAttachmentsResponse(response []Attachment, w http.Resp
 func encodeGetOfferResponse(response *Offer, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2809,7 +2710,6 @@ func encodeGetOfferResponse(response *Offer, w http.ResponseWriter, span trace.S
 func encodeGetOfferCounterResponse(response *Counter, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2823,7 +2723,6 @@ func encodeGetOfferCounterResponse(response *Counter, w http.ResponseWriter, spa
 func encodeGetOfferDraftResponse(response *InvoiceishDraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -2837,7 +2736,6 @@ func encodeGetOfferDraftResponse(response *InvoiceishDraftResult, w http.Respons
 func encodeGetOfferDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -2920,7 +2818,6 @@ func encodeGetOfferDraftsResponse(response *GetOfferDraftsOKHeaders, w http.Resp
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3003,7 +2900,6 @@ func encodeGetOffersResponse(response *GetOffersOKHeaders, w http.ResponseWriter
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3021,7 +2917,6 @@ func encodeGetOffersResponse(response *GetOffersOKHeaders, w http.ResponseWriter
 func encodeGetOrderConfirmationResponse(response *OrderConfirmation, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3035,7 +2930,6 @@ func encodeGetOrderConfirmationResponse(response *OrderConfirmation, w http.Resp
 func encodeGetOrderConfirmationCounterResponse(response *Counter, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3049,7 +2943,6 @@ func encodeGetOrderConfirmationCounterResponse(response *Counter, w http.Respons
 func encodeGetOrderConfirmationDraftResponse(response *InvoiceishDraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3063,7 +2956,6 @@ func encodeGetOrderConfirmationDraftResponse(response *InvoiceishDraftResult, w 
 func encodeGetOrderConfirmationDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3146,7 +3038,6 @@ func encodeGetOrderConfirmationDraftsResponse(response *GetOrderConfirmationDraf
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3229,7 +3120,6 @@ func encodeGetOrderConfirmationsResponse(response *GetOrderConfirmationsOKHeader
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3247,7 +3137,6 @@ func encodeGetOrderConfirmationsResponse(response *GetOrderConfirmationsOKHeader
 func encodeGetProductResponse(response *Product, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3326,7 +3215,6 @@ func encodeGetProductsResponse(response *GetProductsOKHeaders, w http.ResponseWr
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3344,7 +3232,6 @@ func encodeGetProductsResponse(response *GetProductsOKHeaders, w http.ResponseWr
 func encodeGetProjectResponse(response *ProjectResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3423,7 +3310,6 @@ func encodeGetProjectsResponse(response *GetProjectsOKHeaders, w http.ResponseWr
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3441,7 +3327,6 @@ func encodeGetProjectsResponse(response *GetProjectsOKHeaders, w http.ResponseWr
 func encodeGetPurchaseResponse(response *PurchaseResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3455,7 +3340,6 @@ func encodeGetPurchaseResponse(response *PurchaseResult, w http.ResponseWriter, 
 func encodeGetPurchaseAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3473,7 +3357,6 @@ func encodeGetPurchaseAttachmentsResponse(response []Attachment, w http.Response
 func encodeGetPurchaseDraftResponse(response *DraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3487,7 +3370,6 @@ func encodeGetPurchaseDraftResponse(response *DraftResult, w http.ResponseWriter
 func encodeGetPurchaseDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3570,7 +3452,6 @@ func encodeGetPurchaseDraftsResponse(response *GetPurchaseDraftsOKHeaders, w htt
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3588,7 +3469,6 @@ func encodeGetPurchaseDraftsResponse(response *GetPurchaseDraftsOKHeaders, w htt
 func encodeGetPurchasePaymentResponse(response *Payment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3602,7 +3482,6 @@ func encodeGetPurchasePaymentResponse(response *Payment, w http.ResponseWriter, 
 func encodeGetPurchasePaymentsResponse(response []Payment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3685,7 +3564,6 @@ func encodeGetPurchasesResponse(response *GetPurchasesOKHeaders, w http.Response
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3703,7 +3581,6 @@ func encodeGetPurchasesResponse(response *GetPurchasesOKHeaders, w http.Response
 func encodeGetSaleResponse(response *SaleResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3717,7 +3594,6 @@ func encodeGetSaleResponse(response *SaleResult, w http.ResponseWriter, span tra
 func encodeGetSaleAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3735,7 +3611,6 @@ func encodeGetSaleAttachmentsResponse(response []Attachment, w http.ResponseWrit
 func encodeGetSaleDraftResponse(response *DraftResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3749,7 +3624,6 @@ func encodeGetSaleDraftResponse(response *DraftResult, w http.ResponseWriter, sp
 func encodeGetSaleDraftAttachmentsResponse(response []Attachment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3832,7 +3706,6 @@ func encodeGetSaleDraftsResponse(response *GetSaleDraftsOKHeaders, w http.Respon
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3850,7 +3723,6 @@ func encodeGetSaleDraftsResponse(response *GetSaleDraftsOKHeaders, w http.Respon
 func encodeGetSalePaymentResponse(response *Payment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -3864,7 +3736,6 @@ func encodeGetSalePaymentResponse(response *Payment, w http.ResponseWriter, span
 func encodeGetSalePaymentsResponse(response []Payment, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -3947,7 +3818,6 @@ func encodeGetSalesResponse(response *GetSalesOKHeaders, w http.ResponseWriter, 
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -4030,7 +3900,6 @@ func encodeGetTimeEntriesResponse(response *GetTimeEntriesOKHeaders, w http.Resp
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -4048,7 +3917,6 @@ func encodeGetTimeEntriesResponse(response *GetTimeEntriesOKHeaders, w http.Resp
 func encodeGetTimeEntryResponse(response *TimeEntryResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -4062,7 +3930,6 @@ func encodeGetTimeEntryResponse(response *TimeEntryResult, w http.ResponseWriter
 func encodeGetTimeUserResponse(response *TimeUserResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -4141,7 +4008,6 @@ func encodeGetTimeUsersResponse(response *GetTimeUsersOKHeaders, w http.Response
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -4159,7 +4025,6 @@ func encodeGetTimeUsersResponse(response *GetTimeUsersOKHeaders, w http.Response
 func encodeGetTransactionResponse(response *Transaction, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -4238,7 +4103,6 @@ func encodeGetTransactionsResponse(response *GetTransactionsOKHeaders, w http.Re
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -4256,7 +4120,6 @@ func encodeGetTransactionsResponse(response *GetTransactionsOKHeaders, w http.Re
 func encodeGetUserResponse(response *Userinfo, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -4269,21 +4132,18 @@ func encodeGetUserResponse(response *Userinfo, w http.ResponseWriter, span trace
 
 func encodeSendCreditNoteResponse(response *SendCreditNoteOK, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
 
 func encodeSendInvoiceResponse(response *SendInvoiceOK, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
 
 func encodeSendOfferResponse(response *SendOfferOK, w http.ResponseWriter, span trace.Span) error {
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4291,7 +4151,6 @@ func encodeSendOfferResponse(response *SendOfferOK, w http.ResponseWriter, span 
 func encodeSettledSaleResponse(response *SaleResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -4324,7 +4183,6 @@ func encodeUpdateActivityResponse(response *UpdateActivityOK, w http.ResponseWri
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4351,7 +4209,6 @@ func encodeUpdateContactResponse(response *UpdateContactOK, w http.ResponseWrite
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4378,7 +4235,6 @@ func encodeUpdateContactContactPersonResponse(response *UpdateContactContactPers
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4405,7 +4261,6 @@ func encodeUpdateCreditNoteDraftResponse(response *UpdateCreditNoteDraftCreated,
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4432,7 +4287,6 @@ func encodeUpdateInvoiceResponse(response *UpdateInvoiceOK, w http.ResponseWrite
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4459,7 +4313,6 @@ func encodeUpdateInvoiceDraftResponse(response *UpdateInvoiceDraftCreated, w htt
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4486,7 +4339,6 @@ func encodeUpdateOfferDraftResponse(response *UpdateOfferDraftCreated, w http.Re
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4513,7 +4365,6 @@ func encodeUpdateOrderConfirmationDraftResponse(response *UpdateOrderConfirmatio
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4540,7 +4391,6 @@ func encodeUpdateProductResponse(response *UpdateProductOK, w http.ResponseWrite
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4567,7 +4417,6 @@ func encodeUpdateProjectResponse(response *UpdateProjectCreated, w http.Response
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4594,7 +4443,6 @@ func encodeUpdatePurchaseDraftResponse(response *UpdatePurchaseDraftCreated, w h
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4621,7 +4469,6 @@ func encodeUpdateSaleDraftResponse(response *UpdateSaleDraftCreated, w http.Resp
 		}
 	}
 	w.WriteHeader(201)
-	span.SetStatus(codes.Ok, http.StatusText(201))
 
 	return nil
 }
@@ -4648,7 +4495,6 @@ func encodeUpdateTimeEntryResponse(response *UpdateTimeEntryOK, w http.ResponseW
 		}
 	}
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	return nil
 }
@@ -4656,7 +4502,6 @@ func encodeUpdateTimeEntryResponse(response *UpdateTimeEntryOK, w http.ResponseW
 func encodeWriteOffSaleResponse(response *SaleResult, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)

@@ -4,6 +4,7 @@ package fiken
 
 import (
 	"context"
+	"io"
 	"net/url"
 	"strings"
 	"time"
@@ -109,9 +110,8 @@ type Invoker interface {
 	// CreateBankAccount invokes createBankAccount operation.
 	//
 	// Creates a new bank account. The Location response header returns the URL of the newly created bank
-	// account.
-	// Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The field
-	// "foreignService" should only be filled out for accounts of type FOREIGN.
+	// account. Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The
+	// field "foreignService" should only be filled out for accounts of type FOREIGN.
 	//
 	// POST /companies/{companySlug}/bankAccounts
 	CreateBankAccount(ctx context.Context, request *BankAccountRequest, params CreateBankAccountParams) (*CreateBankAccountCreated, error)
@@ -162,17 +162,13 @@ type Invoker interface {
 	CreateInboxDocument(ctx context.Context, request *CreateInboxDocumentReq, params CreateInboxDocumentParams) (*CreateInboxDocumentCreated, error)
 	// CreateInvoice invokes createInvoice operation.
 	//
-	// Creates an invoice. This corresponds to "Ny faktura" in Fiken.
-	// There are two types of invoice lines that can be added to an invoice line: product line or free
-	// text line.
-	// Provide a product Id if you are invoicing a product. All information regarding the price and VAT
-	// for this product will be added to the invoice.
-	// It is however also possible to override the unit amount by sending information in both fields
-	// "productId" and "unitAmount".
-	// An invoice line can also be a free text line meaning that no existing product will be associated
-	// with the invoiced line.
-	// In this case all information regarding the price and VAT of the product or service to be invoiced
-	// must be provided.
+	// Creates an invoice. This corresponds to "Ny faktura" in Fiken. There are two types of invoice lines
+	// that can be added to an invoice line: product line or free text line. Provide a product Id if you
+	// are invoicing a product. All information regarding the price and VAT for this product will be added
+	// to the invoice. It is however also possible to override the unit amount by sending information in
+	// both fields "productId" and "unitAmount". An invoice line can also be a free text line meaning that
+	// no existing product will be associated with the invoiced line. In this case all information
+	// regarding the price and VAT of the product or service to be invoiced must be provided.
 	//
 	// POST /companies/{companySlug}/invoices
 	CreateInvoice(ctx context.Context, request *InvoiceRequest, params CreateInvoiceParams) (*CreateInvoiceCreated, error)
@@ -199,17 +195,21 @@ type Invoker interface {
 	// CreateInvoiceDraftFromTimeEntries invokes createInvoiceDraftFromTimeEntries operation.
 	//
 	// Creates an invoice draft from one or more time entries.
-	// The time entries will be converted to invoice lines based on the specified grouping.
-	// After successful creation, the included time entries will be marked as "in draft" and
-	// cannot be modified until the draft is deleted or converted to an invoice.
-	// **Grouping options:**
-	// - activity: One invoice line per activity, summing hours across all selected time entries for that
-	// activity
-	// - activityAndPerson: One invoice line per unique activity+person combination
-	// - none: Each time entry becomes its own invoice line
-	// **Line description:**
-	// By default, the invoice line description is generated from the activity name and total hours.
-	// If `includeTimeEntryDescriptions` is true, individual time entry descriptions are appended.
+	//
+	// The time entries will be converted to invoice lines based on the specified grouping. After
+	// successful creation, the included time entries will be marked as "in draft" and cannot be modified
+	// until the draft is deleted or converted to an invoice.
+	//
+	// Grouping options:
+	//
+	//  - activity: One invoice line per activity, summing hours across all selected time entries for that
+	//    activity
+	//  - activityAndPerson: One invoice line per unique activity+person combination
+	//  - none: Each time entry becomes its own invoice line
+	//
+	// Line description: By default, the invoice line description is generated from the activity name and
+	// total hours. If `includeTimeEntryDescriptions` is true, individual time entry descriptions are
+	// appended.
 	//
 	// POST /companies/{companySlug}/timeEntries/createInvoiceDraft
 	CreateInvoiceDraftFromTimeEntries(ctx context.Context, request *TimeEntryInvoiceDraftRequest, params CreateInvoiceDraftFromTimeEntriesParams) (*InvoiceishDraftResultHeaders, error)
@@ -310,8 +310,8 @@ type Invoker interface {
 	// CreateSale invokes createSale operation.
 	//
 	// Creates a new sale. This corresponds to "Annet salg" in Fiken and should be used when the invoice
-	// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints
-	// should be used.
+	// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints should
+	// be used.
 	//
 	// POST /companies/{companySlug}/sales
 	CreateSale(ctx context.Context, request *SaleRequest, params CreateSaleParams) (*CreateSaleCreated, error)
@@ -342,21 +342,24 @@ type Invoker interface {
 	// DeleteActivity invokes deleteActivity operation.
 	//
 	// Delete or archive activity with specified id.
-	// **Behavior:**
-	// - If the activity has no associated time entries and is not set as a default activity on any
-	// project, it will be permanently deleted
-	// - If the activity has associated time entries or is set as a default activity on a project, it
-	// will be **archived** instead of deleted
-	// - Archived activities are hidden from selection lists but remain accessible for historical time
-	// entries
+	//
+	// Behavior:
+	//
+	//  - If the activity has no associated time entries and is not set as a default activity on any
+	//    project, it will be permanently deleted
+	//  - If the activity has associated time entries or is set as a default activity on a project, it will
+	//    be archived instead of deleted
+	//  - Archived activities are hidden from selection lists but remain accessible for historical time
+	//    entries
+	//
 	// The response is 204 in both cases (deleted or archived).
 	//
 	// DELETE /companies/{companySlug}/activities/{activityId}
 	DeleteActivity(ctx context.Context, params DeleteActivityParams) error
 	// DeleteContact invokes deleteContact operation.
 	//
-	// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not
-	// possible to delete will set the contact to inactive.
+	// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not possible
+	// to delete will set the contact to inactive.
 	//
 	// DELETE /companies/{companySlug}/contacts/{contactId}
 	DeleteContact(ctx context.Context, params DeleteContactParams) (DeleteContactRes, error)
@@ -417,8 +420,8 @@ type Invoker interface {
 	DeletePurchaseDraft(ctx context.Context, params DeletePurchaseDraftParams) error
 	// DeleteSale invokes deleteSale operation.
 	//
-	// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created
-	// and the "deleted" property is set to true.
+	// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created and
+	// the "deleted" property is set to true.
 	//
 	// PATCH /companies/{companySlug}/sales/{saleId}/delete
 	DeleteSale(ctx context.Context, params DeleteSaleParams) (*SaleResult, error)
@@ -431,9 +434,12 @@ type Invoker interface {
 	// DeleteTimeEntry invokes deleteTimeEntry operation.
 	//
 	// Delete time entry with specified id.
-	// **Restrictions:**
-	// - Cannot delete if the time entry has been invoiced
-	// - Cannot delete if the time entry belongs to a closed accounting period
+	//
+	// Restrictions:
+	//
+	//  - Cannot delete if the time entry has been invoiced
+	//  - Cannot delete if the time entry belongs to a closed accounting period
+	//
 	// Returns 400 Bad Request if deletion is not allowed due to these restrictions.
 	//
 	// DELETE /companies/{companySlug}/timeEntries/{timeEntryId}
@@ -441,18 +447,14 @@ type Invoker interface {
 	// DeleteTransaction invokes deleteTransaction operation.
 	//
 	// Sets the deleted flag for a transaction. The transaction is not deleted, but a reverse transaction
-	// is created and
-	// the "deleted" property is set to true.
+	// is created and the "deleted" property is set to true.
 	//
 	// PATCH /companies/{companySlug}/transactions/{transactionId}/delete
 	DeleteTransaction(ctx context.Context, params DeleteTransactionParams) (*Transaction, error)
 	// GetAccount invokes getAccount operation.
 	//
-	// Retrieves the specified bookkeping account.
-	// An account is a string with either four digits, or four digits, a colon and five digits
-	// ("reskontro").
-	// Examples:
-	// 3020 and 1500:10001.
+	// Retrieves the specified bookkeping account. An account is a string with either four digits, or four
+	// digits, a colon and five digits ("reskontro"). Examples: 3020 and 1500:10001.
 	//
 	// GET /companies/{companySlug}/accounts/{accountCode}
 	GetAccount(ctx context.Context, params GetAccountParams) (*Account, error)
@@ -464,11 +466,9 @@ type Invoker interface {
 	GetAccountBalance(ctx context.Context, params GetAccountBalanceParams) (*AccountBalance, error)
 	// GetAccountBalances invokes getAccountBalances operation.
 	//
-	// Retrieves the bookkeeping accounts and closing balances for a given date.
-	// An account is a string with either four digits, or four digits, a colon and five digits
-	// ("reskontro").
-	// Examples:
-	// 3020 and 1500:10001.
+	// Retrieves the bookkeeping accounts and closing balances for a given date. An account is a string
+	// with either four digits, or four digits, a colon and five digits ("reskontro"). Examples: 3020 and
+	// 1500:10001.
 	//
 	// GET /companies/{companySlug}/accountBalances
 	GetAccountBalances(ctx context.Context, params GetAccountBalancesParams) (*GetAccountBalancesOKHeaders, error)
@@ -511,8 +511,8 @@ type Invoker interface {
 	// GetCompanies invokes getCompanies operation.
 	//
 	// Returns all companies from the system that the user has access to. The user can update which
-	// companies a given app has
-	// access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har gitt tilgang til.
+	// companies a given app has access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har
+	// gitt tilgang til.
 	//
 	// GET /companies
 	GetCompanies(ctx context.Context, params GetCompaniesParams) (*GetCompaniesOKHeaders, error)
@@ -525,8 +525,7 @@ type Invoker interface {
 	// GetContact invokes getContact operation.
 	//
 	// Retrieves specified contact. ContactId is returned with a GET contacts call as the first returned
-	// field.
-	// ContactId is returned in the Location response header for POST contact.
+	// field. ContactId is returned in the Location response header for POST contact.
 	//
 	// GET /companies/{companySlug}/contacts/{contactId}
 	GetContact(ctx context.Context, params GetContactParams) (*Contact, error)
@@ -881,8 +880,8 @@ type Invoker interface {
 	GetTimeUsers(ctx context.Context, params GetTimeUsersParams) (*GetTimeUsersOKHeaders, error)
 	// GetTransaction invokes getTransaction operation.
 	//
-	// Returns given transaction with associated id. Transaction id is returned in GET calls for
-	// sales, purchases, and journal entries.
+	// Returns given transaction with associated id. Transaction id is returned in GET calls for sales,
+	// purchases, and journal entries.
 	//
 	// GET /companies/{companySlug}/transactions/{transactionId}
 	GetTransaction(ctx context.Context, params GetTransactionParams) (*Transaction, error)
@@ -918,8 +917,8 @@ type Invoker interface {
 	SendOffer(ctx context.Context, request *SendOfferRequest, params SendOfferParams) error
 	// SettledSale invokes settledSale operation.
 	//
-	// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten
-	// betaling" in the GUI. It is possible to change the date of settlement by sending a new settledDate.
+	// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten betaling"
+	// in the GUI. It is possible to change the date of settlement by sending a new settledDate.
 	//
 	// PATCH /companies/{companySlug}/sales/{saleId}/settled
 	SettledSale(ctx context.Context, params SettledSaleParams) (*SaleResult, error)
@@ -949,8 +948,8 @@ type Invoker interface {
 	UpdateCreditNoteDraft(ctx context.Context, request *InvoiceishDraftRequest, params UpdateCreditNoteDraftParams) (*UpdateCreditNoteDraftCreated, error)
 	// UpdateInvoice invokes updateInvoice operation.
 	//
-	// Updates invoice with provided id. It is possible to update the due date of an invoice
-	// as well as if the invoice was sent manually, outside of Fiken.
+	// Updates invoice with provided id. It is possible to update the due date of an invoice as well as if
+	// the invoice was sent manually, outside of Fiken.
 	//
 	// PATCH /companies/{companySlug}/invoices/{invoiceId}
 	UpdateInvoice(ctx context.Context, request *UpdateInvoiceRequest, params UpdateInvoiceParams) (*UpdateInvoiceOK, error)
@@ -1191,7 +1190,13 @@ func (c *Client) sendAddAttachmentToContact(ctx context.Context, request OptAddA
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToContactResponse(resp)
@@ -1340,7 +1345,13 @@ func (c *Client) sendAddAttachmentToCreditNoteDraft(ctx context.Context, request
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToCreditNoteDraftResponse(resp)
@@ -1489,7 +1500,13 @@ func (c *Client) sendAddAttachmentToInvoice(ctx context.Context, request OptAddA
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToInvoiceResponse(resp)
@@ -1638,7 +1655,13 @@ func (c *Client) sendAddAttachmentToInvoiceDraft(ctx context.Context, request Op
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToInvoiceDraftResponse(resp)
@@ -1787,7 +1810,13 @@ func (c *Client) sendAddAttachmentToJournalEntry(ctx context.Context, request Op
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToJournalEntryResponse(resp)
@@ -1936,7 +1965,13 @@ func (c *Client) sendAddAttachmentToOfferDraft(ctx context.Context, request OptA
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToOfferDraftResponse(resp)
@@ -2085,7 +2120,13 @@ func (c *Client) sendAddAttachmentToOrderConfirmationDraft(ctx context.Context, 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToOrderConfirmationDraftResponse(resp)
@@ -2272,7 +2313,13 @@ func (c *Client) sendAddAttachmentToPurchase(ctx context.Context, request OptAdd
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToPurchaseResponse(resp)
@@ -2421,7 +2468,13 @@ func (c *Client) sendAddAttachmentToPurchaseDraft(ctx context.Context, request O
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToPurchaseDraftResponse(resp)
@@ -2608,7 +2661,13 @@ func (c *Client) sendAddAttachmentToSale(ctx context.Context, request OptAddAtta
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToSaleResponse(resp)
@@ -2757,7 +2816,13 @@ func (c *Client) sendAddAttachmentToSaleDraft(ctx context.Context, request OptAd
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddAttachmentToSaleDraftResponse(resp)
@@ -2906,7 +2971,13 @@ func (c *Client) sendAddContactPersonToContact(ctx context.Context, request *Con
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeAddContactPersonToContactResponse(resp)
@@ -3036,7 +3107,13 @@ func (c *Client) sendCreateActivity(ctx context.Context, request *ActivityReques
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateActivityResponse(resp)
@@ -3050,9 +3127,8 @@ func (c *Client) sendCreateActivity(ctx context.Context, request *ActivityReques
 // CreateBankAccount invokes createBankAccount operation.
 //
 // Creates a new bank account. The Location response header returns the URL of the newly created bank
-// account.
-// Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The field
-// "foreignService" should only be filled out for accounts of type FOREIGN.
+// account. Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The
+// field "foreignService" should only be filled out for accounts of type FOREIGN.
 //
 // POST /companies/{companySlug}/bankAccounts
 func (c *Client) CreateBankAccount(ctx context.Context, request *BankAccountRequest, params CreateBankAccountParams) (*CreateBankAccountCreated, error) {
@@ -3169,7 +3245,13 @@ func (c *Client) sendCreateBankAccount(ctx context.Context, request *BankAccount
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateBankAccountResponse(resp)
@@ -3299,7 +3381,13 @@ func (c *Client) sendCreateContact(ctx context.Context, request *Contact, params
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateContactResponse(resp)
@@ -3431,7 +3519,13 @@ func (c *Client) sendCreateCreditNoteCounter(ctx context.Context, request OptCou
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateCreditNoteCounterResponse(resp)
@@ -3562,7 +3656,13 @@ func (c *Client) sendCreateCreditNoteDraft(ctx context.Context, request *Invoice
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateCreditNoteDraftResponse(resp)
@@ -3708,7 +3808,13 @@ func (c *Client) sendCreateCreditNoteFromDraft(ctx context.Context, params Creat
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateCreditNoteFromDraftResponse(resp)
@@ -3838,7 +3944,13 @@ func (c *Client) sendCreateFullCreditNote(ctx context.Context, request *FullCred
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateFullCreditNoteResponse(resp)
@@ -3968,7 +4080,13 @@ func (c *Client) sendCreateGeneralJournalEntry(ctx context.Context, request *Gen
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateGeneralJournalEntryResponse(resp)
@@ -4098,7 +4216,13 @@ func (c *Client) sendCreateInboxDocument(ctx context.Context, request *CreateInb
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInboxDocumentResponse(resp)
@@ -4111,17 +4235,13 @@ func (c *Client) sendCreateInboxDocument(ctx context.Context, request *CreateInb
 
 // CreateInvoice invokes createInvoice operation.
 //
-// Creates an invoice. This corresponds to "Ny faktura" in Fiken.
-// There are two types of invoice lines that can be added to an invoice line: product line or free
-// text line.
-// Provide a product Id if you are invoicing a product. All information regarding the price and VAT
-// for this product will be added to the invoice.
-// It is however also possible to override the unit amount by sending information in both fields
-// "productId" and "unitAmount".
-// An invoice line can also be a free text line meaning that no existing product will be associated
-// with the invoiced line.
-// In this case all information regarding the price and VAT of the product or service to be invoiced
-// must be provided.
+// Creates an invoice. This corresponds to "Ny faktura" in Fiken. There are two types of invoice lines
+// that can be added to an invoice line: product line or free text line. Provide a product Id if you
+// are invoicing a product. All information regarding the price and VAT for this product will be added
+// to the invoice. It is however also possible to override the unit amount by sending information in
+// both fields "productId" and "unitAmount". An invoice line can also be a free text line meaning that
+// no existing product will be associated with the invoiced line. In this case all information
+// regarding the price and VAT of the product or service to be invoiced must be provided.
 //
 // POST /companies/{companySlug}/invoices
 func (c *Client) CreateInvoice(ctx context.Context, request *InvoiceRequest, params CreateInvoiceParams) (*CreateInvoiceCreated, error) {
@@ -4238,7 +4358,13 @@ func (c *Client) sendCreateInvoice(ctx context.Context, request *InvoiceRequest,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceResponse(resp)
@@ -4370,7 +4496,13 @@ func (c *Client) sendCreateInvoiceCounter(ctx context.Context, request OptCounte
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceCounterResponse(resp)
@@ -4500,7 +4632,13 @@ func (c *Client) sendCreateInvoiceDraft(ctx context.Context, request *Invoiceish
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceDraftResponse(resp)
@@ -4646,7 +4784,13 @@ func (c *Client) sendCreateInvoiceDraftFromOrderConfirmation(ctx context.Context
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceDraftFromOrderConfirmationResponse(resp)
@@ -4660,17 +4804,21 @@ func (c *Client) sendCreateInvoiceDraftFromOrderConfirmation(ctx context.Context
 // CreateInvoiceDraftFromTimeEntries invokes createInvoiceDraftFromTimeEntries operation.
 //
 // Creates an invoice draft from one or more time entries.
-// The time entries will be converted to invoice lines based on the specified grouping.
-// After successful creation, the included time entries will be marked as "in draft" and
-// cannot be modified until the draft is deleted or converted to an invoice.
-// **Grouping options:**
-// - activity: One invoice line per activity, summing hours across all selected time entries for that
-// activity
-// - activityAndPerson: One invoice line per unique activity+person combination
-// - none: Each time entry becomes its own invoice line
-// **Line description:**
-// By default, the invoice line description is generated from the activity name and total hours.
-// If `includeTimeEntryDescriptions` is true, individual time entry descriptions are appended.
+//
+// The time entries will be converted to invoice lines based on the specified grouping. After
+// successful creation, the included time entries will be marked as "in draft" and cannot be modified
+// until the draft is deleted or converted to an invoice.
+//
+// Grouping options:
+//
+//   - activity: One invoice line per activity, summing hours across all selected time entries for that
+//     activity
+//   - activityAndPerson: One invoice line per unique activity+person combination
+//   - none: Each time entry becomes its own invoice line
+//
+// Line description: By default, the invoice line description is generated from the activity name and
+// total hours. If `includeTimeEntryDescriptions` is true, individual time entry descriptions are
+// appended.
 //
 // POST /companies/{companySlug}/timeEntries/createInvoiceDraft
 func (c *Client) CreateInvoiceDraftFromTimeEntries(ctx context.Context, request *TimeEntryInvoiceDraftRequest, params CreateInvoiceDraftFromTimeEntriesParams) (*InvoiceishDraftResultHeaders, error) {
@@ -4787,7 +4935,13 @@ func (c *Client) sendCreateInvoiceDraftFromTimeEntries(ctx context.Context, requ
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceDraftFromTimeEntriesResponse(resp)
@@ -4933,7 +5087,13 @@ func (c *Client) sendCreateInvoiceFromDraft(ctx context.Context, params CreateIn
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateInvoiceFromDraftResponse(resp)
@@ -5065,7 +5225,13 @@ func (c *Client) sendCreateOfferCounter(ctx context.Context, request OptCounter,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOfferCounterResponse(resp)
@@ -5195,7 +5361,13 @@ func (c *Client) sendCreateOfferDraft(ctx context.Context, request *InvoiceishDr
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOfferDraftResponse(resp)
@@ -5341,7 +5513,13 @@ func (c *Client) sendCreateOfferFromDraft(ctx context.Context, params CreateOffe
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOfferFromDraftResponse(resp)
@@ -5473,7 +5651,13 @@ func (c *Client) sendCreateOrderConfirmationCounter(ctx context.Context, request
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOrderConfirmationCounterResponse(resp)
@@ -5603,7 +5787,13 @@ func (c *Client) sendCreateOrderConfirmationDraft(ctx context.Context, request *
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOrderConfirmationDraftResponse(resp)
@@ -5749,7 +5939,13 @@ func (c *Client) sendCreateOrderConfirmationFromDraft(ctx context.Context, param
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateOrderConfirmationFromDraftResponse(resp)
@@ -5879,7 +6075,13 @@ func (c *Client) sendCreatePartialCreditNote(ctx context.Context, request *Parti
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreatePartialCreditNoteResponse(resp)
@@ -6009,7 +6211,13 @@ func (c *Client) sendCreateProduct(ctx context.Context, request *Product, params
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateProductResponse(resp)
@@ -6139,7 +6347,13 @@ func (c *Client) sendCreateProductSalesReport(ctx context.Context, request *Prod
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateProductSalesReportResponse(resp)
@@ -6269,7 +6483,13 @@ func (c *Client) sendCreateProject(ctx context.Context, request *ProjectRequest,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateProjectResponse(resp)
@@ -6399,7 +6619,13 @@ func (c *Client) sendCreatePurchase(ctx context.Context, request *PurchaseReques
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreatePurchaseResponse(resp)
@@ -6529,7 +6755,13 @@ func (c *Client) sendCreatePurchaseDraft(ctx context.Context, request *DraftRequ
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreatePurchaseDraftResponse(resp)
@@ -6675,7 +6907,13 @@ func (c *Client) sendCreatePurchaseFromDraft(ctx context.Context, params CreateP
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreatePurchaseFromDraftResponse(resp)
@@ -6824,7 +7062,13 @@ func (c *Client) sendCreatePurchasePayment(ctx context.Context, request *Payment
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreatePurchasePaymentResponse(resp)
@@ -6838,8 +7082,8 @@ func (c *Client) sendCreatePurchasePayment(ctx context.Context, request *Payment
 // CreateSale invokes createSale operation.
 //
 // Creates a new sale. This corresponds to "Annet salg" in Fiken and should be used when the invoice
-// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints
-// should be used.
+// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints should
+// be used.
 //
 // POST /companies/{companySlug}/sales
 func (c *Client) CreateSale(ctx context.Context, request *SaleRequest, params CreateSaleParams) (*CreateSaleCreated, error) {
@@ -6956,7 +7200,13 @@ func (c *Client) sendCreateSale(ctx context.Context, request *SaleRequest, param
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateSaleResponse(resp)
@@ -7086,7 +7336,13 @@ func (c *Client) sendCreateSaleDraft(ctx context.Context, request *DraftRequest,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateSaleDraftResponse(resp)
@@ -7232,7 +7488,13 @@ func (c *Client) sendCreateSaleFromDraft(ctx context.Context, params CreateSaleF
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateSaleFromDraftResponse(resp)
@@ -7381,7 +7643,13 @@ func (c *Client) sendCreateSalePayment(ctx context.Context, request *Payment, pa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateSalePaymentResponse(resp)
@@ -7511,7 +7779,13 @@ func (c *Client) sendCreateTimeEntry(ctx context.Context, request *TimeEntryRequ
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeCreateTimeEntryResponse(resp)
@@ -7525,13 +7799,16 @@ func (c *Client) sendCreateTimeEntry(ctx context.Context, request *TimeEntryRequ
 // DeleteActivity invokes deleteActivity operation.
 //
 // Delete or archive activity with specified id.
-// **Behavior:**
-// - If the activity has no associated time entries and is not set as a default activity on any
-// project, it will be permanently deleted
-// - If the activity has associated time entries or is set as a default activity on a project, it
-// will be **archived** instead of deleted
-// - Archived activities are hidden from selection lists but remain accessible for historical time
-// entries
+//
+// Behavior:
+//
+//   - If the activity has no associated time entries and is not set as a default activity on any
+//     project, it will be permanently deleted
+//   - If the activity has associated time entries or is set as a default activity on a project, it will
+//     be archived instead of deleted
+//   - Archived activities are hidden from selection lists but remain accessible for historical time
+//     entries
+//
 // The response is 204 in both cases (deleted or archived).
 //
 // DELETE /companies/{companySlug}/activities/{activityId}
@@ -7664,7 +7941,13 @@ func (c *Client) sendDeleteActivity(ctx context.Context, params DeleteActivityPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteActivityResponse(resp)
@@ -7677,8 +7960,8 @@ func (c *Client) sendDeleteActivity(ctx context.Context, params DeleteActivityPa
 
 // DeleteContact invokes deleteContact operation.
 //
-// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not
-// possible to delete will set the contact to inactive.
+// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not possible
+// to delete will set the contact to inactive.
 //
 // DELETE /companies/{companySlug}/contacts/{contactId}
 func (c *Client) DeleteContact(ctx context.Context, params DeleteContactParams) (DeleteContactRes, error) {
@@ -7810,7 +8093,13 @@ func (c *Client) sendDeleteContact(ctx context.Context, params DeleteContactPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteContactResponse(resp)
@@ -7974,7 +8263,13 @@ func (c *Client) sendDeleteContactContactPerson(ctx context.Context, params Dele
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteContactContactPersonResponse(resp)
@@ -8119,7 +8414,13 @@ func (c *Client) sendDeleteCreditNoteDraft(ctx context.Context, params DeleteCre
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteCreditNoteDraftResponse(resp)
@@ -8264,7 +8565,13 @@ func (c *Client) sendDeleteInvoiceDraft(ctx context.Context, params DeleteInvoic
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteInvoiceDraftResponse(resp)
@@ -8409,7 +8716,13 @@ func (c *Client) sendDeleteOfferDraft(ctx context.Context, params DeleteOfferDra
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteOfferDraftResponse(resp)
@@ -8554,7 +8867,13 @@ func (c *Client) sendDeleteOrderConfirmationDraft(ctx context.Context, params De
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteOrderConfirmationDraftResponse(resp)
@@ -8699,7 +9018,13 @@ func (c *Client) sendDeleteProduct(ctx context.Context, params DeleteProductPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteProductResponse(resp)
@@ -8844,7 +9169,13 @@ func (c *Client) sendDeleteProject(ctx context.Context, params DeleteProjectPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteProjectResponse(resp)
@@ -9009,7 +9340,13 @@ func (c *Client) sendDeletePurchase(ctx context.Context, params DeletePurchasePa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeletePurchaseResponse(resp)
@@ -9154,7 +9491,13 @@ func (c *Client) sendDeletePurchaseDraft(ctx context.Context, params DeletePurch
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeletePurchaseDraftResponse(resp)
@@ -9167,8 +9510,8 @@ func (c *Client) sendDeletePurchaseDraft(ctx context.Context, params DeletePurch
 
 // DeleteSale invokes deleteSale operation.
 //
-// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created
-// and the "deleted" property is set to true.
+// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created and
+// the "deleted" property is set to true.
 //
 // PATCH /companies/{companySlug}/sales/{saleId}/delete
 func (c *Client) DeleteSale(ctx context.Context, params DeleteSaleParams) (*SaleResult, error) {
@@ -9319,7 +9662,13 @@ func (c *Client) sendDeleteSale(ctx context.Context, params DeleteSaleParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteSaleResponse(resp)
@@ -9464,7 +9813,13 @@ func (c *Client) sendDeleteSaleDraft(ctx context.Context, params DeleteSaleDraft
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteSaleDraftResponse(resp)
@@ -9478,9 +9833,12 @@ func (c *Client) sendDeleteSaleDraft(ctx context.Context, params DeleteSaleDraft
 // DeleteTimeEntry invokes deleteTimeEntry operation.
 //
 // Delete time entry with specified id.
-// **Restrictions:**
-// - Cannot delete if the time entry has been invoiced
-// - Cannot delete if the time entry belongs to a closed accounting period
+//
+// Restrictions:
+//
+//   - Cannot delete if the time entry has been invoiced
+//   - Cannot delete if the time entry belongs to a closed accounting period
+//
 // Returns 400 Bad Request if deletion is not allowed due to these restrictions.
 //
 // DELETE /companies/{companySlug}/timeEntries/{timeEntryId}
@@ -9613,7 +9971,13 @@ func (c *Client) sendDeleteTimeEntry(ctx context.Context, params DeleteTimeEntry
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteTimeEntryResponse(resp)
@@ -9627,8 +9991,7 @@ func (c *Client) sendDeleteTimeEntry(ctx context.Context, params DeleteTimeEntry
 // DeleteTransaction invokes deleteTransaction operation.
 //
 // Sets the deleted flag for a transaction. The transaction is not deleted, but a reverse transaction
-// is created and
-// the "deleted" property is set to true.
+// is created and the "deleted" property is set to true.
 //
 // PATCH /companies/{companySlug}/transactions/{transactionId}/delete
 func (c *Client) DeleteTransaction(ctx context.Context, params DeleteTransactionParams) (*Transaction, error) {
@@ -9779,7 +10142,13 @@ func (c *Client) sendDeleteTransaction(ctx context.Context, params DeleteTransac
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeDeleteTransactionResponse(resp)
@@ -9792,11 +10161,8 @@ func (c *Client) sendDeleteTransaction(ctx context.Context, params DeleteTransac
 
 // GetAccount invokes getAccount operation.
 //
-// Retrieves the specified bookkeping account.
-// An account is a string with either four digits, or four digits, a colon and five digits
-// ("reskontro").
-// Examples:
-// 3020 and 1500:10001.
+// Retrieves the specified bookkeping account. An account is a string with either four digits, or four
+// digits, a colon and five digits ("reskontro"). Examples: 3020 and 1500:10001.
 //
 // GET /companies/{companySlug}/accounts/{accountCode}
 func (c *Client) GetAccount(ctx context.Context, params GetAccountParams) (*Account, error) {
@@ -9928,7 +10294,13 @@ func (c *Client) sendGetAccount(ctx context.Context, params GetAccountParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetAccountResponse(resp)
@@ -10091,7 +10463,13 @@ func (c *Client) sendGetAccountBalance(ctx context.Context, params GetAccountBal
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetAccountBalanceResponse(resp)
@@ -10104,11 +10482,9 @@ func (c *Client) sendGetAccountBalance(ctx context.Context, params GetAccountBal
 
 // GetAccountBalances invokes getAccountBalances operation.
 //
-// Retrieves the bookkeeping accounts and closing balances for a given date.
-// An account is a string with either four digits, or four digits, a colon and five digits
-// ("reskontro").
-// Examples:
-// 3020 and 1500:10001.
+// Retrieves the bookkeeping accounts and closing balances for a given date. An account is a string
+// with either four digits, or four digits, a colon and five digits ("reskontro"). Examples: 3020 and
+// 1500:10001.
 //
 // GET /companies/{companySlug}/accountBalances
 func (c *Client) GetAccountBalances(ctx context.Context, params GetAccountBalancesParams) (*GetAccountBalancesOKHeaders, error) {
@@ -10308,7 +10684,13 @@ func (c *Client) sendGetAccountBalances(ctx context.Context, params GetAccountBa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetAccountBalancesResponse(resp)
@@ -10524,7 +10906,13 @@ func (c *Client) sendGetAccounts(ctx context.Context, params GetAccountsParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetAccountsResponse(resp)
@@ -10723,7 +11111,13 @@ func (c *Client) sendGetActivities(ctx context.Context, params GetActivitiesPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetActivitiesResponse(resp)
@@ -10868,7 +11262,13 @@ func (c *Client) sendGetActivity(ctx context.Context, params GetActivityParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetActivityResponse(resp)
@@ -11013,7 +11413,13 @@ func (c *Client) sendGetBankAccount(ctx context.Context, params GetBankAccountPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetBankAccountResponse(resp)
@@ -11195,7 +11601,13 @@ func (c *Client) sendGetBankAccounts(ctx context.Context, params GetBankAccounts
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetBankAccountsResponse(resp)
@@ -11377,7 +11789,13 @@ func (c *Client) sendGetBankBalances(ctx context.Context, params GetBankBalances
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetBankBalancesResponse(resp)
@@ -11391,8 +11809,8 @@ func (c *Client) sendGetBankBalances(ctx context.Context, params GetBankBalances
 // GetCompanies invokes getCompanies operation.
 //
 // Returns all companies from the system that the user has access to. The user can update which
-// companies a given app has
-// access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har gitt tilgang til.
+// companies a given app has access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har
+// gitt tilgang til.
 //
 // GET /companies
 func (c *Client) GetCompanies(ctx context.Context, params GetCompaniesParams) (*GetCompaniesOKHeaders, error) {
@@ -11542,7 +11960,13 @@ func (c *Client) sendGetCompanies(ctx context.Context, params GetCompaniesParams
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCompaniesResponse(resp)
@@ -11668,7 +12092,13 @@ func (c *Client) sendGetCompany(ctx context.Context, params GetCompanyParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCompanyResponse(resp)
@@ -11682,8 +12112,7 @@ func (c *Client) sendGetCompany(ctx context.Context, params GetCompanyParams) (r
 // GetContact invokes getContact operation.
 //
 // Retrieves specified contact. ContactId is returned with a GET contacts call as the first returned
-// field.
-// ContactId is returned in the Location response header for POST contact.
+// field. ContactId is returned in the Location response header for POST contact.
 //
 // GET /companies/{companySlug}/contacts/{contactId}
 func (c *Client) GetContact(ctx context.Context, params GetContactParams) (*Contact, error) {
@@ -11815,7 +12244,13 @@ func (c *Client) sendGetContact(ctx context.Context, params GetContactParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetContactResponse(resp)
@@ -11961,7 +12396,13 @@ func (c *Client) sendGetContactContactPerson(ctx context.Context, params GetCont
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetContactContactPersonResponse(resp)
@@ -12125,7 +12566,13 @@ func (c *Client) sendGetContactPerson(ctx context.Context, params GetContactPers
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetContactPersonResponse(resp)
@@ -12681,7 +13128,13 @@ func (c *Client) sendGetContacts(ctx context.Context, params GetContactsParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetContactsResponse(resp)
@@ -12826,7 +13279,13 @@ func (c *Client) sendGetCreditNote(ctx context.Context, params GetCreditNotePara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNoteResponse(resp)
@@ -12953,7 +13412,13 @@ func (c *Client) sendGetCreditNoteCounter(ctx context.Context, params GetCreditN
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNoteCounterResponse(resp)
@@ -13098,7 +13563,13 @@ func (c *Client) sendGetCreditNoteDraft(ctx context.Context, params GetCreditNot
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNoteDraftResponse(resp)
@@ -13244,7 +13715,13 @@ func (c *Client) sendGetCreditNoteDraftAttachments(ctx context.Context, params G
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNoteDraftAttachmentsResponse(resp)
@@ -13409,7 +13886,13 @@ func (c *Client) sendGetCreditNoteDrafts(ctx context.Context, params GetCreditNo
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNoteDraftsResponse(resp)
@@ -13795,7 +14278,13 @@ func (c *Client) sendGetCreditNotes(ctx context.Context, params GetCreditNotesPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetCreditNotesResponse(resp)
@@ -13960,7 +14449,13 @@ func (c *Client) sendGetGroups(ctx context.Context, params GetGroupsParams) (res
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetGroupsResponse(resp)
@@ -14176,7 +14671,13 @@ func (c *Client) sendGetInbox(ctx context.Context, params GetInboxParams) (res *
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInboxResponse(resp)
@@ -14321,7 +14822,13 @@ func (c *Client) sendGetInboxDocument(ctx context.Context, params GetInboxDocume
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInboxDocumentResponse(resp)
@@ -14466,7 +14973,13 @@ func (c *Client) sendGetInvoice(ctx context.Context, params GetInvoiceParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceResponse(resp)
@@ -14612,7 +15125,13 @@ func (c *Client) sendGetInvoiceAttachments(ctx context.Context, params GetInvoic
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceAttachmentsResponse(resp)
@@ -14739,7 +15258,13 @@ func (c *Client) sendGetInvoiceCounter(ctx context.Context, params GetInvoiceCou
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceCounterResponse(resp)
@@ -14884,7 +15409,13 @@ func (c *Client) sendGetInvoiceDraft(ctx context.Context, params GetInvoiceDraft
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceDraftResponse(resp)
@@ -15030,7 +15561,13 @@ func (c *Client) sendGetInvoiceDraftAttachments(ctx context.Context, params GetI
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceDraftAttachmentsResponse(resp)
@@ -15229,7 +15766,13 @@ func (c *Client) sendGetInvoiceDrafts(ctx context.Context, params GetInvoiceDraf
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoiceDraftsResponse(resp)
@@ -15735,7 +16278,13 @@ func (c *Client) sendGetInvoices(ctx context.Context, params GetInvoicesParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetInvoicesResponse(resp)
@@ -16155,7 +16704,13 @@ func (c *Client) sendGetJournalEntries(ctx context.Context, params GetJournalEnt
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetJournalEntriesResponse(resp)
@@ -16300,7 +16855,13 @@ func (c *Client) sendGetJournalEntry(ctx context.Context, params GetJournalEntry
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetJournalEntryResponse(resp)
@@ -16446,7 +17007,13 @@ func (c *Client) sendGetJournalEntryAttachments(ctx context.Context, params GetJ
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetJournalEntryAttachmentsResponse(resp)
@@ -16591,7 +17158,13 @@ func (c *Client) sendGetOffer(ctx context.Context, params GetOfferParams) (res *
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOfferResponse(resp)
@@ -16718,7 +17291,13 @@ func (c *Client) sendGetOfferCounter(ctx context.Context, params GetOfferCounter
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOfferCounterResponse(resp)
@@ -16863,7 +17442,13 @@ func (c *Client) sendGetOfferDraft(ctx context.Context, params GetOfferDraftPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOfferDraftResponse(resp)
@@ -17009,7 +17594,13 @@ func (c *Client) sendGetOfferDraftAttachments(ctx context.Context, params GetOff
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOfferDraftAttachmentsResponse(resp)
@@ -17174,7 +17765,13 @@ func (c *Client) sendGetOfferDrafts(ctx context.Context, params GetOfferDraftsPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOfferDraftsResponse(resp)
@@ -17339,7 +17936,13 @@ func (c *Client) sendGetOffers(ctx context.Context, params GetOffersParams) (res
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOffersResponse(resp)
@@ -17484,7 +18087,13 @@ func (c *Client) sendGetOrderConfirmation(ctx context.Context, params GetOrderCo
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationResponse(resp)
@@ -17611,7 +18220,13 @@ func (c *Client) sendGetOrderConfirmationCounter(ctx context.Context, params Get
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationCounterResponse(resp)
@@ -17756,7 +18371,13 @@ func (c *Client) sendGetOrderConfirmationDraft(ctx context.Context, params GetOr
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationDraftResponse(resp)
@@ -17902,7 +18523,13 @@ func (c *Client) sendGetOrderConfirmationDraftAttachments(ctx context.Context, p
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationDraftAttachmentsResponse(resp)
@@ -18067,7 +18694,13 @@ func (c *Client) sendGetOrderConfirmationDrafts(ctx context.Context, params GetO
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationDraftsResponse(resp)
@@ -18232,7 +18865,13 @@ func (c *Client) sendGetOrderConfirmations(ctx context.Context, params GetOrderC
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetOrderConfirmationsResponse(resp)
@@ -18377,7 +19016,13 @@ func (c *Client) sendGetProduct(ctx context.Context, params GetProductParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetProductResponse(resp)
@@ -18763,7 +19408,13 @@ func (c *Client) sendGetProducts(ctx context.Context, params GetProductsParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetProductsResponse(resp)
@@ -18908,7 +19559,13 @@ func (c *Client) sendGetProject(ctx context.Context, params GetProjectParams) (r
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetProjectResponse(resp)
@@ -19124,7 +19781,13 @@ func (c *Client) sendGetProjects(ctx context.Context, params GetProjectsParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetProjectsResponse(resp)
@@ -19269,7 +19932,13 @@ func (c *Client) sendGetPurchase(ctx context.Context, params GetPurchaseParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchaseResponse(resp)
@@ -19415,7 +20084,13 @@ func (c *Client) sendGetPurchaseAttachments(ctx context.Context, params GetPurch
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchaseAttachmentsResponse(resp)
@@ -19560,7 +20235,13 @@ func (c *Client) sendGetPurchaseDraft(ctx context.Context, params GetPurchaseDra
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchaseDraftResponse(resp)
@@ -19706,7 +20387,13 @@ func (c *Client) sendGetPurchaseDraftAttachments(ctx context.Context, params Get
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchaseDraftAttachmentsResponse(resp)
@@ -19871,7 +20558,13 @@ func (c *Client) sendGetPurchaseDrafts(ctx context.Context, params GetPurchaseDr
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchaseDraftsResponse(resp)
@@ -20035,7 +20728,13 @@ func (c *Client) sendGetPurchasePayment(ctx context.Context, params GetPurchaseP
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchasePaymentResponse(resp)
@@ -20181,7 +20880,13 @@ func (c *Client) sendGetPurchasePayments(ctx context.Context, params GetPurchase
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchasePaymentsResponse(resp)
@@ -20550,7 +21255,13 @@ func (c *Client) sendGetPurchases(ctx context.Context, params GetPurchasesParams
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetPurchasesResponse(resp)
@@ -20695,7 +21406,13 @@ func (c *Client) sendGetSale(ctx context.Context, params GetSaleParams) (res *Sa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSaleResponse(resp)
@@ -20841,7 +21558,13 @@ func (c *Client) sendGetSaleAttachments(ctx context.Context, params GetSaleAttac
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSaleAttachmentsResponse(resp)
@@ -20986,7 +21709,13 @@ func (c *Client) sendGetSaleDraft(ctx context.Context, params GetSaleDraftParams
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSaleDraftResponse(resp)
@@ -21132,7 +21861,13 @@ func (c *Client) sendGetSaleDraftAttachments(ctx context.Context, params GetSale
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSaleDraftAttachmentsResponse(resp)
@@ -21297,7 +22032,13 @@ func (c *Client) sendGetSaleDrafts(ctx context.Context, params GetSaleDraftsPara
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSaleDraftsResponse(resp)
@@ -21461,7 +22202,13 @@ func (c *Client) sendGetSalePayment(ctx context.Context, params GetSalePaymentPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSalePaymentResponse(resp)
@@ -21607,7 +22354,13 @@ func (c *Client) sendGetSalePayments(ctx context.Context, params GetSalePayments
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSalePaymentsResponse(resp)
@@ -21993,7 +22746,13 @@ func (c *Client) sendGetSales(ctx context.Context, params GetSalesParams) (res *
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetSalesResponse(resp)
@@ -22311,7 +23070,13 @@ func (c *Client) sendGetTimeEntries(ctx context.Context, params GetTimeEntriesPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTimeEntriesResponse(resp)
@@ -22456,7 +23221,13 @@ func (c *Client) sendGetTimeEntry(ctx context.Context, params GetTimeEntryParams
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTimeEntryResponse(resp)
@@ -22601,7 +23372,13 @@ func (c *Client) sendGetTimeUser(ctx context.Context, params GetTimeUserParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTimeUserResponse(resp)
@@ -22800,7 +23577,13 @@ func (c *Client) sendGetTimeUsers(ctx context.Context, params GetTimeUsersParams
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTimeUsersResponse(resp)
@@ -22813,8 +23596,8 @@ func (c *Client) sendGetTimeUsers(ctx context.Context, params GetTimeUsersParams
 
 // GetTransaction invokes getTransaction operation.
 //
-// Returns given transaction with associated id. Transaction id is returned in GET calls for
-// sales, purchases, and journal entries.
+// Returns given transaction with associated id. Transaction id is returned in GET calls for sales,
+// purchases, and journal entries.
 //
 // GET /companies/{companySlug}/transactions/{transactionId}
 func (c *Client) GetTransaction(ctx context.Context, params GetTransactionParams) (*Transaction, error) {
@@ -22946,7 +23729,13 @@ func (c *Client) sendGetTransaction(ctx context.Context, params GetTransactionPa
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTransactionResponse(resp)
@@ -23281,7 +24070,13 @@ func (c *Client) sendGetTransactions(ctx context.Context, params GetTransactions
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetTransactionsResponse(resp)
@@ -23389,7 +24184,13 @@ func (c *Client) sendGetUser(ctx context.Context) (res *Userinfo, err error) {
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeGetUserResponse(resp)
@@ -23519,7 +24320,13 @@ func (c *Client) sendSendCreditNote(ctx context.Context, request *SendCreditNote
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeSendCreditNoteResponse(resp)
@@ -23649,7 +24456,13 @@ func (c *Client) sendSendInvoice(ctx context.Context, request *SendInvoiceReques
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeSendInvoiceResponse(resp)
@@ -23779,7 +24592,13 @@ func (c *Client) sendSendOffer(ctx context.Context, request *SendOfferRequest, p
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeSendOfferResponse(resp)
@@ -23792,8 +24611,8 @@ func (c *Client) sendSendOffer(ctx context.Context, request *SendOfferRequest, p
 
 // SettledSale invokes settledSale operation.
 //
-// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten
-// betaling" in the GUI. It is possible to change the date of settlement by sending a new settledDate.
+// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten betaling"
+// in the GUI. It is possible to change the date of settlement by sending a new settledDate.
 //
 // PATCH /companies/{companySlug}/sales/{saleId}/settled
 func (c *Client) SettledSale(ctx context.Context, params SettledSaleParams) (*SaleResult, error) {
@@ -23944,7 +24763,13 @@ func (c *Client) sendSettledSale(ctx context.Context, params SettledSaleParams) 
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeSettledSaleResponse(resp)
@@ -24092,7 +24917,13 @@ func (c *Client) sendUpdateActivity(ctx context.Context, request *UpdateActivity
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateActivityResponse(resp)
@@ -24240,7 +25071,13 @@ func (c *Client) sendUpdateContact(ctx context.Context, request *Contact, params
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateContactResponse(resp)
@@ -24407,7 +25244,13 @@ func (c *Client) sendUpdateContactContactPerson(ctx context.Context, request *Co
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateContactContactPersonResponse(resp)
@@ -24555,7 +25398,13 @@ func (c *Client) sendUpdateCreditNoteDraft(ctx context.Context, request *Invoice
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateCreditNoteDraftResponse(resp)
@@ -24568,8 +25417,8 @@ func (c *Client) sendUpdateCreditNoteDraft(ctx context.Context, request *Invoice
 
 // UpdateInvoice invokes updateInvoice operation.
 //
-// Updates invoice with provided id. It is possible to update the due date of an invoice
-// as well as if the invoice was sent manually, outside of Fiken.
+// Updates invoice with provided id. It is possible to update the due date of an invoice as well as if
+// the invoice was sent manually, outside of Fiken.
 //
 // PATCH /companies/{companySlug}/invoices/{invoiceId}
 func (c *Client) UpdateInvoice(ctx context.Context, request *UpdateInvoiceRequest, params UpdateInvoiceParams) (*UpdateInvoiceOK, error) {
@@ -24704,7 +25553,13 @@ func (c *Client) sendUpdateInvoice(ctx context.Context, request *UpdateInvoiceRe
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateInvoiceResponse(resp)
@@ -24852,7 +25707,13 @@ func (c *Client) sendUpdateInvoiceDraft(ctx context.Context, request *Invoiceish
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateInvoiceDraftResponse(resp)
@@ -25000,7 +25861,13 @@ func (c *Client) sendUpdateOfferDraft(ctx context.Context, request *InvoiceishDr
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateOfferDraftResponse(resp)
@@ -25148,7 +26015,13 @@ func (c *Client) sendUpdateOrderConfirmationDraft(ctx context.Context, request *
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateOrderConfirmationDraftResponse(resp)
@@ -25296,7 +26169,13 @@ func (c *Client) sendUpdateProduct(ctx context.Context, request *Product, params
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateProductResponse(resp)
@@ -25444,7 +26323,13 @@ func (c *Client) sendUpdateProject(ctx context.Context, request *UpdateProjectRe
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateProjectResponse(resp)
@@ -25592,7 +26477,13 @@ func (c *Client) sendUpdatePurchaseDraft(ctx context.Context, request *DraftRequ
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdatePurchaseDraftResponse(resp)
@@ -25740,7 +26631,13 @@ func (c *Client) sendUpdateSaleDraft(ctx context.Context, request *DraftRequest,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateSaleDraftResponse(resp)
@@ -25888,7 +26785,13 @@ func (c *Client) sendUpdateTimeEntry(ctx context.Context, request *UpdateTimeEnt
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeUpdateTimeEntryResponse(resp)
@@ -26039,7 +26942,13 @@ func (c *Client) sendWriteOffSale(ctx context.Context, request *WriteOffRequest,
 		return res, errors.Wrap(err, "do request")
 	}
 	body := resp.Body
-	defer body.Close()
+	defer func() {
+		// Drain the body to EOF before closing, so the underlying
+		// connection can be reused by the Transport regardless of the
+		// response status code. See https://github.com/ogen-go/ogen/issues/1670.
+		_, _ = io.Copy(io.Discard, body)
+		_ = body.Close()
+	}()
 
 	stage = "DecodeResponse"
 	result, err := decodeWriteOffSaleResponse(resp)

@@ -89,9 +89,8 @@ type Handler interface {
 	// CreateBankAccount implements createBankAccount operation.
 	//
 	// Creates a new bank account. The Location response header returns the URL of the newly created bank
-	// account.
-	// Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The field
-	// "foreignService" should only be filled out for accounts of type FOREIGN.
+	// account. Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The
+	// field "foreignService" should only be filled out for accounts of type FOREIGN.
 	//
 	// POST /companies/{companySlug}/bankAccounts
 	CreateBankAccount(ctx context.Context, req *BankAccountRequest, params CreateBankAccountParams) (*CreateBankAccountCreated, error)
@@ -142,17 +141,13 @@ type Handler interface {
 	CreateInboxDocument(ctx context.Context, req *CreateInboxDocumentReq, params CreateInboxDocumentParams) (*CreateInboxDocumentCreated, error)
 	// CreateInvoice implements createInvoice operation.
 	//
-	// Creates an invoice. This corresponds to "Ny faktura" in Fiken.
-	// There are two types of invoice lines that can be added to an invoice line: product line or free
-	// text line.
-	// Provide a product Id if you are invoicing a product. All information regarding the price and VAT
-	// for this product will be added to the invoice.
-	// It is however also possible to override the unit amount by sending information in both fields
-	// "productId" and "unitAmount".
-	// An invoice line can also be a free text line meaning that no existing product will be associated
-	// with the invoiced line.
-	// In this case all information regarding the price and VAT of the product or service to be invoiced
-	// must be provided.
+	// Creates an invoice. This corresponds to "Ny faktura" in Fiken. There are two types of invoice lines
+	// that can be added to an invoice line: product line or free text line. Provide a product Id if you
+	// are invoicing a product. All information regarding the price and VAT for this product will be added
+	// to the invoice. It is however also possible to override the unit amount by sending information in
+	// both fields "productId" and "unitAmount". An invoice line can also be a free text line meaning that
+	// no existing product will be associated with the invoiced line. In this case all information
+	// regarding the price and VAT of the product or service to be invoiced must be provided.
 	//
 	// POST /companies/{companySlug}/invoices
 	CreateInvoice(ctx context.Context, req *InvoiceRequest, params CreateInvoiceParams) (*CreateInvoiceCreated, error)
@@ -179,17 +174,21 @@ type Handler interface {
 	// CreateInvoiceDraftFromTimeEntries implements createInvoiceDraftFromTimeEntries operation.
 	//
 	// Creates an invoice draft from one or more time entries.
-	// The time entries will be converted to invoice lines based on the specified grouping.
-	// After successful creation, the included time entries will be marked as "in draft" and
-	// cannot be modified until the draft is deleted or converted to an invoice.
-	// **Grouping options:**
-	// - activity: One invoice line per activity, summing hours across all selected time entries for that
-	// activity
-	// - activityAndPerson: One invoice line per unique activity+person combination
-	// - none: Each time entry becomes its own invoice line
-	// **Line description:**
-	// By default, the invoice line description is generated from the activity name and total hours.
-	// If `includeTimeEntryDescriptions` is true, individual time entry descriptions are appended.
+	//
+	// The time entries will be converted to invoice lines based on the specified grouping. After
+	// successful creation, the included time entries will be marked as "in draft" and cannot be modified
+	// until the draft is deleted or converted to an invoice.
+	//
+	// Grouping options:
+	//
+	//  - activity: One invoice line per activity, summing hours across all selected time entries for that
+	//    activity
+	//  - activityAndPerson: One invoice line per unique activity+person combination
+	//  - none: Each time entry becomes its own invoice line
+	//
+	// Line description: By default, the invoice line description is generated from the activity name and
+	// total hours. If `includeTimeEntryDescriptions` is true, individual time entry descriptions are
+	// appended.
 	//
 	// POST /companies/{companySlug}/timeEntries/createInvoiceDraft
 	CreateInvoiceDraftFromTimeEntries(ctx context.Context, req *TimeEntryInvoiceDraftRequest, params CreateInvoiceDraftFromTimeEntriesParams) (*InvoiceishDraftResultHeaders, error)
@@ -290,8 +289,8 @@ type Handler interface {
 	// CreateSale implements createSale operation.
 	//
 	// Creates a new sale. This corresponds to "Annet salg" in Fiken and should be used when the invoice
-	// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints
-	// should be used.
+	// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints should
+	// be used.
 	//
 	// POST /companies/{companySlug}/sales
 	CreateSale(ctx context.Context, req *SaleRequest, params CreateSaleParams) (*CreateSaleCreated, error)
@@ -322,21 +321,24 @@ type Handler interface {
 	// DeleteActivity implements deleteActivity operation.
 	//
 	// Delete or archive activity with specified id.
-	// **Behavior:**
-	// - If the activity has no associated time entries and is not set as a default activity on any
-	// project, it will be permanently deleted
-	// - If the activity has associated time entries or is set as a default activity on a project, it
-	// will be **archived** instead of deleted
-	// - Archived activities are hidden from selection lists but remain accessible for historical time
-	// entries
+	//
+	// Behavior:
+	//
+	//  - If the activity has no associated time entries and is not set as a default activity on any
+	//    project, it will be permanently deleted
+	//  - If the activity has associated time entries or is set as a default activity on a project, it will
+	//    be archived instead of deleted
+	//  - Archived activities are hidden from selection lists but remain accessible for historical time
+	//    entries
+	//
 	// The response is 204 in both cases (deleted or archived).
 	//
 	// DELETE /companies/{companySlug}/activities/{activityId}
 	DeleteActivity(ctx context.Context, params DeleteActivityParams) error
 	// DeleteContact implements deleteContact operation.
 	//
-	// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not
-	// possible to delete will set the contact to inactive.
+	// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not possible
+	// to delete will set the contact to inactive.
 	//
 	// DELETE /companies/{companySlug}/contacts/{contactId}
 	DeleteContact(ctx context.Context, params DeleteContactParams) (DeleteContactRes, error)
@@ -397,8 +399,8 @@ type Handler interface {
 	DeletePurchaseDraft(ctx context.Context, params DeletePurchaseDraftParams) error
 	// DeleteSale implements deleteSale operation.
 	//
-	// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created
-	// and the "deleted" property is set to true.
+	// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created and
+	// the "deleted" property is set to true.
 	//
 	// PATCH /companies/{companySlug}/sales/{saleId}/delete
 	DeleteSale(ctx context.Context, params DeleteSaleParams) (*SaleResult, error)
@@ -411,9 +413,12 @@ type Handler interface {
 	// DeleteTimeEntry implements deleteTimeEntry operation.
 	//
 	// Delete time entry with specified id.
-	// **Restrictions:**
-	// - Cannot delete if the time entry has been invoiced
-	// - Cannot delete if the time entry belongs to a closed accounting period
+	//
+	// Restrictions:
+	//
+	//  - Cannot delete if the time entry has been invoiced
+	//  - Cannot delete if the time entry belongs to a closed accounting period
+	//
 	// Returns 400 Bad Request if deletion is not allowed due to these restrictions.
 	//
 	// DELETE /companies/{companySlug}/timeEntries/{timeEntryId}
@@ -421,18 +426,14 @@ type Handler interface {
 	// DeleteTransaction implements deleteTransaction operation.
 	//
 	// Sets the deleted flag for a transaction. The transaction is not deleted, but a reverse transaction
-	// is created and
-	// the "deleted" property is set to true.
+	// is created and the "deleted" property is set to true.
 	//
 	// PATCH /companies/{companySlug}/transactions/{transactionId}/delete
 	DeleteTransaction(ctx context.Context, params DeleteTransactionParams) (*Transaction, error)
 	// GetAccount implements getAccount operation.
 	//
-	// Retrieves the specified bookkeping account.
-	// An account is a string with either four digits, or four digits, a colon and five digits
-	// ("reskontro").
-	// Examples:
-	// 3020 and 1500:10001.
+	// Retrieves the specified bookkeping account. An account is a string with either four digits, or four
+	// digits, a colon and five digits ("reskontro"). Examples: 3020 and 1500:10001.
 	//
 	// GET /companies/{companySlug}/accounts/{accountCode}
 	GetAccount(ctx context.Context, params GetAccountParams) (*Account, error)
@@ -444,11 +445,9 @@ type Handler interface {
 	GetAccountBalance(ctx context.Context, params GetAccountBalanceParams) (*AccountBalance, error)
 	// GetAccountBalances implements getAccountBalances operation.
 	//
-	// Retrieves the bookkeeping accounts and closing balances for a given date.
-	// An account is a string with either four digits, or four digits, a colon and five digits
-	// ("reskontro").
-	// Examples:
-	// 3020 and 1500:10001.
+	// Retrieves the bookkeeping accounts and closing balances for a given date. An account is a string
+	// with either four digits, or four digits, a colon and five digits ("reskontro"). Examples: 3020 and
+	// 1500:10001.
 	//
 	// GET /companies/{companySlug}/accountBalances
 	GetAccountBalances(ctx context.Context, params GetAccountBalancesParams) (*GetAccountBalancesOKHeaders, error)
@@ -491,8 +490,8 @@ type Handler interface {
 	// GetCompanies implements getCompanies operation.
 	//
 	// Returns all companies from the system that the user has access to. The user can update which
-	// companies a given app has
-	// access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har gitt tilgang til.
+	// companies a given app has access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har
+	// gitt tilgang til.
 	//
 	// GET /companies
 	GetCompanies(ctx context.Context, params GetCompaniesParams) (*GetCompaniesOKHeaders, error)
@@ -505,8 +504,7 @@ type Handler interface {
 	// GetContact implements getContact operation.
 	//
 	// Retrieves specified contact. ContactId is returned with a GET contacts call as the first returned
-	// field.
-	// ContactId is returned in the Location response header for POST contact.
+	// field. ContactId is returned in the Location response header for POST contact.
 	//
 	// GET /companies/{companySlug}/contacts/{contactId}
 	GetContact(ctx context.Context, params GetContactParams) (*Contact, error)
@@ -861,8 +859,8 @@ type Handler interface {
 	GetTimeUsers(ctx context.Context, params GetTimeUsersParams) (*GetTimeUsersOKHeaders, error)
 	// GetTransaction implements getTransaction operation.
 	//
-	// Returns given transaction with associated id. Transaction id is returned in GET calls for
-	// sales, purchases, and journal entries.
+	// Returns given transaction with associated id. Transaction id is returned in GET calls for sales,
+	// purchases, and journal entries.
 	//
 	// GET /companies/{companySlug}/transactions/{transactionId}
 	GetTransaction(ctx context.Context, params GetTransactionParams) (*Transaction, error)
@@ -898,8 +896,8 @@ type Handler interface {
 	SendOffer(ctx context.Context, req *SendOfferRequest, params SendOfferParams) error
 	// SettledSale implements settledSale operation.
 	//
-	// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten
-	// betaling" in the GUI. It is possible to change the date of settlement by sending a new settledDate.
+	// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten betaling"
+	// in the GUI. It is possible to change the date of settlement by sending a new settledDate.
 	//
 	// PATCH /companies/{companySlug}/sales/{saleId}/settled
 	SettledSale(ctx context.Context, params SettledSaleParams) (*SaleResult, error)
@@ -929,8 +927,8 @@ type Handler interface {
 	UpdateCreditNoteDraft(ctx context.Context, req *InvoiceishDraftRequest, params UpdateCreditNoteDraftParams) (*UpdateCreditNoteDraftCreated, error)
 	// UpdateInvoice implements updateInvoice operation.
 	//
-	// Updates invoice with provided id. It is possible to update the due date of an invoice
-	// as well as if the invoice was sent manually, outside of Fiken.
+	// Updates invoice with provided id. It is possible to update the due date of an invoice as well as if
+	// the invoice was sent manually, outside of Fiken.
 	//
 	// PATCH /companies/{companySlug}/invoices/{invoiceId}
 	UpdateInvoice(ctx context.Context, req *UpdateInvoiceRequest, params UpdateInvoiceParams) (*UpdateInvoiceOK, error)

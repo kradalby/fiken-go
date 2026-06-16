@@ -72,7 +72,7 @@ func (s *Server) handleAddAttachmentToContactRequest(args [2]string, argsEscaped
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -279,7 +279,7 @@ func (s *Server) handleAddAttachmentToCreditNoteDraftRequest(args [2]string, arg
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -486,7 +486,7 @@ func (s *Server) handleAddAttachmentToInvoiceRequest(args [2]string, argsEscaped
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -693,7 +693,7 @@ func (s *Server) handleAddAttachmentToInvoiceDraftRequest(args [2]string, argsEs
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -900,7 +900,7 @@ func (s *Server) handleAddAttachmentToJournalEntryRequest(args [2]string, argsEs
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -1107,7 +1107,7 @@ func (s *Server) handleAddAttachmentToOfferDraftRequest(args [2]string, argsEsca
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -1314,7 +1314,7 @@ func (s *Server) handleAddAttachmentToOrderConfirmationDraftRequest(args [2]stri
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -1521,7 +1521,7 @@ func (s *Server) handleAddAttachmentToPurchaseRequest(args [2]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -1736,7 +1736,7 @@ func (s *Server) handleAddAttachmentToPurchaseDraftRequest(args [2]string, argsE
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -1943,7 +1943,7 @@ func (s *Server) handleAddAttachmentToSaleRequest(args [2]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -2158,7 +2158,7 @@ func (s *Server) handleAddAttachmentToSaleDraftRequest(args [2]string, argsEscap
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -2365,7 +2365,7 @@ func (s *Server) handleAddContactPersonToContactRequest(args [2]string, argsEsca
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -2572,7 +2572,7 @@ func (s *Server) handleCreateActivityRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -2739,9 +2739,8 @@ func (s *Server) handleCreateActivityRequest(args [1]string, argsEscaped bool, w
 // handleCreateBankAccountRequest handles createBankAccount operation.
 //
 // Creates a new bank account. The Location response header returns the URL of the newly created bank
-// account.
-// Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The field
-// "foreignService" should only be filled out for accounts of type FOREIGN.
+// account. Possible types of bank accounts are NORMAL, TAX_DEDUCTION, FOREIGN, and CREDIT_CARD. The
+// field "foreignService" should only be filled out for accounts of type FOREIGN.
 //
 // POST /companies/{companySlug}/bankAccounts
 func (s *Server) handleCreateBankAccountRequest(args [1]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -2778,7 +2777,7 @@ func (s *Server) handleCreateBankAccountRequest(args [1]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -2981,7 +2980,7 @@ func (s *Server) handleCreateContactRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -3186,7 +3185,7 @@ func (s *Server) handleCreateCreditNoteCounterRequest(args [1]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -3390,7 +3389,7 @@ func (s *Server) handleCreateCreditNoteDraftRequest(args [1]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -3593,7 +3592,7 @@ func (s *Server) handleCreateCreditNoteFromDraftRequest(args [2]string, argsEsca
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -3785,7 +3784,7 @@ func (s *Server) handleCreateFullCreditNoteRequest(args [1]string, argsEscaped b
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -3988,7 +3987,7 @@ func (s *Server) handleCreateGeneralJournalEntryRequest(args [1]string, argsEsca
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -4191,7 +4190,7 @@ func (s *Server) handleCreateInboxDocumentRequest(args [1]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -4357,17 +4356,13 @@ func (s *Server) handleCreateInboxDocumentRequest(args [1]string, argsEscaped bo
 
 // handleCreateInvoiceRequest handles createInvoice operation.
 //
-// Creates an invoice. This corresponds to "Ny faktura" in Fiken.
-// There are two types of invoice lines that can be added to an invoice line: product line or free
-// text line.
-// Provide a product Id if you are invoicing a product. All information regarding the price and VAT
-// for this product will be added to the invoice.
-// It is however also possible to override the unit amount by sending information in both fields
-// "productId" and "unitAmount".
-// An invoice line can also be a free text line meaning that no existing product will be associated
-// with the invoiced line.
-// In this case all information regarding the price and VAT of the product or service to be invoiced
-// must be provided.
+// Creates an invoice. This corresponds to "Ny faktura" in Fiken. There are two types of invoice lines
+// that can be added to an invoice line: product line or free text line. Provide a product Id if you
+// are invoicing a product. All information regarding the price and VAT for this product will be added
+// to the invoice. It is however also possible to override the unit amount by sending information in
+// both fields "productId" and "unitAmount". An invoice line can also be a free text line meaning that
+// no existing product will be associated with the invoiced line. In this case all information
+// regarding the price and VAT of the product or service to be invoiced must be provided.
 //
 // POST /companies/{companySlug}/invoices
 func (s *Server) handleCreateInvoiceRequest(args [1]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -4404,7 +4399,7 @@ func (s *Server) handleCreateInvoiceRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -4609,7 +4604,7 @@ func (s *Server) handleCreateInvoiceCounterRequest(args [1]string, argsEscaped b
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -4812,7 +4807,7 @@ func (s *Server) handleCreateInvoiceDraftRequest(args [1]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -5015,7 +5010,7 @@ func (s *Server) handleCreateInvoiceDraftFromOrderConfirmationRequest(args [2]st
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -5171,17 +5166,21 @@ func (s *Server) handleCreateInvoiceDraftFromOrderConfirmationRequest(args [2]st
 // handleCreateInvoiceDraftFromTimeEntriesRequest handles createInvoiceDraftFromTimeEntries operation.
 //
 // Creates an invoice draft from one or more time entries.
-// The time entries will be converted to invoice lines based on the specified grouping.
-// After successful creation, the included time entries will be marked as "in draft" and
-// cannot be modified until the draft is deleted or converted to an invoice.
-// **Grouping options:**
-// - activity: One invoice line per activity, summing hours across all selected time entries for that
-// activity
-// - activityAndPerson: One invoice line per unique activity+person combination
-// - none: Each time entry becomes its own invoice line
-// **Line description:**
-// By default, the invoice line description is generated from the activity name and total hours.
-// If `includeTimeEntryDescriptions` is true, individual time entry descriptions are appended.
+//
+// The time entries will be converted to invoice lines based on the specified grouping. After
+// successful creation, the included time entries will be marked as "in draft" and cannot be modified
+// until the draft is deleted or converted to an invoice.
+//
+// Grouping options:
+//
+//   - activity: One invoice line per activity, summing hours across all selected time entries for that
+//     activity
+//   - activityAndPerson: One invoice line per unique activity+person combination
+//   - none: Each time entry becomes its own invoice line
+//
+// Line description: By default, the invoice line description is generated from the activity name and
+// total hours. If `includeTimeEntryDescriptions` is true, individual time entry descriptions are
+// appended.
 //
 // POST /companies/{companySlug}/timeEntries/createInvoiceDraft
 func (s *Server) handleCreateInvoiceDraftFromTimeEntriesRequest(args [1]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -5218,7 +5217,7 @@ func (s *Server) handleCreateInvoiceDraftFromTimeEntriesRequest(args [1]string, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -5421,7 +5420,7 @@ func (s *Server) handleCreateInvoiceFromDraftRequest(args [2]string, argsEscaped
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -5615,7 +5614,7 @@ func (s *Server) handleCreateOfferCounterRequest(args [1]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -5818,7 +5817,7 @@ func (s *Server) handleCreateOfferDraftRequest(args [1]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -6021,7 +6020,7 @@ func (s *Server) handleCreateOfferFromDraftRequest(args [2]string, argsEscaped b
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -6215,7 +6214,7 @@ func (s *Server) handleCreateOrderConfirmationCounterRequest(args [1]string, arg
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -6418,7 +6417,7 @@ func (s *Server) handleCreateOrderConfirmationDraftRequest(args [1]string, argsE
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -6621,7 +6620,7 @@ func (s *Server) handleCreateOrderConfirmationFromDraftRequest(args [2]string, a
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -6813,7 +6812,7 @@ func (s *Server) handleCreatePartialCreditNoteRequest(args [1]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -7016,7 +7015,7 @@ func (s *Server) handleCreateProductRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -7219,7 +7218,7 @@ func (s *Server) handleCreateProductSalesReportRequest(args [1]string, argsEscap
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -7422,7 +7421,7 @@ func (s *Server) handleCreateProjectRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -7625,7 +7624,7 @@ func (s *Server) handleCreatePurchaseRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -7828,7 +7827,7 @@ func (s *Server) handleCreatePurchaseDraftRequest(args [1]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -8031,7 +8030,7 @@ func (s *Server) handleCreatePurchaseFromDraftRequest(args [2]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -8223,7 +8222,7 @@ func (s *Server) handleCreatePurchasePaymentRequest(args [2]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -8394,8 +8393,8 @@ func (s *Server) handleCreatePurchasePaymentRequest(args [2]string, argsEscaped 
 // handleCreateSaleRequest handles createSale operation.
 //
 // Creates a new sale. This corresponds to "Annet salg" in Fiken and should be used when the invoice
-// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints
-// should be used.
+// document and invoice number have been created outside Fiken. Otherwise the invoices-endpoints should
+// be used.
 //
 // POST /companies/{companySlug}/sales
 func (s *Server) handleCreateSaleRequest(args [1]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -8432,7 +8431,7 @@ func (s *Server) handleCreateSaleRequest(args [1]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -8635,7 +8634,7 @@ func (s *Server) handleCreateSaleDraftRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -8838,7 +8837,7 @@ func (s *Server) handleCreateSaleFromDraftRequest(args [2]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -9030,7 +9029,7 @@ func (s *Server) handleCreateSalePaymentRequest(args [2]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -9237,7 +9236,7 @@ func (s *Server) handleCreateTimeEntryRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -9404,13 +9403,16 @@ func (s *Server) handleCreateTimeEntryRequest(args [1]string, argsEscaped bool, 
 // handleDeleteActivityRequest handles deleteActivity operation.
 //
 // Delete or archive activity with specified id.
-// **Behavior:**
-// - If the activity has no associated time entries and is not set as a default activity on any
-// project, it will be permanently deleted
-// - If the activity has associated time entries or is set as a default activity on a project, it
-// will be **archived** instead of deleted
-// - Archived activities are hidden from selection lists but remain accessible for historical time
-// entries
+//
+// Behavior:
+//
+//   - If the activity has no associated time entries and is not set as a default activity on any
+//     project, it will be permanently deleted
+//   - If the activity has associated time entries or is set as a default activity on a project, it will
+//     be archived instead of deleted
+//   - Archived activities are hidden from selection lists but remain accessible for historical time
+//     entries
+//
 // The response is 204 in both cases (deleted or archived).
 //
 // DELETE /companies/{companySlug}/activities/{activityId}
@@ -9448,7 +9450,7 @@ func (s *Server) handleDeleteActivityRequest(args [2]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -9603,8 +9605,8 @@ func (s *Server) handleDeleteActivityRequest(args [2]string, argsEscaped bool, w
 
 // handleDeleteContactRequest handles deleteContact operation.
 //
-// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not
-// possible to delete will set the contact to inactive.
+// Deletes the contact if possible (no associated journal entries/sales/invoices/etc). If not possible
+// to delete will set the contact to inactive.
 //
 // DELETE /companies/{companySlug}/contacts/{contactId}
 func (s *Server) handleDeleteContactRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -9641,7 +9643,7 @@ func (s *Server) handleDeleteContactRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -9833,7 +9835,7 @@ func (s *Server) handleDeleteContactContactPersonRequest(args [3]string, argsEsc
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10029,7 +10031,7 @@ func (s *Server) handleDeleteCreditNoteDraftRequest(args [2]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10221,7 +10223,7 @@ func (s *Server) handleDeleteInvoiceDraftRequest(args [2]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10413,7 +10415,7 @@ func (s *Server) handleDeleteOfferDraftRequest(args [2]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10605,7 +10607,7 @@ func (s *Server) handleDeleteOrderConfirmationDraftRequest(args [2]string, argsE
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10797,7 +10799,7 @@ func (s *Server) handleDeleteProductRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -10989,7 +10991,7 @@ func (s *Server) handleDeleteProjectRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -11182,7 +11184,7 @@ func (s *Server) handleDeletePurchaseRequest(args [2]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -11378,7 +11380,7 @@ func (s *Server) handleDeletePurchaseDraftRequest(args [2]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -11533,8 +11535,8 @@ func (s *Server) handleDeletePurchaseDraftRequest(args [2]string, argsEscaped bo
 
 // handleDeleteSaleRequest handles deleteSale operation.
 //
-// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created
-// and the "deleted" property is set to true.
+// Sets the deleted flag for a sale. The sale is not deleted, but a reverse transaction is created and
+// the "deleted" property is set to true.
 //
 // PATCH /companies/{companySlug}/sales/{saleId}/delete
 func (s *Server) handleDeleteSaleRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -11571,7 +11573,7 @@ func (s *Server) handleDeleteSaleRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -11767,7 +11769,7 @@ func (s *Server) handleDeleteSaleDraftRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -11923,9 +11925,12 @@ func (s *Server) handleDeleteSaleDraftRequest(args [2]string, argsEscaped bool, 
 // handleDeleteTimeEntryRequest handles deleteTimeEntry operation.
 //
 // Delete time entry with specified id.
-// **Restrictions:**
-// - Cannot delete if the time entry has been invoiced
-// - Cannot delete if the time entry belongs to a closed accounting period
+//
+// Restrictions:
+//
+//   - Cannot delete if the time entry has been invoiced
+//   - Cannot delete if the time entry belongs to a closed accounting period
+//
 // Returns 400 Bad Request if deletion is not allowed due to these restrictions.
 //
 // DELETE /companies/{companySlug}/timeEntries/{timeEntryId}
@@ -11963,7 +11968,7 @@ func (s *Server) handleDeleteTimeEntryRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -12119,8 +12124,7 @@ func (s *Server) handleDeleteTimeEntryRequest(args [2]string, argsEscaped bool, 
 // handleDeleteTransactionRequest handles deleteTransaction operation.
 //
 // Sets the deleted flag for a transaction. The transaction is not deleted, but a reverse transaction
-// is created and
-// the "deleted" property is set to true.
+// is created and the "deleted" property is set to true.
 //
 // PATCH /companies/{companySlug}/transactions/{transactionId}/delete
 func (s *Server) handleDeleteTransactionRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -12157,7 +12161,7 @@ func (s *Server) handleDeleteTransactionRequest(args [2]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -12316,11 +12320,8 @@ func (s *Server) handleDeleteTransactionRequest(args [2]string, argsEscaped bool
 
 // handleGetAccountRequest handles getAccount operation.
 //
-// Retrieves the specified bookkeping account.
-// An account is a string with either four digits, or four digits, a colon and five digits
-// ("reskontro").
-// Examples:
-// 3020 and 1500:10001.
+// Retrieves the specified bookkeping account. An account is a string with either four digits, or four
+// digits, a colon and five digits ("reskontro"). Examples: 3020 and 1500:10001.
 //
 // GET /companies/{companySlug}/accounts/{accountCode}
 func (s *Server) handleGetAccountRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -12357,7 +12358,7 @@ func (s *Server) handleGetAccountRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -12549,7 +12550,7 @@ func (s *Server) handleGetAccountBalanceRequest(args [2]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -12708,11 +12709,9 @@ func (s *Server) handleGetAccountBalanceRequest(args [2]string, argsEscaped bool
 
 // handleGetAccountBalancesRequest handles getAccountBalances operation.
 //
-// Retrieves the bookkeeping accounts and closing balances for a given date.
-// An account is a string with either four digits, or four digits, a colon and five digits
-// ("reskontro").
-// Examples:
-// 3020 and 1500:10001.
+// Retrieves the bookkeeping accounts and closing balances for a given date. An account is a string
+// with either four digits, or four digits, a colon and five digits ("reskontro"). Examples: 3020 and
+// 1500:10001.
 //
 // GET /companies/{companySlug}/accountBalances
 func (s *Server) handleGetAccountBalancesRequest(args [1]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -12749,7 +12748,7 @@ func (s *Server) handleGetAccountBalancesRequest(args [1]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -12957,7 +12956,7 @@ func (s *Server) handleGetAccountsRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -13165,7 +13164,7 @@ func (s *Server) handleGetActivitiesRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -13369,7 +13368,7 @@ func (s *Server) handleGetActivityRequest(args [2]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -13561,7 +13560,7 @@ func (s *Server) handleGetBankAccountRequest(args [2]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -13753,7 +13752,7 @@ func (s *Server) handleGetBankAccountsRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -13953,7 +13952,7 @@ func (s *Server) handleGetBankBalancesRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -14117,8 +14116,8 @@ func (s *Server) handleGetBankBalancesRequest(args [1]string, argsEscaped bool, 
 // handleGetCompaniesRequest handles getCompanies operation.
 //
 // Returns all companies from the system that the user has access to. The user can update which
-// companies a given app has
-// access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har gitt tilgang til.
+// companies a given app has access to in Fiken under Brukerinnstillinger -> Sikkerhet -> Apper du har
+// gitt tilgang til.
 //
 // GET /companies
 func (s *Server) handleGetCompaniesRequest(args [0]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -14155,7 +14154,7 @@ func (s *Server) handleGetCompaniesRequest(args [0]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -14351,7 +14350,7 @@ func (s *Server) handleGetCompanyRequest(args [1]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -14503,8 +14502,7 @@ func (s *Server) handleGetCompanyRequest(args [1]string, argsEscaped bool, w htt
 // handleGetContactRequest handles getContact operation.
 //
 // Retrieves specified contact. ContactId is returned with a GET contacts call as the first returned
-// field.
-// ContactId is returned in the Location response header for POST contact.
+// field. ContactId is returned in the Location response header for POST contact.
 //
 // GET /companies/{companySlug}/contacts/{contactId}
 func (s *Server) handleGetContactRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -14541,7 +14539,7 @@ func (s *Server) handleGetContactRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -14733,7 +14731,7 @@ func (s *Server) handleGetContactContactPersonRequest(args [2]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -14925,7 +14923,7 @@ func (s *Server) handleGetContactPersonRequest(args [3]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -15121,7 +15119,7 @@ func (s *Server) handleGetContactsRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -15409,7 +15407,7 @@ func (s *Server) handleGetCreditNoteRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -15601,7 +15599,7 @@ func (s *Server) handleGetCreditNoteCounterRequest(args [1]string, argsEscaped b
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -15789,7 +15787,7 @@ func (s *Server) handleGetCreditNoteDraftRequest(args [2]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -15981,7 +15979,7 @@ func (s *Server) handleGetCreditNoteDraftAttachmentsRequest(args [2]string, args
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -16173,7 +16171,7 @@ func (s *Server) handleGetCreditNoteDraftsRequest(args [1]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -16369,7 +16367,7 @@ func (s *Server) handleGetCreditNotesRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -16617,7 +16615,7 @@ func (s *Server) handleGetGroupsRequest(args [1]string, argsEscaped bool, w http
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -16813,7 +16811,7 @@ func (s *Server) handleGetInboxRequest(args [1]string, argsEscaped bool, w http.
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17021,7 +17019,7 @@ func (s *Server) handleGetInboxDocumentRequest(args [2]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17213,7 +17211,7 @@ func (s *Server) handleGetInvoiceRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17405,7 +17403,7 @@ func (s *Server) handleGetInvoiceAttachmentsRequest(args [2]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17597,7 +17595,7 @@ func (s *Server) handleGetInvoiceCounterRequest(args [1]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17785,7 +17783,7 @@ func (s *Server) handleGetInvoiceDraftRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -17977,7 +17975,7 @@ func (s *Server) handleGetInvoiceDraftAttachmentsRequest(args [2]string, argsEsc
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -18169,7 +18167,7 @@ func (s *Server) handleGetInvoiceDraftsRequest(args [1]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -18374,7 +18372,7 @@ func (s *Server) handleGetInvoicesRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -18650,7 +18648,7 @@ func (s *Server) handleGetJournalEntriesRequest(args [1]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -18906,7 +18904,7 @@ func (s *Server) handleGetJournalEntryRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -19098,7 +19096,7 @@ func (s *Server) handleGetJournalEntryAttachmentsRequest(args [2]string, argsEsc
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -19290,7 +19288,7 @@ func (s *Server) handleGetOfferRequest(args [2]string, argsEscaped bool, w http.
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -19482,7 +19480,7 @@ func (s *Server) handleGetOfferCounterRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -19670,7 +19668,7 @@ func (s *Server) handleGetOfferDraftRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -19862,7 +19860,7 @@ func (s *Server) handleGetOfferDraftAttachmentsRequest(args [2]string, argsEscap
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -20054,7 +20052,7 @@ func (s *Server) handleGetOfferDraftsRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -20250,7 +20248,7 @@ func (s *Server) handleGetOffersRequest(args [1]string, argsEscaped bool, w http
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -20446,7 +20444,7 @@ func (s *Server) handleGetOrderConfirmationRequest(args [2]string, argsEscaped b
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -20638,7 +20636,7 @@ func (s *Server) handleGetOrderConfirmationCounterRequest(args [1]string, argsEs
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -20826,7 +20824,7 @@ func (s *Server) handleGetOrderConfirmationDraftRequest(args [2]string, argsEsca
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -21018,7 +21016,7 @@ func (s *Server) handleGetOrderConfirmationDraftAttachmentsRequest(args [2]strin
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -21210,7 +21208,7 @@ func (s *Server) handleGetOrderConfirmationDraftsRequest(args [1]string, argsEsc
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -21406,7 +21404,7 @@ func (s *Server) handleGetOrderConfirmationsRequest(args [1]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -21602,7 +21600,7 @@ func (s *Server) handleGetProductRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -21794,7 +21792,7 @@ func (s *Server) handleGetProductsRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -22042,7 +22040,7 @@ func (s *Server) handleGetProjectRequest(args [2]string, argsEscaped bool, w htt
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -22234,7 +22232,7 @@ func (s *Server) handleGetProjectsRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -22442,7 +22440,7 @@ func (s *Server) handleGetPurchaseRequest(args [2]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -22634,7 +22632,7 @@ func (s *Server) handleGetPurchaseAttachmentsRequest(args [2]string, argsEscaped
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -22826,7 +22824,7 @@ func (s *Server) handleGetPurchaseDraftRequest(args [2]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -23018,7 +23016,7 @@ func (s *Server) handleGetPurchaseDraftAttachmentsRequest(args [2]string, argsEs
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -23210,7 +23208,7 @@ func (s *Server) handleGetPurchaseDraftsRequest(args [1]string, argsEscaped bool
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -23406,7 +23404,7 @@ func (s *Server) handleGetPurchasePaymentRequest(args [3]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -23602,7 +23600,7 @@ func (s *Server) handleGetPurchasePaymentsRequest(args [2]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -23794,7 +23792,7 @@ func (s *Server) handleGetPurchasesRequest(args [1]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -24038,7 +24036,7 @@ func (s *Server) handleGetSaleRequest(args [2]string, argsEscaped bool, w http.R
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -24230,7 +24228,7 @@ func (s *Server) handleGetSaleAttachmentsRequest(args [2]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -24422,7 +24420,7 @@ func (s *Server) handleGetSaleDraftRequest(args [2]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -24614,7 +24612,7 @@ func (s *Server) handleGetSaleDraftAttachmentsRequest(args [2]string, argsEscape
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -24806,7 +24804,7 @@ func (s *Server) handleGetSaleDraftsRequest(args [1]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -25002,7 +25000,7 @@ func (s *Server) handleGetSalePaymentRequest(args [3]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -25198,7 +25196,7 @@ func (s *Server) handleGetSalePaymentsRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -25390,7 +25388,7 @@ func (s *Server) handleGetSalesRequest(args [1]string, argsEscaped bool, w http.
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -25638,7 +25636,7 @@ func (s *Server) handleGetTimeEntriesRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -25870,7 +25868,7 @@ func (s *Server) handleGetTimeEntryRequest(args [2]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -26062,7 +26060,7 @@ func (s *Server) handleGetTimeUserRequest(args [2]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -26254,7 +26252,7 @@ func (s *Server) handleGetTimeUsersRequest(args [1]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -26421,8 +26419,8 @@ func (s *Server) handleGetTimeUsersRequest(args [1]string, argsEscaped bool, w h
 
 // handleGetTransactionRequest handles getTransaction operation.
 //
-// Returns given transaction with associated id. Transaction id is returned in GET calls for
-// sales, purchases, and journal entries.
+// Returns given transaction with associated id. Transaction id is returned in GET calls for sales,
+// purchases, and journal entries.
 //
 // GET /companies/{companySlug}/transactions/{transactionId}
 func (s *Server) handleGetTransactionRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -26459,7 +26457,7 @@ func (s *Server) handleGetTransactionRequest(args [2]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -26651,7 +26649,7 @@ func (s *Server) handleGetTransactionsRequest(args [1]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -26887,7 +26885,7 @@ func (s *Server) handleGetUserRequest(args [0]string, argsEscaped bool, w http.R
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -27060,7 +27058,7 @@ func (s *Server) handleSendCreditNoteRequest(args [1]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -27263,7 +27261,7 @@ func (s *Server) handleSendInvoiceRequest(args [1]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -27466,7 +27464,7 @@ func (s *Server) handleSendOfferRequest(args [1]string, argsEscaped bool, w http
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -27632,8 +27630,8 @@ func (s *Server) handleSendOfferRequest(args [1]string, argsEscaped bool, w http
 
 // handleSettledSaleRequest handles settledSale operation.
 //
-// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten
-// betaling" in the GUI. It is possible to change the date of settlement by sending a new settledDate.
+// Marks the sale as settled without payment. This is synonymous with "sett til oppgjort uten betaling"
+// in the GUI. It is possible to change the date of settlement by sending a new settledDate.
 //
 // PATCH /companies/{companySlug}/sales/{saleId}/settled
 func (s *Server) handleSettledSaleRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -27670,7 +27668,7 @@ func (s *Server) handleSettledSaleRequest(args [2]string, argsEscaped bool, w ht
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -27866,7 +27864,7 @@ func (s *Server) handleUpdateActivityRequest(args [2]string, argsEscaped bool, w
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -28073,7 +28071,7 @@ func (s *Server) handleUpdateContactRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -28280,7 +28278,7 @@ func (s *Server) handleUpdateContactContactPersonRequest(args [3]string, argsEsc
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -28491,7 +28489,7 @@ func (s *Server) handleUpdateCreditNoteDraftRequest(args [2]string, argsEscaped 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -28661,8 +28659,8 @@ func (s *Server) handleUpdateCreditNoteDraftRequest(args [2]string, argsEscaped 
 
 // handleUpdateInvoiceRequest handles updateInvoice operation.
 //
-// Updates invoice with provided id. It is possible to update the due date of an invoice
-// as well as if the invoice was sent manually, outside of Fiken.
+// Updates invoice with provided id. It is possible to update the due date of an invoice as well as if
+// the invoice was sent manually, outside of Fiken.
 //
 // PATCH /companies/{companySlug}/invoices/{invoiceId}
 func (s *Server) handleUpdateInvoiceRequest(args [2]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
@@ -28699,7 +28697,7 @@ func (s *Server) handleUpdateInvoiceRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -28906,7 +28904,7 @@ func (s *Server) handleUpdateInvoiceDraftRequest(args [2]string, argsEscaped boo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -29113,7 +29111,7 @@ func (s *Server) handleUpdateOfferDraftRequest(args [2]string, argsEscaped bool,
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -29320,7 +29318,7 @@ func (s *Server) handleUpdateOrderConfirmationDraftRequest(args [2]string, argsE
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -29527,7 +29525,7 @@ func (s *Server) handleUpdateProductRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -29734,7 +29732,7 @@ func (s *Server) handleUpdateProjectRequest(args [2]string, argsEscaped bool, w 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -29941,7 +29939,7 @@ func (s *Server) handleUpdatePurchaseDraftRequest(args [2]string, argsEscaped bo
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -30148,7 +30146,7 @@ func (s *Server) handleUpdateSaleDraftRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -30355,7 +30353,7 @@ func (s *Server) handleUpdateTimeEntryRequest(args [2]string, argsEscaped bool, 
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 
@@ -30564,7 +30562,7 @@ func (s *Server) handleWriteOffSaleRequest(args [2]string, argsEscaped bool, w h
 		if code != 0 {
 			codeAttr := semconv.HTTPResponseStatusCode(code)
 			attrs = append(attrs, codeAttr)
-			span.SetAttributes(codeAttr)
+			span.SetAttributes(attrs...)
 		}
 		attrOpt := metric.WithAttributes(attrs...)
 

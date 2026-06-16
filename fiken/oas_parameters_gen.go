@@ -259,8 +259,8 @@ func decodeAddAttachmentToCreditNoteDraftParams(args [2]string, argsEscaped bool
 type AddAttachmentToInvoiceParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The invoiceId (primary key of the returned object) is returned in the GET all
-	// invoices call; not to be confused with invoiceNumber.
+	// The invoiceId (primary key of the returned object) is returned in the GET all invoices call; not to
+	// be confused with invoiceNumber.
 	InvoiceId int64
 }
 
@@ -857,9 +857,9 @@ func decodeAddAttachmentToOrderConfirmationDraftParams(args [2]string, argsEscap
 
 // AddAttachmentToPurchaseParams is parameters of addAttachmentToPurchase operation.
 type AddAttachmentToPurchaseParams struct {
-	// True if this attachment may document the payment (i.e. transaction receipt from credit
-	// card/payment company, export from bank, etc.). Default value is false if not specified. At least
-	// one of attachToPayment and attachToSale must be true.
+	// True if this attachment may document the payment (i.e. transaction receipt from credit card/payment
+	// company, export from bank, etc.). Default value is false if not specified. At least one of
+	// attachToPayment and attachToSale must be true.
 	AttachToPayment OptBool `json:",omitempty,omitzero"`
 	// True if this attachment may document the sale (i.e. invoice, etc). Default value is false if not
 	// specified. At least one of attachToPayment and attachToSale must be true.
@@ -1204,9 +1204,9 @@ func decodeAddAttachmentToPurchaseDraftParams(args [2]string, argsEscaped bool, 
 
 // AddAttachmentToSaleParams is parameters of addAttachmentToSale operation.
 type AddAttachmentToSaleParams struct {
-	// True if this attachment may document the payment (i.e. transaction receipt from credit
-	// card/payment company, export from bank, etc.). Default value is false if not specified. At least
-	// one of attachToPayment and attachToSale must be true.
+	// True if this attachment may document the payment (i.e. transaction receipt from credit card/payment
+	// company, export from bank, etc.). Default value is false if not specified. At least one of
+	// attachToPayment and attachToSale must be true.
 	AttachToPayment OptBool `json:",omitempty,omitzero"`
 	// True if this attachment may document the sale (i.e. invoice, etc). Default value is false if not
 	// specified. At least one of attachToPayment and attachToSale must be true.
@@ -2519,8 +2519,7 @@ type CreateInvoiceDraftFromOrderConfirmationParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
 	// The confirmationId (primary key of the returned object) is returned as the first field in the GET
-	// all
-	// order confirmations call.
+	// all order confirmations call.
 	ConfirmationId string
 }
 
@@ -5293,8 +5292,8 @@ func decodeDeleteOrderConfirmationDraftParams(args [2]string, argsEscaped bool, 
 type DeleteProductParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The productId (primary key of the returned object) is returned in the GET all
-	// products call; not to be confused with productNumber.
+	// The productId (primary key of the returned object) is returned in the GET all products call; not to
+	// be confused with productNumber.
 	ProductId int64
 }
 
@@ -6506,8 +6505,7 @@ func decodeGetAccountParams(args [2]string, argsEscaped bool, r *http.Request) (
 
 // GetAccountBalanceParams is parameters of getAccountBalance operation.
 type GetAccountBalanceParams struct {
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date time.Time
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -6679,16 +6677,13 @@ type GetAccountBalancesParams struct {
 	// Filter parameter specifying which account numbers to return. Specify using the from and to
 	// parameters (excluding subaccount).
 	ToAccount OptInt64 `json:",omitempty,omitzero"`
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date time.Time
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -7066,13 +7061,11 @@ type GetAccountsParams struct {
 	// Filter parameter specifying which account numbers to return. Specify using the from and to
 	// parameters (excluding subaccount).
 	ToAccount OptInt64 `json:",omitempty,omitzero"`
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Comma-separated list of account numbers or ranges of account numbers (e.g. "1000-1500, 1580-1999,
 	// 2000, 2061, 7000-7004").
@@ -7454,13 +7447,11 @@ func decodeGetAccountsParams(args [1]string, argsEscaped bool, r *http.Request) 
 
 // GetActivitiesParams is parameters of getActivities operation.
 type GetActivitiesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter activities by name (partial match).
 	Name OptString `json:",omitempty,omitzero"`
@@ -8032,13 +8023,11 @@ func decodeGetBankAccountParams(args [2]string, argsEscaped bool, r *http.Reques
 
 // GetBankAccountsParams is parameters of getBankAccounts operation.
 type GetBankAccountsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Return all active bank accounts (false) or all inactive bank accounts (true).
 	Inactive OptBool `json:",omitempty,omitzero"`
@@ -8319,16 +8308,13 @@ func decodeGetBankAccountsParams(args [1]string, argsEscaped bool, r *http.Reque
 
 // GetBankBalancesParams is parameters of getBankBalances operation.
 type GetBankBalancesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date OptDate `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -8607,13 +8593,11 @@ func decodeGetBankBalancesParams(args [1]string, argsEscaped bool, r *http.Reque
 
 // GetCompaniesParams is parameters of getCompanies operation.
 type GetCompaniesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt                `json:",omitempty,omitzero"`
 	SortBy   OptGetCompaniesSortBy `json:",omitempty,omitzero"`
 }
@@ -9335,54 +9319,41 @@ func decodeGetContactPersonParams(args [3]string, argsEscaped bool, r *http.Requ
 
 // GetContactsParams is parameters of getContacts operation.
 type GetContactsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDate OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created before or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly before the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly before the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLt OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created after or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly after the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGt OptDate `json:",omitempty,omitzero"`
 	// Find all results with the supplier number equal to the specified parameter.
 	SupplierNumber OptInt `json:",omitempty,omitzero"`
@@ -11238,13 +11209,11 @@ func decodeGetCreditNoteDraftAttachmentsParams(args [2]string, argsEscaped bool,
 
 // GetCreditNoteDraftsParams is parameters of getCreditNoteDrafts operation.
 type GetCreditNoteDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -11473,61 +11442,47 @@ func decodeGetCreditNoteDraftsParams(args [1]string, argsEscaped bool, r *http.R
 
 // GetCreditNotesParams is parameters of getCreditNotes operation.
 type GetCreditNotesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDate OptDate `json:",omitempty,omitzero"`
-	// Filter based on date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly less than parameter value. Dates are represented as strings formatted
+	// as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date greater than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly greater than parameter value
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly greater than parameter value Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
 	// Returns only credit notes sent to specified customer. Must be the contactId provided by a GET
 	// contacts call.
 	CustomerId OptInt64 `json:",omitempty,omitzero"`
 	// When set to true, returns only credit notes that have been settled. Otherwise false returns all
-	// credit notes
-	// that have not been fully settled.
+	// credit notes that have not been fully settled.
 	Settled OptBool `json:",omitempty,omitzero"`
 	// Filter based on the UUID of the credit note draft that was used to create a given invoice. Applies
 	// only to "uavhengig kreditnotaer".
@@ -12409,13 +12364,11 @@ func decodeGetCreditNotesParams(args [1]string, argsEscaped bool, r *http.Reques
 
 // GetGroupsParams is parameters of getGroups operation.
 type GetGroupsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -12644,13 +12597,11 @@ func decodeGetGroupsParams(args [1]string, argsEscaped bool, r *http.Request) (p
 
 // GetInboxParams is parameters of getInbox operation.
 type GetInboxParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Sorts results in either ascending (asc) or descending (desc) order based on the parameter value.
 	SortBy OptGetInboxSortBy `json:",omitempty,omitzero"`
@@ -13195,8 +13146,8 @@ func decodeGetInboxDocumentParams(args [2]string, argsEscaped bool, r *http.Requ
 type GetInvoiceParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The invoiceId (primary key of the returned object) is returned in the GET all
-	// invoices call; not to be confused with invoiceNumber.
+	// The invoiceId (primary key of the returned object) is returned in the GET all invoices call; not to
+	// be confused with invoiceNumber.
 	InvoiceId int64
 }
 
@@ -13316,8 +13267,8 @@ func decodeGetInvoiceParams(args [2]string, argsEscaped bool, r *http.Request) (
 type GetInvoiceAttachmentsParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The invoiceId (primary key of the returned object) is returned in the GET all
-	// invoices call; not to be confused with invoiceNumber.
+	// The invoiceId (primary key of the returned object) is returned in the GET all invoices call; not to
+	// be confused with invoiceNumber.
 	InvoiceId int64
 }
 
@@ -13741,13 +13692,11 @@ func decodeGetInvoiceDraftAttachmentsParams(args [2]string, argsEscaped bool, r 
 
 // GetInvoiceDraftsParams is parameters of getInvoiceDrafts operation.
 type GetInvoiceDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter based on order reference for a given invoice draft.
 	OrderReference OptString `json:",omitempty,omitzero"`
@@ -14080,83 +14029,64 @@ func decodeGetInvoiceDraftsParams(args [1]string, argsEscaped bool, r *http.Requ
 
 // GetInvoicesParams is parameters of getInvoices operation.
 type GetInvoicesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDate OptDate `json:",omitempty,omitzero"`
-	// Filter based on date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly less than parameter value. Dates are represented as strings formatted
+	// as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date greater than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly greater than parameter value
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly greater than parameter value Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	IssueDateGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on due date of invoice. Returns results from the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DueDate OptDate `json:",omitempty,omitzero"`
-	// Returns invoices with a due date before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns invoices with a due date before or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DueDateLe OptDate `json:",omitempty,omitzero"`
-	// Returns invoices with a due date that have been last modified strictly before the date provided as
-	// a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns invoices with a due date that have been last modified strictly before the date provided as a
+	// parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st,
+	// 1970: "1970-01-01".
 	DueDateLt OptDate `json:",omitempty,omitzero"`
 	// Returns invoices with a due date that have been last modified after or on the date provided as a
-	// parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st,
+	// 1970: "1970-01-01".
 	DueDateGe OptDate `json:",omitempty,omitzero"`
-	// Returns invoices with a due date that have been last modified strictly after the date provided as
-	// a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns invoices with a due date that have been last modified strictly after the date provided as a
+	// parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st,
+	// 1970: "1970-01-01".
 	DueDateGt OptDate `json:",omitempty,omitzero"`
 	// Returns only invoices sent to specified customer. Must be the contactId provided by a GET contacts
 	// call.
 	CustomerId OptInt64 `json:",omitempty,omitzero"`
-	// When set to true, returns only invoices that have been settled. Otherwise false returns all
-	// invoices
+	// When set to true, returns only invoices that have been settled. Otherwise false returns all invoices
 	// that have not been fully settled.
 	Settled OptBool `json:",omitempty,omitzero"`
 	// Filter based on order reference for a given invoice.
@@ -15391,73 +15321,55 @@ func decodeGetInvoicesParams(args [1]string, argsEscaped bool, r *http.Request) 
 
 // GetJournalEntriesParams is parameters of getJournalEntries operation.
 type GetJournalEntriesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date OptDate `json:",omitempty,omitzero"`
-	// Filter based on date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly less than parameter value. Dates are represented as strings formatted
+	// as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date greater than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly greater than parameter value
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly greater than parameter value Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDate OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created before or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly before the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly before the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLt OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created after or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly after the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGt OptDate `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -17101,13 +17013,11 @@ func decodeGetOfferDraftAttachmentsParams(args [2]string, argsEscaped bool, r *h
 
 // GetOfferDraftsParams is parameters of getOfferDrafts operation.
 type GetOfferDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -17336,13 +17246,11 @@ func decodeGetOfferDraftsParams(args [1]string, argsEscaped bool, r *http.Reques
 
 // GetOffersParams is parameters of getOffers operation.
 type GetOffersParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -17574,8 +17482,7 @@ type GetOrderConfirmationParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
 	// The confirmationId (primary key of the returned object) is returned as the first field in the GET
-	// all
-	// order confirmations call.
+	// all order confirmations call.
 	ConfirmationId string
 }
 
@@ -17999,13 +17906,11 @@ func decodeGetOrderConfirmationDraftAttachmentsParams(args [2]string, argsEscape
 
 // GetOrderConfirmationDraftsParams is parameters of getOrderConfirmationDrafts operation.
 type GetOrderConfirmationDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -18234,13 +18139,11 @@ func decodeGetOrderConfirmationDraftsParams(args [1]string, argsEscaped bool, r 
 
 // GetOrderConfirmationsParams is parameters of getOrderConfirmations operation.
 type GetOrderConfirmationsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -18471,8 +18374,8 @@ func decodeGetOrderConfirmationsParams(args [1]string, argsEscaped bool, r *http
 type GetProductParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The productId (primary key of the returned object) is returned in the GET all
-	// products call; not to be confused with productNumber.
+	// The productId (primary key of the returned object) is returned in the GET all products call; not to
+	// be confused with productNumber.
 	ProductId int64
 }
 
@@ -18590,54 +18493,41 @@ func decodeGetProductParams(args [2]string, argsEscaped bool, r *http.Request) (
 
 // GetProductsParams is parameters of getProducts operation.
 type GetProductsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDate OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created before or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly before the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly before the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLt OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created after or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly after the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
 	// Find all results with product name equal to the specified parameter.
 	Name OptString `json:",omitempty,omitzero"`
@@ -19641,13 +19531,11 @@ func decodeGetProjectParams(args [2]string, argsEscaped bool, r *http.Request) (
 
 // GetProjectsParams is parameters of getProjects operation.
 type GetProjectsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter results based on completed / not completed.
 	Completed OptBool `json:",omitempty,omitzero"`
@@ -20510,13 +20398,11 @@ func decodeGetPurchaseDraftAttachmentsParams(args [2]string, argsEscaped bool, r
 
 // GetPurchaseDraftsParams is parameters of getPurchaseDrafts operation.
 type GetPurchaseDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -21036,57 +20922,45 @@ func decodeGetPurchasePaymentsParams(args [2]string, argsEscaped bool, r *http.R
 
 // GetPurchasesParams is parameters of getPurchases operation.
 type GetPurchasesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date OptDate `json:",omitempty,omitzero"`
-	// Filter based on date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly less than parameter value. Dates are represented as strings formatted
+	// as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date greater than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly greater than parameter value
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly greater than parameter value Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGt OptDate `json:",omitempty,omitzero"`
 	// Sorts results in either ascending (asc) or descending (desc) order based on the parameter value.
 	SortBy OptGetPurchasesSortBy `json:",omitempty,omitzero"`
 	// When set to true, returns only purchases that have been paid. Otherwise false returns all purchases
 	// that have not been fully settled.
 	Paid OptBool `json:",omitempty,omitzero"`
-	// Filter based on settled date equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on settled date equal to parameter value. Dates are represented as strings formatted as
+	// YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	SettledDate OptDate `json:",omitempty,omitzero"`
-	// Filter based on settled date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on settled date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	SettledDateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on settled date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on settled date strictly less than parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	SettledDateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on settled date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on settled date greater than or equal to parameter value. Dates are represented as
+	// strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	SettledDateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on settled date strictly greater than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on settled date strictly greater than parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	SettledDateGt OptDate `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -22413,13 +22287,11 @@ func decodeGetSaleDraftAttachmentsParams(args [2]string, argsEscaped bool, r *ht
 
 // GetSaleDraftsParams is parameters of getSaleDrafts operation.
 type GetSaleDraftsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -22939,59 +22811,46 @@ func decodeGetSalePaymentsParams(args [2]string, argsEscaped bool, r *http.Reque
 
 // GetSalesParams is parameters of getSales operation.
 type GetSalesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	Date OptDate `json:",omitempty,omitzero"`
-	// Filter based on date less than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date less than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly less than parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly less than parameter value. Dates are represented as strings formatted
+	// as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateLt OptDate `json:",omitempty,omitzero"`
-	// Filter based on date greater than or equal to parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date greater than or equal to parameter value. Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGe OptDate `json:",omitempty,omitzero"`
-	// Filter based on date strictly greater than parameter value
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Filter based on date strictly greater than parameter value Dates are represented as strings
+	// formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	DateGt OptDate `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
 	// Find all results with the sale number equal to the specified parameter.
 	SaleNumber OptString `json:",omitempty,omitzero"`
-	// When set to true, returns only sales that have been settled. Otherwise false returns all sales
-	// that have not been fully settled.
+	// When set to true, returns only sales that have been settled. Otherwise false returns all sales that
+	// have not been fully settled.
 	Settled OptBool `json:",omitempty,omitzero"`
 	// Find all sale results for a given customer.
 	ContactId OptInt64 `json:",omitempty,omitzero"`
@@ -23872,13 +23731,11 @@ func decodeGetSalesParams(args [1]string, argsEscaped bool, r *http.Request) (pa
 
 // GetTimeEntriesParams is parameters of getTimeEntries operation.
 type GetTimeEntriesParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter time entries by exact date (yyyy-MM-dd).
 	Date OptDate `json:",omitempty,omitzero"`
@@ -24815,13 +24672,11 @@ func decodeGetTimeUserParams(args [2]string, argsEscaped bool, r *http.Request) 
 
 // GetTimeUsersParams is parameters of getTimeUsers operation.
 type GetTimeUsersParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter by name (partial match).
 	Name OptString `json:",omitempty,omitzero"`
@@ -25273,54 +25128,41 @@ func decodeGetTransactionParams(args [2]string, argsEscaped bool, r *http.Reques
 
 // GetTransactionsParams is parameters of getTransactions operation.
 type GetTransactionsParams struct {
-	// Returns the number of the page to return. Valid page values are integers from 0 to the total
-	// number of pages.
-	// Default value is 0.
+	// Returns the number of the page to return. Valid page values are integers from 0 to the total number
+	// of pages. Default value is 0.
 	Page OptInt `json:",omitempty,omitzero"`
-	// Defines the number of entries to return on each page. Maximum number of results that can be
-	// returned at one time are 100.
-	// Default value is 25.
+	// Defines the number of entries to return on each page. Maximum number of results that can be returned
+	// at one time are 100. Default value is 25.
 	PageSize OptInt `json:",omitempty,omitzero"`
 	// Filter based on date of last modification. Returns results that were last modified on the date
-	// provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// provided as a parameter value. Dates are represented as strings formatted as YYYY-MM-DD. Example:
+	// January 1st, 1970: "1970-01-01".
 	LastModified OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that have been last modified strictly before the date provided as a parameter
-	// value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that have been last modified strictly before the date provided as a parameter value.
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedLt OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGe OptDate `json:",omitempty,omitzero"`
 	// Returns results that have been last modified strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	LastModifiedGt OptDate `json:",omitempty,omitzero"`
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Dates are represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDate OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created before or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created before or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly before the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly before the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateLt OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created after or on the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created after or on the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGe OptDate `json:",omitempty,omitzero"`
-	// Returns results that were created strictly after the date provided as a parameter value.
-	// Dates are represented as strings formatted as YYYY-MM-DD.
-	// Example: January 1st, 1970: "1970-01-01".
+	// Returns results that were created strictly after the date provided as a parameter value. Dates are
+	// represented as strings formatted as YYYY-MM-DD. Example: January 1st, 1970: "1970-01-01".
 	CreatedDateGt OptDate `json:",omitempty,omitzero"`
 	// Slug of company to retrieve.
 	CompanySlug string
@@ -26945,8 +26787,8 @@ func decodeUpdateCreditNoteDraftParams(args [2]string, argsEscaped bool, r *http
 type UpdateInvoiceParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The invoiceId (primary key of the returned object) is returned in the GET all
-	// invoices call; not to be confused with invoiceNumber.
+	// The invoiceId (primary key of the returned object) is returned in the GET all invoices call; not to
+	// be confused with invoiceNumber.
 	InvoiceId int64
 }
 
@@ -27426,8 +27268,8 @@ func decodeUpdateOrderConfirmationDraftParams(args [2]string, argsEscaped bool, 
 type UpdateProductParams struct {
 	// Slug of company to retrieve.
 	CompanySlug string
-	// The productId (primary key of the returned object) is returned in the GET all
-	// products call; not to be confused with productNumber.
+	// The productId (primary key of the returned object) is returned in the GET all products call; not to
+	// be confused with productNumber.
 	ProductId int64
 }
 
