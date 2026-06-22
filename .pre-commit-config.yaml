@@ -7,7 +7,7 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
-        args: ["--maxkb=1024"]
+        args: ["--maxkb=1000"]
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-symlinks
@@ -104,6 +104,13 @@ repos:
         pass_filenames: false
         files: '^go\.(mod|sum)$'
         stages: [pre-commit]
+
+      - id: nix-build-checks
+        name: nix build checks (non-VM)
+        language: system
+        entry: bash -c 'nix build --fallback .#checks.x86_64-linux.build .#checks.x86_64-linux.golangci-lint .#checks.x86_64-linux.formatting'
+        pass_filenames: false
+        files: '^(flake\.(nix|lock)|go\.(mod|sum))$'
 
       - id: go-test-full
         name: go-test-full
