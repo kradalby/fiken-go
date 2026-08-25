@@ -48,12 +48,10 @@ func (cfg *otelConfig) initOTEL() {
 	if cfg.MeterProvider == nil {
 		cfg.MeterProvider = otel.GetMeterProvider()
 	}
-	cfg.Tracer = cfg.TracerProvider.Tracer(
-		otelogen.Name,
+	cfg.Tracer = cfg.TracerProvider.Tracer(otelogen.Name,
 		trace.WithInstrumentationVersion(otelogen.SemVersion()),
 	)
-	cfg.Meter = cfg.MeterProvider.Meter(
-		otelogen.Name,
+	cfg.Meter = cfg.MeterProvider.Meter(otelogen.Name,
 		metric.WithInstrumentationVersion(otelogen.SemVersion()),
 	)
 }
