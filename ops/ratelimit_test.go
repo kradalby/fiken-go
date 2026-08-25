@@ -10,23 +10,22 @@ import (
 )
 
 func TestConcurrencyTokenSerializes(t *testing.T) {
-	var inflight int32
-	var maxInflight int32
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		n := atomic.AddInt32(&inflight, 1)
-		if n > atomic.LoadInt32(&maxInflight) {
-			atomic.StoreInt32(&maxInflight, n)
+	var inflight atomic.Int32
+	var maxInflight atomic.Int32
+	srv := httptest.NewTestServer(t, http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		n := inflight.Add(1)
+		if n > maxInflight.Load() {
+			maxInflight.Store(n)
 		}
 		time.Sleep(20 * time.Millisecond)
-		atomic.AddInt32(&inflight, -1)
+		inflight.Add(-1)
 		w.WriteHeader(200)
 	}))
-	t.Cleanup(srv.Close)
 
-	c := &http.Client{Transport: newConcurrencyRT(http.DefaultTransport)}
+	c := &http.Client{Transport: newConcurrencyRT(srv.Client().Transport)}
 	const N = 5
 	done := make(chan struct{}, N)
-	for i := 0; i < N; i++ {
+	for range N {
 		go func() {
 			req, _ := http.NewRequest("GET", srv.URL, nil)
 			resp, err := c.Do(req)
@@ -39,18 +38,18 @@ func TestConcurrencyTokenSerializes(t *testing.T) {
 			done <- struct{}{}
 		}()
 	}
-	for i := 0; i < N; i++ {
+	for range N {
 		<-done
 	}
-	if got := atomic.LoadInt32(&maxInflight); got != 1 {
+	if got := maxInflight.Load(); got != 1 {
 		t.Fatalf("maxInflight=%d want 1 (concurrency token broken)", got)
 	}
 }
 
 func TestBackoffHonorsRetryAfter(t *testing.T) {
-	var attempts int32
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		n := atomic.AddInt32(&attempts, 1)
+	var attempts atomic.Int32
+	srv := httptest.NewTestServer(t, http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		n := attempts.Add(1)
 		if n == 1 {
 			w.Header().Set("Retry-After", "1")
 			w.WriteHeader(429)
@@ -58,9 +57,8 @@ func TestBackoffHonorsRetryAfter(t *testing.T) {
 		}
 		w.WriteHeader(200)
 	}))
-	t.Cleanup(srv.Close)
 
-	c := &http.Client{Transport: newBackoffRT(http.DefaultTransport, 3)}
+	c := &http.Client{Transport: newBackoffRT(srv.Client().Transport, 3)}
 	start := time.Now()
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", srv.URL, nil)
 	resp, err := c.Do(req)
@@ -72,7 +70,7 @@ func TestBackoffHonorsRetryAfter(t *testing.T) {
 	if elapsed < 900*time.Millisecond {
 		t.Fatalf("backoff too fast: %s (Retry-After=1 should sleep ~1s)", elapsed)
 	}
-	if got := atomic.LoadInt32(&attempts); got != 2 {
+	if got := attempts.Load(); got != 2 {
 		t.Fatalf("attempts=%d want 2 (one retry)", got)
 	}
 }

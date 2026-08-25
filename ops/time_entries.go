@@ -390,9 +390,9 @@ func (c *Client) TimeEntriesInvoiceDraftFromTimes(ctx context.Context, in TimeEn
 		// if the body did not echo the id — guards against shapes where
 		// only the header is populated.
 		if out.DraftID == 0 && out.Location != "" {
-			if idx := strings.LastIndex(out.Location, "/"); idx >= 0 {
-				if n, perr := strconv.ParseInt(out.Location[idx+1:], 10, 64); perr == nil {
-					out.DraftID = n
+			if _, seg, found := strings.CutLast(out.Location, "/"); found {
+				if v, perr := strconv.ParseInt(seg, 10, 64); perr == nil {
+					out.DraftID = v
 				}
 			}
 		}
