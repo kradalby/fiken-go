@@ -133,8 +133,7 @@ func (s *Server) lookup(op string) (any, *errOverride, bool) {
 // fall through to ogen's default handler (which surfaces
 // ht.ErrNotImplemented as 501, etc).
 func mockErrorHandler(ctx context.Context, w http.ResponseWriter, r *http.Request, err error) {
-	var over *errOverride
-	if errors.As(err, &over) {
+	if over, ok := errors.AsType[*errOverride](err); ok {
 		if over.status == 0 {
 			w.WriteHeader(http.StatusInternalServerError)
 		} else {

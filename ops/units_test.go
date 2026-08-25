@@ -26,56 +26,55 @@ var unitRules = []struct {
 // (CompanyOut) is the first addition.
 func outStructs() []reflect.Type {
 	return []reflect.Type{
-		reflect.TypeOf(CompanyOut{}),
-		reflect.TypeOf(CompaniesListOut{}),
-		reflect.TypeOf(ContactOut{}),
-		reflect.TypeOf(ContactsListOut{}),
-		reflect.TypeOf(ContactPersonOut{}),
-		reflect.TypeOf(ContactPersonsListOut{}),
-		reflect.TypeOf(ContactsDeleteOut{}),
-		reflect.TypeOf(ContactsPersonsDeleteOut{}),
-		reflect.TypeOf(AccountOut{}),
-		reflect.TypeOf(AccountsListOut{}),
-		reflect.TypeOf(BankAccountOut{}),
-		reflect.TypeOf(BankAccountsListOut{}),
-		reflect.TypeOf(JournalEntryOut{}),
-		reflect.TypeOf(JournalEntryLineOut{}),
-		reflect.TypeOf(JournalEntriesListOut{}),
-		reflect.TypeOf(AttachmentOut{}),
-		reflect.TypeOf(AttachmentsListOut{}),
-		reflect.TypeOf(JournalEntriesAttachmentsAttachOut{}),
-		reflect.TypeOf(TransactionOut{}),
-		reflect.TypeOf(TransactionsListOut{}),
-		reflect.TypeOf(InvoiceOut{}),
-		reflect.TypeOf(InvoiceLineOut{}),
-		reflect.TypeOf(InvoicesListOut{}),
-		reflect.TypeOf(InvoicesSendOut{}),
-		reflect.TypeOf(InvoicesCounterCreateOut{}),
-		reflect.TypeOf(InvoiceDraftOut{}),
-		reflect.TypeOf(InvoiceDraftLineOut{}),
-		reflect.TypeOf(InvoiceDraftsListOut{}),
-		reflect.TypeOf(InvoiceDraftsDeleteOut{}),
-		reflect.TypeOf(InvoiceDraftsCreateFromOut{}),
-		reflect.TypeOf(InvoicesAttachmentsAttachOut{}),
-		reflect.TypeOf(InvoiceDraftsAttachmentsAttachOut{}),
-		reflect.TypeOf(CreditNoteOut{}),
-		reflect.TypeOf(CreditNotesListOut{}),
-		reflect.TypeOf(CreditNotesSendOut{}),
-		reflect.TypeOf(CreditNotesCounterCreateOut{}),
-		reflect.TypeOf(CreditNotesFullCreateOut{}),
-		reflect.TypeOf(CreditNotesPartialCreateOut{}),
-		reflect.TypeOf(CreditNoteDraftsListOut{}),
-		reflect.TypeOf(CreditNoteDraftsDeleteOut{}),
-		reflect.TypeOf(CreditNoteDraftsCreateFromOut{}),
-		reflect.TypeOf(CreditNoteDraftsAttachmentsAttachOut{}),
+		reflect.TypeFor[CompanyOut](),
+		reflect.TypeFor[CompaniesListOut](),
+		reflect.TypeFor[ContactOut](),
+		reflect.TypeFor[ContactsListOut](),
+		reflect.TypeFor[ContactPersonOut](),
+		reflect.TypeFor[ContactPersonsListOut](),
+		reflect.TypeFor[ContactsDeleteOut](),
+		reflect.TypeFor[ContactsPersonsDeleteOut](),
+		reflect.TypeFor[AccountOut](),
+		reflect.TypeFor[AccountsListOut](),
+		reflect.TypeFor[BankAccountOut](),
+		reflect.TypeFor[BankAccountsListOut](),
+		reflect.TypeFor[JournalEntryOut](),
+		reflect.TypeFor[JournalEntryLineOut](),
+		reflect.TypeFor[JournalEntriesListOut](),
+		reflect.TypeFor[AttachmentOut](),
+		reflect.TypeFor[AttachmentsListOut](),
+		reflect.TypeFor[JournalEntriesAttachmentsAttachOut](),
+		reflect.TypeFor[TransactionOut](),
+		reflect.TypeFor[TransactionsListOut](),
+		reflect.TypeFor[InvoiceOut](),
+		reflect.TypeFor[InvoiceLineOut](),
+		reflect.TypeFor[InvoicesListOut](),
+		reflect.TypeFor[InvoicesSendOut](),
+		reflect.TypeFor[InvoicesCounterCreateOut](),
+		reflect.TypeFor[InvoiceDraftOut](),
+		reflect.TypeFor[InvoiceDraftLineOut](),
+		reflect.TypeFor[InvoiceDraftsListOut](),
+		reflect.TypeFor[InvoiceDraftsDeleteOut](),
+		reflect.TypeFor[InvoiceDraftsCreateFromOut](),
+		reflect.TypeFor[InvoicesAttachmentsAttachOut](),
+		reflect.TypeFor[InvoiceDraftsAttachmentsAttachOut](),
+		reflect.TypeFor[CreditNoteOut](),
+		reflect.TypeFor[CreditNotesListOut](),
+		reflect.TypeFor[CreditNotesSendOut](),
+		reflect.TypeFor[CreditNotesCounterCreateOut](),
+		reflect.TypeFor[CreditNotesFullCreateOut](),
+		reflect.TypeFor[CreditNotesPartialCreateOut](),
+		reflect.TypeFor[CreditNoteDraftsListOut](),
+		reflect.TypeFor[CreditNoteDraftsDeleteOut](),
+		reflect.TypeFor[CreditNoteDraftsCreateFromOut](),
+		reflect.TypeFor[CreditNoteDraftsAttachmentsAttachOut](),
 	}
 }
 
 func TestOutFieldUnits(t *testing.T) {
 	var failures []string
 	for _, st := range outStructs() {
-		for i := 0; i < st.NumField(); i++ {
-			f := st.Field(i)
+		for f := range st.Fields() {
 			if !f.IsExported() {
 				continue
 			}
@@ -97,7 +96,7 @@ func TestOutFieldUnits(t *testing.T) {
 }
 
 func goKindFor(t reflect.Type) string {
-	if t == reflect.TypeOf(time.Time{}) {
+	if t == reflect.TypeFor[time.Time]() {
 		return "time.Time"
 	}
 	if t.Kind() == reflect.String && t.Name() == "Date" {

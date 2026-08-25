@@ -27,7 +27,7 @@ func main() {
 	flag.Parse()
 
 	ignored := map[string]bool{}
-	for _, s := range strings.Split(*ignoreFlag, ",") {
+	for s := range strings.SplitSeq(*ignoreFlag, ",") {
 		s = strings.TrimSpace(s)
 		if s != "" {
 			ignored[s] = true
