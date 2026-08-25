@@ -111,7 +111,7 @@
         }
         # NixOS VM test for the fiken-mcp module. Plain-HTTP only;
         # tsnet can't reach the control plane inside the sandbox.
-        // lib.optionalAttrs pkgs.stdenv.isLinux {
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
           fiken-mcp-module = pkgs.testers.nixosTest (
             import ./nix/tests/fiken-mcp.nix {
               inherit pkgs;
