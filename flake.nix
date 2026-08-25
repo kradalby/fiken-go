@@ -81,6 +81,30 @@
           gotest = fc.goTest common;
           golangci-lint = fc.goLint common;
           formatting = fc.goFormat common;
+
+          # `go generate ./...` drift. Three generators run: ogen over
+          # api/fiken-openapi.yaml, plus cmd/fiken-mutating-gen and
+          # cmd/fiken-i18n-scaffold over the same spec. The spec is not a Go
+          # file, so the fileset-filtered source has to opt it in explicitly
+          # or the generators fail on a missing input.
+          #
+          # ogen comes from the `tool` directive in go.mod, so `go run
+          # github.com/ogen-go/ogen/cmd/ogen` resolves out of the vendored
+          # tree and regenerates with exactly the version go.mod pins rather
+          # than whatever nixpkgs happens to ship. gofumpt and goimports are
+          # the last two //go:generate lines in fiken/doc.go and need to be
+          # on PATH.
+          #
+          # Until now this was only guarded by the local `codegen-clean`
+          # pre-commit hook, which does nothing for a commit pushed from a
+          # machine without the hook installed.
+          generate = fc.goGenerate (
+            common
+            // {
+              extraSrc = [ (./. + "/api/fiken-openapi.yaml") ];
+              nativeCheckInputs = [ pkgs.gofumpt pkgs.gotools ];
+            }
+          );
         }
         # NixOS VM test for the fiken-mcp module. Plain-HTTP only;
         # tsnet can't reach the control plane inside the sandbox.
