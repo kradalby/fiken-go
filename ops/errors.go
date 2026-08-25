@@ -38,8 +38,7 @@ func MapErr(op string, err error) *Error {
 	if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
 		return &Error{Code: CodeCancelled, Message: err.Error(), Op: op}
 	}
-	var netErr *net.OpError
-	if errors.As(err, &netErr) {
+	if _, ok := errors.AsType[*net.OpError](err); ok {
 		return &Error{Code: CodeNetwork, Message: err.Error(), Op: op}
 	}
 	if status := extractOgenStatus(err); status > 0 {
@@ -60,12 +59,12 @@ func extractOgenStatus(err error) int {
 	// in case the typed error has been flattened by a wrapper.
 	msg := err.Error()
 	const prefix = "unexpected status code: "
-	idx := strings.Index(msg, prefix)
-	if idx < 0 {
+	_, after, ok := strings.Cut(msg, prefix)
+	if !ok {
 		return 0
 	}
 	var status int
-	if _, perr := fmt.Sscanf(msg[idx+len(prefix):], "%d", &status); perr != nil {
+	if _, perr := fmt.Sscanf(after, "%d", &status); perr != nil {
 		return 0
 	}
 	return status
