@@ -1,8 +1,9 @@
-{ pkgs
-, lib
-, fiken-mcp
-, module
-, ...
+{
+  pkgs,
+  lib,
+  fiken-mcp,
+  module,
+  ...
 }:
 {
   name = "fiken-mcp";

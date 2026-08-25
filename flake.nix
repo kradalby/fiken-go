@@ -10,11 +10,11 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , flake-utils
-    , flake-checks
-    ,
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      flake-checks,
     }:
     # Per-system outputs (packages, devShells, formatter) are merged
     # via // with system-agnostic outputs (overlays) below.
@@ -102,7 +102,10 @@
             common
             // {
               extraSrc = [ (./. + "/api/fiken-openapi.yaml") ];
-              nativeCheckInputs = [ pkgs.gofumpt pkgs.gotools ];
+              nativeCheckInputs = [
+                pkgs.gofumpt
+                pkgs.gotools
+              ];
             }
           );
         }
@@ -132,7 +135,7 @@
             pkgs.prek
             pkgs.ogen
             pkgs.prettier
-            pkgs.nixpkgs-fmt
+            pkgs.nixfmt
             pkgs.git
           ];
 
