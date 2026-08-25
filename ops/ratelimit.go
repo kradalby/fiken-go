@@ -71,10 +71,7 @@ func retryAfter(resp *http.Response, attempt int) time.Duration {
 	}
 	const baseDelay = 250 * time.Millisecond
 	const maxDelay = 4 * time.Second
-	d := baseDelay * (1 << attempt)
-	if d > maxDelay {
-		d = maxDelay
-	}
+	d := min(baseDelay*(1<<attempt), maxDelay)
 	//nolint:gosec // jitter only, non-cryptographic
-	return time.Duration(rand.Int64N(int64(d)))
+	return rand.N(d)
 }

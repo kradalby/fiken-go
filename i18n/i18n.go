@@ -80,7 +80,8 @@ func (b *Bundle) Keys(lang string) []string {
 }
 
 func normalizeLang(lang string) string {
-	switch strings.ToLower(strings.Split(lang, "_")[0]) {
+	base, _, _ := strings.Cut(lang, "_")
+	switch strings.ToLower(base) {
 	case "nb", "no":
 		return "nb"
 	case "":
