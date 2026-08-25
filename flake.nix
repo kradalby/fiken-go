@@ -21,14 +21,35 @@
     (flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (_final: prev: {
+              # goimports (shipped in gotools) shells out to `go` for type
+              # information, and nixpkgs wraps it with `pkgs.go` pinned onto
+              # PATH. `pkgs.go` still trails the release, so a 1.26 `go` meets
+              # `go 1.27.0` in go.mod and tries to fetch the newer toolchain.
+              # The formatting check runs in the network-less nix sandbox,
+              # where that fetch cannot succeed. `go` fixes the wrapper's PATH;
+              # `buildGoModule` compiles the tool with the matching toolchain.
+              gotools = prev.gotools.override {
+                buildGoModule = prev.buildGoLatestModule;
+                go = prev.go_latest;
+              };
+            })
+          ];
+        };
         inherit (pkgs) lib;
         fc = flake-checks.lib;
 
-        # Prefer Go 1.26 if available, else 1.25. go.mod sets the
-        # language version separately; this just selects the
-        # toolchain in the devShell and package builder.
-        go = pkgs.go_1_26 or pkgs.go_1_25;
+        # Track the newest Go nixpkgs ships rather than pinning a
+        # version that goes stale. `pkgs.go` still resolves to the
+        # previous release, so the `_latest` attribute is required.
+        # flake-checks feeds this to `buildGoModule.override { go = ...; }`,
+        # which is what `buildGoLatestModule` is. go.mod sets the language
+        # version separately; this selects the toolchain for the devShell,
+        # the package builder, and the checks.
+        go = pkgs.go_latest;
 
         # Shared context for the flake-checks Go helpers. i18n/i18n.go
         # embeds locale files via //go:embed, so the locale directory must
@@ -39,7 +60,7 @@
           root = ./.;
           pname = "fiken-go";
           version = "0.0.1";
-          vendorHash = "sha256-roPJqrDOwegcMcUI9mOREFTaDre3JSAicq28/U68Q/A=";
+          vendorHash = "sha256-btXoAy+wOeVxwp5QLrhOp3+Wu8YRtcOulKZT5rg6gNA=";
           goPkg = go;
           embedDirs = [ (./. + "/i18n/locales") ];
         };
