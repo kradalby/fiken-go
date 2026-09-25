@@ -150,8 +150,8 @@
       # `inputs.fiken-go.overlays.default` resolves correctly for any
       # consumer regardless of their `system`.
       overlays.default = final: prev: {
-        fiken = self.packages.${prev.system}.fiken;
-        fiken-mcp = self.packages.${prev.system}.fiken-mcp;
+        fiken = self.packages.${prev.stdenv.hostPlatform.system}.fiken;
+        fiken-mcp = self.packages.${prev.stdenv.hostPlatform.system}.fiken-mcp;
       };
 
       nixosModules = {
