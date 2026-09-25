@@ -18,7 +18,9 @@
     }:
     # Per-system outputs (packages, devShells, formatter) are merged
     # via // with system-agnostic outputs (overlays) below.
-    (flake-utils.lib.eachDefaultSystem (
+    # Explicit list: nixpkgs dropped x86_64-darwin, which
+    # eachDefaultSystem still includes and fails evaluation on.
+    (flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
       system:
       let
         pkgs = import nixpkgs {
@@ -146,7 +148,7 @@
       }
     ))
     // {
-      # System-agnostic outputs live outside eachDefaultSystem so
+      # System-agnostic outputs live outside eachSystem so
       # `inputs.fiken-go.overlays.default` resolves correctly for any
       # consumer regardless of their `system`.
       overlays.default = final: prev: {
