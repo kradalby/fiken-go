@@ -60,7 +60,7 @@
           root = ./.;
           pname = "fiken-go";
           version = "0.0.1";
-          vendorHash = "sha256-btXoAy+wOeVxwp5QLrhOp3+Wu8YRtcOulKZT5rg6gNA=";
+          vendorHash = "sha256-HCo4pyf48S+ri3M7LbKnvp+fhifnJgUkdR260Vrr+Wc=";
           goPkg = go;
           embedDirs = [ (./. + "/i18n/locales") ];
         };
