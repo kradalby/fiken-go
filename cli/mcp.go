@@ -24,6 +24,7 @@ func AddMCP(root *ff.Command, stdout, stderr io.Writer, sf *sessionFactory) erro
 		transport     string
 		listen        string
 		enableAtt     bool
+		attachDir     string
 		tsnetEnable   bool
 		tsnetHostname string
 		tsnetAuthKey  string
@@ -33,7 +34,8 @@ func AddMCP(root *ff.Command, stdout, stderr io.Writer, sf *sessionFactory) erro
 	set.StringVar(&mode, 0, "mode", "read-only", "read-only | read-write (ignored when --tsnet)")
 	set.StringVar(&transport, 0, "transport", "stdio", "stdio | http (ignored when --tsnet)")
 	set.StringVar(&listen, 0, "listen", ":8765", "HTTP listen address (ignored when --tsnet)")
-	set.BoolVar(&enableAtt, 0, "enable-attachments", "Expose 6 multipart attachment ops")
+	set.BoolVar(&enableAtt, 0, "enable-attachments", "Expose multipart attachment ops (tsnet/http: requires --attachments-dir)")
+	set.StringVar(&attachDir, 0, "attachments-dir", "", "Confine attachment file_path to paths relative to this directory")
 	set.BoolVar(&tsnetEnable, 0, "tsnet", "Serve MCP over Tailscale (tsnet); disables stdio/HTTP")
 	set.StringVar(&tsnetHostname, 0, "tsnet-hostname", "fiken-mcp", "Tailscale device name")
 	set.StringVar(&tsnetAuthKey, 0, "tsnet-authkey", "", "Tailscale pre-auth key (mutex with --tsnet-authkey-file)")
@@ -46,13 +48,27 @@ func AddMCP(root *ff.Command, stdout, stderr io.Writer, sf *sessionFactory) erro
 		ShortHelp: "Run the MCP server.",
 		Flags:     set,
 		Exec: func(ctx context.Context, _ []string) error {
+			// Network peers pick file_path, so they only get a confined view.
+			if enableAtt && attachDir == "" && (tsnetEnable || transport == "http") {
+				return fmt.Errorf("--enable-attachments over --tsnet or --transport=http requires --attachments-dir")
+			}
+
 			ctx, err := sf.Build(ctx, stdout, stderr)
 			if err != nil {
 				return err
 			}
 
+			var attachRoot *os.Root
+			if attachDir != "" {
+				attachRoot, err = os.OpenRoot(attachDir)
+				if err != nil {
+					return fmt.Errorf("open --attachments-dir: %w", err)
+				}
+				defer func() { _ = attachRoot.Close() }()
+			}
+
 			if tsnetEnable {
-				return runTsnet(ctx, tsnetHostname, tsnetAuthKey, tsnetAuthFile, tsnetStateDir)
+				return runTsnet(ctx, enableAtt, attachRoot, tsnetHostname, tsnetAuthKey, tsnetAuthFile, tsnetStateDir)
 			}
 
 			modeVal := mcp.ModeReadOnly
@@ -65,6 +81,7 @@ func AddMCP(root *ff.Command, stdout, stderr io.Writer, sf *sessionFactory) erro
 				Bundle:            Bundle(ctx),
 				Lang:              Lang(ctx),
 				EnableAttachments: enableAtt,
+				AttachmentRoot:    attachRoot,
 			})
 			if err != nil {
 				return err
@@ -79,7 +96,7 @@ func AddMCP(root *ff.Command, stdout, stderr io.Writer, sf *sessionFactory) erro
 	return nil
 }
 
-func runTsnet(ctx context.Context, hostname, authKey, authFile, stateDir string) error {
+func runTsnet(ctx context.Context, enableAtt bool, attachRoot *os.Root, hostname, authKey, authFile, stateDir string) error {
 	if authKey != "" && authFile != "" {
 		return fmt.Errorf("--tsnet-authkey and --tsnet-authkey-file are mutually exclusive")
 	}
@@ -96,13 +113,15 @@ func runTsnet(ctx context.Context, hostname, authKey, authFile, stateDir string)
 	if err := os.MkdirAll(stateDir, 0o700); err != nil {
 		return fmt.Errorf("create tsnet state dir: %w", err)
 	}
-	// tsnet exposes every tool; per-request capability gates writes.
+	// tsnet exposes every tool but attachments (opt-in, confined);
+	// per-request capability gates writes.
 	srv, err := mcp.New(mcp.Options{
 		Client:            Client(ctx),
 		Mode:              mcp.ModeReadWrite,
 		Bundle:            Bundle(ctx),
 		Lang:              Lang(ctx),
-		EnableAttachments: true,
+		EnableAttachments: enableAtt,
+		AttachmentRoot:    attachRoot,
 		CapGated:          true,
 	})
 	if err != nil {

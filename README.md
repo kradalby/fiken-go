@@ -35,6 +35,7 @@ claude mcp add fiken -- fiken mcp
 ```
 
 Over tsnet, reads are implicit for any tailnet peer. Writes require a Tailscale ACL grant under `kradalby.no/cap/fiken-mcp` with `{"write": true}`.
+Attachment tools are opt-in (`--enable-attachments`). Over tsnet or HTTP they also need `--attachments-dir=DIR`; peers can then upload only files under `DIR`, by relative path.
 
 ## NixOS
 
