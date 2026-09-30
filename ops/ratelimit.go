@@ -1,9 +1,11 @@
 package ops
 
 import (
+	"io"
 	"math/rand/v2"
 	"net/http"
 	"strconv"
+	"sync"
 	"time"
 )
 
@@ -24,8 +26,26 @@ func (rt *concurrencyRT) RoundTrip(r *http.Request) (*http.Response, error) {
 	case <-r.Context().Done():
 		return nil, r.Context().Err()
 	}
-	defer func() { <-rt.sem }()
-	return rt.base.RoundTrip(r)
+	release := sync.OnceFunc(func() { <-rt.sem })
+	resp, err := rt.base.RoundTrip(r)
+	if err != nil {
+		release()
+		return resp, err
+	}
+	// Fiken counts the request as in flight until the body is streamed,
+	// so the slot travels with the body.
+	resp.Body = &releaseOnClose{ReadCloser: resp.Body, release: release}
+	return resp, nil
+}
+
+type releaseOnClose struct {
+	io.ReadCloser
+	release func()
+}
+
+func (b *releaseOnClose) Close() error {
+	defer b.release()
+	return b.ReadCloser.Close()
 }
 
 // newBackoffRT wraps base with 429-aware retry: honors Retry-After
