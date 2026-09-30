@@ -391,7 +391,7 @@ func (c *Client) PurchasesAttach(ctx context.Context, in PurchasesAttachIn) Resu
 			Code: CodeValidation, Message: "file is required", Op: OpPurchasesAttach,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[PurchasesAttachOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpPurchasesAttach,

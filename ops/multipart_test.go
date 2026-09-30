@@ -21,7 +21,7 @@ func TestOpenMultipartFile(t *testing.T) {
 		t.Fatalf("write: %v", err)
 	}
 
-	opt, closer, err := OpenMultipartFile(path, "")
+	opt, closer, err := OpenMultipartFile(nil, path, "")
 	if err != nil {
 		t.Fatalf("OpenMultipartFile: %v", err)
 	}
@@ -60,7 +60,7 @@ func TestOpenMultipartFileExplicitName(t *testing.T) {
 		t.Fatalf("write: %v", err)
 	}
 
-	opt, closer, err := OpenMultipartFile(path, "override.bin")
+	opt, closer, err := OpenMultipartFile(nil, path, "override.bin")
 	if err != nil {
 		t.Fatalf("OpenMultipartFile: %v", err)
 	}
@@ -76,7 +76,7 @@ func TestOpenMultipartFileExplicitName(t *testing.T) {
 func TestOpenMultipartFileMissing(t *testing.T) {
 	t.Parallel()
 
-	_, closer, err := OpenMultipartFile(filepath.Join(t.TempDir(), "nope"), "")
+	_, closer, err := OpenMultipartFile(nil, filepath.Join(t.TempDir(), "nope"), "")
 	if err == nil {
 		t.Fatal("want error, got nil")
 	}

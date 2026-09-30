@@ -195,7 +195,7 @@ func (c *Client) InboxSend(ctx context.Context, in InboxSendIn) Result[InboxSend
 			Code: CodeValidation, Message: "file is required", Op: OpInboxSend,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[InboxSendOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpInboxSend,

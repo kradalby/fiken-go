@@ -481,7 +481,7 @@ func (c *Client) InvoiceDraftsAttachmentsAttach(ctx context.Context, in InvoiceD
 			Code: CodeValidation, Message: "file is required", Op: OpInvoicesDraftsAttachmentsAttach,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[InvoiceDraftsAttachmentsAttachOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpInvoicesDraftsAttachmentsAttach,

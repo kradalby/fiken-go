@@ -530,7 +530,7 @@ func (c *Client) ContactsAttachmentsAttach(ctx context.Context, in ContactsAttac
 			Code: CodeValidation, Message: "file is required", Op: OpContactsAttachmentsAttach,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[ContactsAttachmentsAttachOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpContactsAttachmentsAttach,

@@ -379,7 +379,7 @@ func (c *Client) JournalEntriesAttachmentsAttach(ctx context.Context, in Journal
 			Code: CodeValidation, Message: "file is required", Op: OpJournalEntriesAttachmentsAttach,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[JournalEntriesAttachmentsAttachOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpJournalEntriesAttachmentsAttach,

@@ -4,6 +4,7 @@ import (
 	"context"
 	"log/slog"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/kradalby/fiken-go/auth"
@@ -13,9 +14,19 @@ import (
 // Client wraps the ogen-generated fiken.Client with auth, rate
 // limiting, and error mapping.
 type Client struct {
-	gen   *fiken.Client
-	auth  auth.Source
-	defCo string
+	gen        *fiken.Client
+	auth       auth.Source
+	defCo      string
+	attachRoot *os.Root // nil: attachment paths open unconfined
+}
+
+// WithAttachmentRoot returns a copy of c whose attachment uploads can
+// only read files beneath root. Use it whenever file paths come from
+// someone other than the local user.
+func (c *Client) WithAttachmentRoot(root *os.Root) *Client {
+	cp := *c
+	cp.attachRoot = root
+	return &cp
 }
 
 // Options configures a new Client.

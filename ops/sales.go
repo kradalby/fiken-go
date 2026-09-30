@@ -569,7 +569,7 @@ func (c *Client) SalesAttach(ctx context.Context, in SalesAttachIn) Result[Sales
 			Code: CodeValidation, Message: "file is required", Op: OpSalesAttach,
 		})
 	}
-	file, closeFn, err := OpenMultipartFile(in.FilePath, in.Filename)
+	file, closeFn, err := OpenMultipartFile(c.attachRoot, in.FilePath, in.Filename)
 	if err != nil {
 		return Err[SalesAttachOut](&Error{
 			Code: CodeValidation, Message: err.Error(), Op: OpSalesAttach,
