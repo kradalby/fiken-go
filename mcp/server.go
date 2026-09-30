@@ -2,6 +2,8 @@ package mcp
 
 import (
 	"context"
+	"errors"
+	"os"
 
 	mcpsdk "github.com/modelcontextprotocol/go-sdk/mcp"
 
@@ -22,10 +24,12 @@ type Options struct {
 	Mode   Mode
 	Bundle *i18n.Bundle
 	Lang   string
-	// EnableAttachments is reserved for Plan D's attachment tools; Plan
-	// B ignores it. Keeping the field surfaces the future toggle in
-	// callers' build code without a follow-up signature change.
+	// EnableAttachments exposes the multipart attachment tools, whose
+	// file_path argument names a file on this host.
 	EnableAttachments bool
+	// AttachmentRoot confines attachment file_path to a directory. nil
+	// leaves paths unconfined, which only suits a local user.
+	AttachmentRoot *os.Root
 	// CapGated installs a receiving-middleware that consults the
 	// per-request Capability (placed in ctx by the tsnet HTTP layer)
 	// before letting a tools/call through. Used only by the tsnet
@@ -36,6 +40,15 @@ type Options struct {
 // New returns a configured MCP server with companies_{list,get}
 // registered (subject to Mode filter).
 func New(opts Options) (*mcpsdk.Server, error) {
+	if opts.CapGated && opts.EnableAttachments && opts.AttachmentRoot == nil {
+		// Remote peers pick file_path; unconfined, any readable
+		// server-local file could be uploaded to Fiken.
+		return nil, errors.New("mcp: attachments over a cap-gated transport require AttachmentRoot")
+	}
+	if opts.AttachmentRoot != nil {
+		opts.Client = opts.Client.WithAttachmentRoot(opts.AttachmentRoot)
+	}
+
 	srv := mcpsdk.NewServer(&mcpsdk.Implementation{
 		Name:    serverName,
 		Version: serverVersion,
